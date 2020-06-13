@@ -1,9 +1,25 @@
 import React from "react";
 import {Main} from "../main/main.jsx";
+import PropTypes from "prop-types";
 
 export const App = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const {promoFilmSettings} = props;
-  // eslint-disable-next-line react/prop-types
-  return <Main promoFilmTitle={promoFilmSettings.title} promoFilmGenre={promoFilmSettings.genre} pormoFilmYear={promoFilmSettings.year}/>;
+  const {settings: {promoFilm: promoFilmSettings, films}} = props;
+
+  return <Main
+    promoFilmTitle={promoFilmSettings.title}
+    promoFilmGenre={promoFilmSettings.genre}
+    promoFilmYear={promoFilmSettings.year}
+    films={films}
+  />;
+};
+
+App.propTypes = {
+  settings: PropTypes.shape({
+    promoFilm: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      year: PropTypes.number.isRequired
+    }).isRequired,
+    films: PropTypes.arrayOf(PropTypes.string)
+  }).isRequired
 };
