@@ -1,8 +1,9 @@
 import React from "react";
 import {Film} from "../film/film.jsx";
+import PropTypes from "prop-types";
 
 export const Main = (props) => {
-  const {promoFilmTitle, promoFilmGenre, pormoFilmYear, films} = props;
+  const {promoFilmTitle, promoFilmGenre, promoFilmYear, films} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -38,7 +39,7 @@ export const Main = (props) => {
             <h2 className="movie-card__title">{promoFilmTitle}</h2>
             <p className="movie-card__meta">
               <span className="movie-card__genre">{promoFilmGenre}</span>
-              <span className="movie-card__year">{pormoFilmYear}</span>
+              <span className="movie-card__year">{promoFilmYear}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -121,4 +122,15 @@ export const Main = (props) => {
       </footer>
     </div>
   </React.Fragment>;
+};
+
+Main.defaultProps = {
+  films: []
+};
+
+Main.propTypes = {
+  promoFilmTitle: PropTypes.string.isRequired,
+  promoFilmGenre: PropTypes.string.isRequired,
+  promoFilmYear: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.string)
 };

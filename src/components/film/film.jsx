@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const Film = (props) => {
   const {film} = props;
@@ -11,4 +12,8 @@ export const Film = (props) => {
       <a className="small-movie-card__link" href="movie-page.html">{film}</a>
     </h3>
   </article>;
+};
+
+Film.propTypes = {
+  film: PropTypes.string.isRequired
 };
