@@ -276,6 +276,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Film Name 1
             </a>
@@ -300,6 +301,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Film Name 2
             </a>
@@ -324,6 +326,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Film Name 3
             </a>
@@ -348,6 +351,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Film Name 4
             </a>
@@ -372,6 +376,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Film Name 5
             </a>
