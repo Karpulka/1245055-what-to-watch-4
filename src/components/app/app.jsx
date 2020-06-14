@@ -1,8 +1,8 @@
 import React from "react";
-import {Main} from "../main/main.jsx";
+import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 
-export const App = (props) => {
+const App = (props) => {
   const {settings: {promoFilm: promoFilmSettings, films}} = props;
 
   return <Main
@@ -23,3 +23,5 @@ App.propTypes = {
     films: PropTypes.arrayOf(PropTypes.string)
   }).isRequired
 };
+
+export default App;
