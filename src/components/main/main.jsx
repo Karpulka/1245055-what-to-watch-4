@@ -1,8 +1,8 @@
 import React from "react";
-import {Film} from "../film/film.jsx";
+import Film from "../film/film.jsx";
 import PropTypes from "prop-types";
 
-export const Main = (props) => {
+const Main = (props) => {
   const {promoFilmTitle, promoFilmGenre, promoFilmYear, films} = props;
 
   return <React.Fragment>
@@ -134,3 +134,5 @@ Main.propTypes = {
   promoFilmYear: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(PropTypes.string)
 };
+
+export default Main;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Film = (props) => {
+const Film = (props) => {
   const {film} = props;
 
   return <article className="small-movie-card catalog__movies-card">
@@ -17,3 +17,5 @@ export const Film = (props) => {
 Film.propTypes = {
   film: PropTypes.string.isRequired
 };
+
+export default Film;
