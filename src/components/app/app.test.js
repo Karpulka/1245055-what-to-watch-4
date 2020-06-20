@@ -9,11 +9,26 @@ const promoFilm = {
 };
 
 const films = [
-  `Film Name 1`,
-  `Film Name 2`,
-  `Film Name 3`,
-  `Film Name 4`,
-  `Film Name 5`
+  {
+    title: `Film Name 1`,
+    src: `111`
+  },
+  {
+    title: `Film Name 2`,
+    src: `222`
+  },
+  {
+    title: `Film Name 3`,
+    src: `333`
+  },
+  {
+    title: `Film Name 4`,
+    src: `444`
+  },
+  {
+    title: `Film Name 5`,
+    src: `555`
+  }
 ];
 
 const settings = {
