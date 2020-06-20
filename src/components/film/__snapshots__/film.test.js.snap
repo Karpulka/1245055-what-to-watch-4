@@ -8,9 +8,9 @@ exports[`Render Film 1`] = `
     className="small-movie-card__image"
   >
     <img
-      alt="{film}"
+      alt="Film name"
       height="175"
-      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      src="111"
       width="280"
     />
   </div>
@@ -20,6 +20,7 @@ exports[`Render Film 1`] = `
     <a
       className="small-movie-card__link"
       href="movie-page.html"
+      onClick={[Function]}
     >
       Film name
     </a>

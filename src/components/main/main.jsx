@@ -134,7 +134,10 @@ Main.propTypes = {
   promoFilmTitle: PropTypes.string.isRequired,
   promoFilmGenre: PropTypes.string.isRequired,
   promoFilmYear: PropTypes.number.isRequired,
-  films: PropTypes.arrayOf(PropTypes.string)
+  films: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired
+  }))
 };
 
 export default Main;

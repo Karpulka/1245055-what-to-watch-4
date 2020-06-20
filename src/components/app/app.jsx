@@ -20,7 +20,10 @@ App.propTypes = {
       genre: PropTypes.string.isRequired,
       year: PropTypes.number.isRequired
     }).isRequired,
-    films: PropTypes.arrayOf(PropTypes.string)
+    films: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired
+    }))
   }).isRequired
 };
 

@@ -264,9 +264,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{film}"
+              alt="Film Name 1"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="111"
               width="280"
             />
           </div>
@@ -289,9 +289,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{film}"
+              alt="Film Name 2"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="222"
               width="280"
             />
           </div>
@@ -314,9 +314,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{film}"
+              alt="Film Name 3"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="333"
               width="280"
             />
           </div>
@@ -339,9 +339,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{film}"
+              alt="Film Name 4"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="444"
               width="280"
             />
           </div>
@@ -364,9 +364,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{film}"
+              alt="Film Name 5"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="555"
               width="280"
             />
           </div>
