@@ -3,7 +3,10 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Film from "./film";
 
-const film = `Film Title`;
+const film = {
+  title: `Film Title`,
+  src: `111`
+};
 
 Enzyme.configure({
   adapter: new Adapter()
