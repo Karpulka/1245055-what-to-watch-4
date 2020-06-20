@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Film = (props) => {
-  const {film, onFilmTitleClick} = props;
+  const {film, onFilmHover, onFilmTitleClick} = props;
 
-  return <article className="small-movie-card catalog__movies-card">
+  return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onFilmHover(film)}>
     <div className="small-movie-card__image">
       <img src={film.src} alt={film.title} width="280" height="175"/>
     </div>
@@ -19,7 +19,8 @@ Film.propTypes = {
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
   }).isRequired,
-  onFilmTitleClick: PropTypes.func.isRequired
+  onFilmTitleClick: PropTypes.func.isRequired,
+  onFilmHover: PropTypes.func.isRequired
 };
 
 export default Film;

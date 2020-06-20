@@ -12,17 +12,34 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
-it(`Click by Film Title`, () => {
-  const onFilmTitleClick = jest.fn();
+describe(`USer events by Film Element`, () => {
+  it(`Click by Film Title`, () => {
+    const onFilmTitleClick = jest.fn();
 
-  const filmElement = shallow(<Film
-    film={film}
-    onFilmTitleClick={onFilmTitleClick}
-  />);
+    const filmElement = shallow(<Film
+      film={film}
+      onFilmTitleClick={onFilmTitleClick}
+      onFilmHover={() => {}}
+    />);
 
-  const filmTitle = filmElement.find(`.small-movie-card__link`);
+    const filmTitle = filmElement.find(`.small-movie-card__link`);
+    filmTitle.simulate(`click`, {preventDefault() {}});
 
-  filmTitle.simulate(`click`, {preventDefault() {}});
+    expect(onFilmTitleClick.mock.calls.length).toBe(1);
+  });
 
-  expect(onFilmTitleClick.mock.calls.length).toBe(1);
+  it(`Hover by Film`, () => {
+    const handleFilmHover = jest.fn((...args) => [...args]);
+
+    const filmElement = shallow(<Film
+      film={film}
+      onFilmTitleClick={() => {}}
+      onFilmHover={handleFilmHover}
+    />);
+
+    filmElement.simulate(`mouseenter`);
+
+    expect(handleFilmHover.mock.calls.length).toBe(1);
+    expect(handleFilmHover.mock.calls[0][0]).toMatchObject(film);
+  });
 });
