@@ -18,7 +18,7 @@ const App = (props) => {
         />
       </Route>
       <Route exact path="/film-detail">
-        <FilmDetail/>
+        <FilmDetail {...films[4]}/>
       </Route>
     </Switch>
   </BrowserRouter>;
@@ -33,7 +33,17 @@ App.propTypes = {
     }).isRequired,
     films: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired
+      src: PropTypes.string.isRequired,
+      background: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      year: PropTypes.number.isRequired,
+      overview: PropTypes.shape({
+        description: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        voiceCount: PropTypes.number.isRequired,
+        director: PropTypes.string.isRequired,
+        actorList: PropTypes.string.isRequired
+      }).isRequired
     }))
   }).isRequired
 };
