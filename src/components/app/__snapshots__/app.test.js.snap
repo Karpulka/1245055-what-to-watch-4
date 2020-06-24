@@ -263,11 +263,12 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
-              alt="Film Name 1"
+              alt="Фантастические твари и места их обитания"
               height="175"
-              src="111"
+              src="/fantastic-beasts-the-crimes-of-grindelwald.jpg"
               width="280"
             />
           </div>
@@ -279,7 +280,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Film Name 1
+              Фантастические твари и места их обитания
             </a>
           </h3>
         </article>
@@ -289,11 +290,12 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
-              alt="Film Name 2"
+              alt="Богемская рапсодия"
               height="175"
-              src="222"
+              src="/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -305,7 +307,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Film Name 2
+              Богемская рапсодия
             </a>
           </h3>
         </article>
@@ -315,11 +317,12 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
-              alt="Film Name 3"
+              alt="Авиатор"
               height="175"
-              src="333"
+              src="/aviator.jpg"
               width="280"
             />
           </div>
@@ -331,59 +334,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Film Name 3
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Film Name 4"
-              height="175"
-              src="444"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Film Name 4
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Film Name 5"
-              height="175"
-              src="555"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Film Name 5
+              Авиатор
             </a>
           </h3>
         </article>

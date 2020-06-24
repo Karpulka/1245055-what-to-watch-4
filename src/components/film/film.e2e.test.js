@@ -18,7 +18,7 @@ describe(`USer events by Film Element`, () => {
 
     const filmElement = shallow(<Film
       film={film}
-      onFilmTitleClick={onFilmTitleClick}
+      onFilmClick={onFilmTitleClick}
       onFilmHover={() => {}}
     />);
 
@@ -33,7 +33,7 @@ describe(`USer events by Film Element`, () => {
 
     const filmElement = shallow(<Film
       film={film}
-      onFilmTitleClick={() => {}}
+      onFilmClick={() => {}}
       onFilmHover={handleFilmHover}
     />);
 
@@ -41,5 +41,23 @@ describe(`USer events by Film Element`, () => {
 
     expect(handleFilmHover.mock.calls.length).toBe(1);
     expect(handleFilmHover.mock.calls[0][0]).toMatchObject(film);
+  });
+
+  it(`CLick By Film Title or Poster`, () => {
+    const handleFilmClick = jest.fn();
+
+    const filmElement = shallow(<Film
+      film={film}
+      onFilmClick={handleFilmClick}
+      onFilmHover={() => {}}
+    />);
+
+    const poster = filmElement.find(`.small-movie-card__image`);
+    const title = filmElement.find(`.small-movie-card__link`);
+
+    poster.simulate(`click`, {preventDefault() {}});
+    title.simulate(`click`, {preventDefault() {}});
+
+    expect(handleFilmClick.mock.calls.length).toBe(2);
   });
 });

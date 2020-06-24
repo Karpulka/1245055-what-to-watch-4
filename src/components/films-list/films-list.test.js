@@ -23,7 +23,7 @@ const films = [
 
 it(`Render FilmsList`, () => {
   const tree = renderer
-    .create(<FilmsList films={films}/>)
+    .create(<FilmsList films={films} onFilmClick={() => {}} onFilmHover={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
