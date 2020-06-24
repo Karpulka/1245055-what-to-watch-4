@@ -1,28 +1,60 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import FilmDetail from "../film-detail/film-detail.jsx";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
-const App = (props) => {
-  const {settings: {promoFilm: promoFilmSettings, films}} = props;
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeFilm: {},
+      selectedFilm: null
+    };
 
-  return <BrowserRouter>
-    <Switch>
-      <Route exact path="/">
-        <Main
-          promoFilmTitle={promoFilmSettings.title}
-          promoFilmGenre={promoFilmSettings.genre}
-          promoFilmYear={promoFilmSettings.year}
-          films={films}
-        />
-      </Route>
-      <Route exact path="/film-detail">
-        <FilmDetail {...films[4]}/>
-      </Route>
-    </Switch>
-  </BrowserRouter>;
-};
+    this.handleFilmHover = this.handleFilmHover.bind(this);
+  }
+
+  render() {
+    const {settings: {films}} = this.props;
+
+    return <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {this._renderFilmPage()}
+        </Route>
+        <Route exact path="/film-detail">
+          <FilmDetail {...films[1]}/>
+        </Route>
+      </Switch>
+    </BrowserRouter>;
+  }
+
+  handleFilmHover(film) {
+    this.setState({activeFilm: film});
+  }
+
+  _renderFilmPage() {
+    const {settings: {promoFilm: promoFilmSettings, films}} = this.props;
+    const selectedFilm = this.state.selectedFilm;
+
+    if (selectedFilm) {
+      return <FilmDetail {...selectedFilm}/>;
+    }
+
+    return <Main
+      promoFilmTitle={promoFilmSettings.title}
+      promoFilmGenre={promoFilmSettings.genre}
+      promoFilmYear={promoFilmSettings.year}
+      films={films}
+      onFilmClick={(evt) => {
+        evt.preventDefault();
+        this.setState({selectedFilm: this.state.activeFilm});
+      }}
+      onFilmHover={this.handleFilmHover}
+    />;
+  }
+}
 
 App.propTypes = {
   settings: PropTypes.shape({
