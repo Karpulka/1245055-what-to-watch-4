@@ -10,6 +10,7 @@ exports[`Render FilmsList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="11"
@@ -36,6 +37,7 @@ exports[`Render FilmsList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="22"
@@ -62,6 +64,7 @@ exports[`Render FilmsList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="33"
@@ -88,6 +91,7 @@ exports[`Render FilmsList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="44"
