@@ -8,16 +8,18 @@ class FilmsList extends PureComponent {
   }
 
   render() {
-    const {films, onFilmClick, onFilmHover} = this.props;
+    const {films, onFilmClick, onFilmHover, activeFilmID, onFilmBlur} = this.props;
 
     return <div className="catalog__movies-list">
       {films.map((film, id) => <Film
         key={film.title + id}
         film={film}
-        onFilmHover={() => {
-          onFilmHover(film);
-        }}
-        onFilmClick={onFilmClick}/>)}
+        onFilmHover={onFilmHover}
+        onFilmClick={onFilmClick}
+        onFilmBlur={onFilmBlur}
+        isPlaying={activeFilmID === film.id}
+      />
+      )}
     </div>;
   }
 }
@@ -28,7 +30,9 @@ FilmsList.propTypes = {
     src: PropTypes.string.isRequired
   })),
   onFilmClick: PropTypes.func.isRequired,
-  onFilmHover: PropTypes.func.isRequired
+  onFilmHover: PropTypes.func.isRequired,
+  onFilmBlur: PropTypes.func.isRequired,
+  activeFilmID: PropTypes.number
 };
 
 export default FilmsList;

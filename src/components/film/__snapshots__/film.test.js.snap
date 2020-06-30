@@ -4,17 +4,13 @@ exports[`Render Film 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="small-movie-card__image"
     onClick={[Function]}
   >
-    <img
-      alt="Film name"
-      height="175"
-      src="111"
-      width="280"
-    />
+    <video />
   </div>
   <h3
     className="small-movie-card__title"
@@ -24,7 +20,7 @@ exports[`Render Film 1`] = `
       href="movie-page.html"
       onClick={[Function]}
     >
-      Film name
+      Остров проклятых
     </a>
   </h3>
 </article>

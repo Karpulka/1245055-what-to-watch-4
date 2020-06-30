@@ -7,17 +7,13 @@ exports[`Render FilmsList 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="11"
-        height="175"
-        src="11"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -27,24 +23,20 @@ exports[`Render FilmsList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        11
+        Фантастические твари и места их обитания
       </a>
     </h3>
   </article>
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="22"
-        height="175"
-        src="22"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -54,24 +46,20 @@ exports[`Render FilmsList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        22
+        Богемская рапсодия
       </a>
     </h3>
   </article>
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="33"
-        height="175"
-        src="33"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -81,34 +69,7 @@ exports[`Render FilmsList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        33
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="44"
-        height="175"
-        src="44"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        44
+        Авиатор
       </a>
     </h3>
   </article>

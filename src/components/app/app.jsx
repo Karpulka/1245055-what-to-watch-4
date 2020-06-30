@@ -8,11 +8,12 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      activeFilm: {},
+      activeFilmID: null,
       selectedFilm: null
     };
 
     this.handleFilmHover = this.handleFilmHover.bind(this);
+    this.handleFilmBlur = this.handleFilmBlur.bind(this);
   }
 
   render() {
@@ -31,12 +32,16 @@ class App extends PureComponent {
   }
 
   handleFilmHover(film) {
-    this.setState({activeFilm: film});
+    setTimeout(() => this.setState({activeFilmID: film.id}), 1000);
+  }
+
+  handleFilmBlur() {
+    this.setState({activeFilmID: null});
   }
 
   _renderFilmPage() {
     const {settings: {promoFilm: promoFilmSettings, films}} = this.props;
-    const selectedFilm = this.state.selectedFilm;
+    const {selectedFilm, activeFilmID} = this.state;
 
     if (selectedFilm) {
       return <FilmDetail {...selectedFilm}/>;
@@ -49,9 +54,12 @@ class App extends PureComponent {
       films={films}
       onFilmClick={(evt) => {
         evt.preventDefault();
-        this.setState({selectedFilm: this.state.activeFilm});
+        const film = films.find((item) => item.id === activeFilmID);
+        this.setState({selectedFilm: film});
       }}
       onFilmHover={this.handleFilmHover}
+      onFilmBlur={this.handleFilmBlur}
+      activeFilmID={activeFilmID}
     />;
   }
 }
