@@ -3,7 +3,7 @@ import FilmsList from "../films-list/films-list.jsx";
 import PropTypes from "prop-types";
 
 const Main = (props) => {
-  const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick, onFilmHover, activeFilmID, onFilmBlur} = props;
+  const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick} = props;
 
   return <React.Fragment>
     <section className="movie-card">
@@ -98,7 +98,7 @@ const Main = (props) => {
           </li>
         </ul>
 
-        <FilmsList films={films} onFilmClick={onFilmClick} onFilmHover={onFilmHover} activeFilmID={activeFilmID} onFilmBlur={onFilmBlur}/>
+        <FilmsList films={films} onFilmClick={onFilmClick} />
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -134,10 +134,7 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
   })),
-  onFilmClick: PropTypes.func.isRequired,
-  onFilmHover: PropTypes.func.isRequired,
-  onFilmBlur: PropTypes.func.isRequired,
-  activeFilmID: PropTypes.number
+  onFilmClick: PropTypes.func.isRequired
 };
 
 export default Main;

@@ -14,9 +14,7 @@ it(`Render Main`, () => {
       promoFilmGenre={promoFilm.genre}
       promoFilmTitle={promoFilm.title}
       promoFilmYear={promoFilm.year}
-      onFilmClick={() => {}}
-      onFilmHover={() => {}}
-      onFilmBlur={() => {}}/>)
+      onFilmClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
