@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
+import Main from "./main.jsx";
 
 const promoFilm = {
   title: `Promo Film Name`,
@@ -14,8 +14,7 @@ it(`Render Main`, () => {
       promoFilmGenre={promoFilm.genre}
       promoFilmTitle={promoFilm.title}
       promoFilmYear={promoFilm.year}
-      onFilmClick={() => {}}
-      onFilmHover={() => {}}/>)
+      onFilmClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

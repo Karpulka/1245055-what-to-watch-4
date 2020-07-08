@@ -1,15 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import VideoPlayer from "../video-player/video-palyer.jsx";
+
+const handleFilmClick = (onFilmClick, film, evt) => {
+  evt.preventDefault();
+  onFilmClick(film);
+};
 
 const Film = (props) => {
-  const {film, onFilmHover, onFilmClick} = props;
+  const {film, onFilmHover, onFilmClick, isPlaying, onFilmBlur} = props;
 
-  return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onFilmHover(film)}>
-    <div className="small-movie-card__image" onClick={onFilmClick}>
-      <img src={film.src} alt={film.title} width="280" height="175"/>
+  return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onFilmHover(film)} onMouseLeave={() => onFilmBlur()}>
+    <div className="small-movie-card__image" onClick={handleFilmClick.bind(null, onFilmClick, film)}>
+      <VideoPlayer src={film.video} poster={film.src} width="280" height="175" isMuted={true} isPlaying={isPlaying}/>
     </div>
     <h3 className="small-movie-card__title">
-      <a className="small-movie-card__link" href="movie-page.html" onClick={onFilmClick}>{film.title}</a>
+      <a className="small-movie-card__link" href="movie-page.html" onClick={handleFilmClick.bind(null, onFilmClick, film)}>{film.title}</a>
     </h3>
   </article>;
 };
@@ -17,10 +23,13 @@ const Film = (props) => {
 Film.propTypes = {
   film: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired
+    src: PropTypes.string.isRequired,
+    video: PropTypes.string.isRequired
   }).isRequired,
   onFilmClick: PropTypes.func.isRequired,
-  onFilmHover: PropTypes.func.isRequired
+  onFilmHover: PropTypes.func.isRequired,
+  onFilmBlur: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool
 };
 
 export default Film;

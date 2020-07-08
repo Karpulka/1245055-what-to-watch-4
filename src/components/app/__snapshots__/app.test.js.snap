@@ -69,7 +69,7 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="{promoFilmTitle}"
+            alt="Promo Film"
             height="327"
             src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
@@ -260,17 +260,13 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Фантастические твари и места их обитания"
-              height="175"
-              src="/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"
@@ -287,17 +283,13 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Богемская рапсодия"
-              height="175"
-              src="/bohemian-rhapsody.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"
@@ -314,17 +306,13 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Авиатор"
-              height="175"
-              src="/aviator.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"

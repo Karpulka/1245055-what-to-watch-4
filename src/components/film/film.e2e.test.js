@@ -4,8 +4,21 @@ import Adapter from "enzyme-adapter-react-16";
 import Film from "./film";
 
 const film = {
-  title: `Film Title`,
-  src: `111`
+  id: 6,
+  title: `Остров проклятых`,
+  src: `/shutter-island.jpg`,
+  background: `/shutter-island.jpg`,
+  genre: `Mystery, Thriller`,
+  year: 2010,
+  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  overview: {
+    description: `<p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.</p>
+                    <p>Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>`,
+    rating: `8.87`,
+    voiceCount: 240,
+    director: `Wes Andreson`,
+    actorList: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`
+  }
 };
 
 Enzyme.configure({
@@ -20,6 +33,8 @@ describe(`USer events by Film Element`, () => {
       film={film}
       onFilmClick={onFilmTitleClick}
       onFilmHover={() => {}}
+      onFilmBlur={() => {}}
+      isPlaying={false}
     />);
 
     const filmTitle = filmElement.find(`.small-movie-card__link`);
@@ -35,6 +50,8 @@ describe(`USer events by Film Element`, () => {
       film={film}
       onFilmClick={() => {}}
       onFilmHover={handleFilmHover}
+      onFilmBlur={() => {}}
+      isPlaying={false}
     />);
 
     filmElement.simulate(`mouseenter`);
@@ -50,6 +67,8 @@ describe(`USer events by Film Element`, () => {
       film={film}
       onFilmClick={handleFilmClick}
       onFilmHover={() => {}}
+      onFilmBlur={() => {}}
+      isPlaying={false}
     />);
 
     const poster = filmElement.find(`.small-movie-card__image`);
