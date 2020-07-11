@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import FilmDetail from "../film-detail/film-detail.jsx";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
+const LIKE_FILMS_COUNT = 4;
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -23,7 +25,7 @@ class App extends PureComponent {
           {this._renderFilmPage()}
         </Route>
         <Route exact path="/film-detail">
-          <FilmDetail {...films[1]}/>
+          <FilmDetail {...films[1]} likeFilms={this._getLikeFilms(films, films[1].genre, films[1].id)} onFilmClick={this.handleFilmClick}/>
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -38,7 +40,7 @@ class App extends PureComponent {
     const {selectedFilm} = this.state;
 
     if (selectedFilm) {
-      return <FilmDetail {...selectedFilm}/>;
+      return <FilmDetail {...selectedFilm} likeFilms={this._getLikeFilms(films, selectedFilm.genre, selectedFilm.id)} onFilmClick={this.handleFilmClick}/>;
     }
 
     return <Main
@@ -48,6 +50,25 @@ class App extends PureComponent {
       films={films}
       onFilmClick={this.handleFilmClick}
     />;
+  }
+
+  _getLikeFilms(films, genre, filmID) {
+    const genres = genre.split(`, `);
+
+    const sortedFilms = films.filter((film) => {
+      const currentGenres = film.genre.split(`, `);
+
+      let isCoincidence = false;
+      genres.forEach((likeGenre) => {
+        if (currentGenres.indexOf(likeGenre) > -1 && film.id !== filmID) {
+          isCoincidence = true;
+        }
+      });
+
+      return isCoincidence;
+    });
+
+    return sortedFilms.slice(0, LIKE_FILMS_COUNT);
   }
 }
 
