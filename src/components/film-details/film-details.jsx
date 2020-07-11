@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
-import momentDurationFormatSetup from "moment-duration-format";
-momentDurationFormatSetup(moment);
+import {prepareFilmDuration} from "../../utils";
 
 const FilmDetails = (props) => {
   const {director, actorList, runtime, genre, year} = props.details;
-  const release = moment.duration(runtime, `minutes`).format(`h[h] m[m]`);
+  const release = prepareFilmDuration(runtime);
 
   return <div className="movie-card__text movie-card__row">
     <div className="movie-card__text-col">

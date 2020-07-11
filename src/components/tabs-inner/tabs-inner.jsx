@@ -6,14 +6,14 @@ import FilmOverview from "../film-overview/film-overview.jsx";
 
 class TabsInner extends PureComponent {
   render() {
-    const {overview, details, isDetails, isReviews} = this.props;
+    const {overview, details, filmID, isDetails, isReviews} = this.props;
 
     if (isDetails) {
       return <FilmDetails details={details}/>;
     }
 
     if (isReviews) {
-      return <FilmReviews/>;
+      return <FilmReviews filmID={filmID}/>;
     }
 
     return <FilmOverview overview={overview}/>;
@@ -35,6 +35,7 @@ TabsInner.propTypes = {
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired
   }).isRequired,
+  filmID: PropTypes.number.isRequired,
   isDetails: PropTypes.bool.isRequired,
   isReviews: PropTypes.bool.isRequired
 };

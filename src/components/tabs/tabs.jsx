@@ -23,7 +23,7 @@ class Tabs extends PureComponent {
   }
 
   render() {
-    const {overview, details} = this.props;
+    const {overview, details, filmID} = this.props;
     const {isOverview, isDetails, isReviews} = this.state;
     const tabVariants = [
       {
@@ -51,7 +51,7 @@ class Tabs extends PureComponent {
           />)}
         </ul>
       </nav>
-      <TabsInner overview={overview} details={details} isOverview={isOverview} isDetails={isDetails} isReviews={isReviews}/>
+      <TabsInner overview={overview} details={details} filmID={filmID} isOverview={isOverview} isDetails={isDetails} isReviews={isReviews}/>
     </React.Fragment>;
   }
 
@@ -95,7 +95,8 @@ Tabs.propTypes = {
     director: PropTypes.string.isRequired,
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  filmID: PropTypes.number.isRequired
 };
 
 export default Tabs;

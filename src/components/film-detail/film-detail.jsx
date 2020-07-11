@@ -4,7 +4,7 @@ import Tabs from "../tabs/tabs.jsx";
 
 class FilmDetail extends PureComponent {
   render() {
-    const {title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime} = this.props;
+    const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime} = this.props;
     const overview = {rating, voiceCount, description, director, actorList};
     const details = {director, actorList, runtime, genre, year};
 
@@ -67,7 +67,7 @@ class FilmDetail extends PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              <Tabs overview={overview} details={details}/>
+              <Tabs overview={overview} details={details} filmID={id}/>
             </div>
           </div>
         </div>
@@ -122,6 +122,7 @@ class FilmDetail extends PureComponent {
 }
 
 FilmDetail.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   background: PropTypes.string.isRequired,
