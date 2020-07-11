@@ -1,32 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-
-const RatingDescription = [
-  {
-    min: 0,
-    max: 3,
-    title: `Bad`
-  },
-  {
-    min: 3,
-    max: 5,
-    title: `Normal`
-  },
-  {
-    min: 5,
-    max: 8,
-    title: `Good`
-  },
-  {
-    min: 8,
-    max: 10,
-    title: `Very good`
-  },
-  {
-    min: 10,
-    title: `Awesome`
-  }
-];
+import Tabs from "../tabs/tabs.jsx";
 
 class FilmDetail extends PureComponent {
   constructor(props) {
@@ -34,8 +8,9 @@ class FilmDetail extends PureComponent {
   }
 
   render() {
-    const {title, src, background, genre, year, overview: {description, rating, voiceCount, director, actorList}} = this.props;
-    const roundRating = Math.floor(rating * 10) / 10;
+    const {title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime} = this.props;
+    const overview = {rating, voiceCount, description, director, actorList};
+    const details = {director, actorList, runtime, genre, year};
 
     return <React.Fragment>
       <section className="movie-card movie-card--full">
@@ -109,20 +84,7 @@ class FilmDetail extends PureComponent {
                   </li>
                 </ul>
               </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{roundRating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{this._getRatingDescription(roundRating)}</span>
-                  <span className="movie-rating__count">{voiceCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                {description}
-                {director ? <p className="movie-card__director"><strong>Director: {director}</strong></p> : ``}
-                {actorList ? <p className="movie-card__starring"><strong>Starring: {actorList}</strong></p> : ``}
-              </div>
+              <Tabs overview={overview} details={details}/>
             </div>
           </div>
         </div>
@@ -174,10 +136,6 @@ class FilmDetail extends PureComponent {
       </div>
     </React.Fragment>;
   }
-
-  _getRatingDescription(rating) {
-    return RatingDescription.find((item) => rating >= item.min && (!item.max || rating < item.max)).title;
-  }
 }
 
 FilmDetail.propTypes = {
@@ -186,13 +144,12 @@ FilmDetail.propTypes = {
   background: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  overview: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.string.isRequired
-  }).isRequired
+  description: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
+  voiceCount: PropTypes.number.isRequired,
+  director: PropTypes.string.isRequired,
+  actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  runtime: PropTypes.number.isRequired
 };
 
 export default FilmDetail;

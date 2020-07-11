@@ -64,13 +64,12 @@ App.propTypes = {
       background: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,
       year: PropTypes.number.isRequired,
-      overview: PropTypes.shape({
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        voiceCount: PropTypes.number.isRequired,
-        director: PropTypes.string.isRequired,
-        actorList: PropTypes.string.isRequired
-      }).isRequired
+      description: PropTypes.string.isRequired,
+      rating: PropTypes.string.isRequired,
+      voiceCount: PropTypes.number.isRequired,
+      director: PropTypes.string.isRequired,
+      actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+      runtime: PropTypes.number.isRequired
     }))
   }).isRequired
 };
