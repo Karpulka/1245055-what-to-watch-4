@@ -6,7 +6,6 @@ momentDurationFormatSetup(moment);
 
 const FilmDetails = (props) => {
   const {director, actorList, runtime, genre, year} = props.details;
-  const actors = actorList.join(`,<br/>`);
   const release = moment.duration(runtime, `minutes`).format(`h[h] m[m]`);
 
   return <div className="movie-card__text movie-card__row">
@@ -17,7 +16,7 @@ const FilmDetails = (props) => {
       </p>
       <p className="movie-card__details-item">
         <strong className="movie-card__details-name">Starring</strong>
-        <span className="movie-card__details-value">{actors}</span>
+        <span className="movie-card__details-value">{actorList.map((actor, i) => <React.Fragment key={actor + i}>{actor}<br/></React.Fragment>)}</span>
       </p>
     </div>
 
