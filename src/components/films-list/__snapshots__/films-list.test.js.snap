@@ -23,7 +23,7 @@ exports[`Render FilmsList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Фантастические твари и места их обитания
+        Большой куш
       </a>
     </h3>
   </article>
@@ -46,7 +46,7 @@ exports[`Render FilmsList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Богемская рапсодия
+        Война миров
       </a>
     </h3>
   </article>
@@ -69,7 +69,7 @@ exports[`Render FilmsList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Авиатор
+        Revenant
       </a>
     </h3>
   </article>

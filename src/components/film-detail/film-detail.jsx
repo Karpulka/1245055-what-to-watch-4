@@ -80,7 +80,7 @@ class FilmDetail extends PureComponent {
 
           <FilmsList films={likeFilms} onFilmClick={onFilmClick} />
         </section>
-      </div>  : ``}
+      </div> : ``}
     </React.Fragment>;
   }
 }
@@ -93,11 +93,26 @@ FilmDetail.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   voiceCount: PropTypes.number.isRequired,
   director: PropTypes.string.isRequired,
   actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  runtime: PropTypes.number.isRequired
+  runtime: PropTypes.number.isRequired,
+  likeFilms: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    voiceCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    runtime: PropTypes.number.isRequired
+  })),
+  onFilmClick: PropTypes.func.isRequired
 };
 
 export default FilmDetail;
