@@ -1,85 +1,46 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import TabsInner from "../tabs-inner/tabs-inner.jsx";
 import PropTypes from "prop-types";
 import TabVariants from "../tab-variants/tab-variants.jsx";
 
-const TabVariantValues = {
+export const TabVariantValues = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`
 };
 
-class Tabs extends PureComponent {
-  constructor(props) {
-    super(props);
+const Tabs = (props) => {
+  const {overview, details, filmID, isOverview, isDetails, isReviews, onTabClick} = props;
 
-    this.handleTabClick = this.handleTabClick.bind(this);
+  const tabVariants = [
+    {
+      title: `Overview`,
+      active: isOverview
+    },
+    {
+      title: `Details`,
+      active: isDetails
+    },
+    {
+      title: `Reviews`,
+      active: isReviews
+    },
+  ];
 
-    this.state = {
-      isOverview: true,
-      isDetails: false,
-      isReviews: false
-    };
-  }
-
-  render() {
-    const {overview, details, filmID} = this.props;
-    const {isOverview, isDetails, isReviews} = this.state;
-    const tabVariants = [
-      {
-        title: `Overview`,
-        active: isOverview
-      },
-      {
-        title: `Details`,
-        active: isDetails
-      },
-      {
-        title: `Reviews`,
-        active: isReviews
-      },
-    ];
-
-    return <React.Fragment>
-      <nav className="movie-nav movie-card__nav">
-        <ul className="movie-nav__list">
-          {tabVariants.map((tab, i) => <TabVariants
-            key={tab.title + i}
-            title={tab.title}
-            active={tab.active}
-            onTabClick={this.handleTabClick}
-          />)}
-        </ul>
-      </nav>
-      <TabsInner overview={overview} details={details} filmID={filmID} isOverview={isOverview} isDetails={isDetails} isReviews={isReviews}/>
-    </React.Fragment>;
-  }
-
-  handleTabClick(evt) {
-    evt.preventDefault();
-    const currentItem = evt.currentTarget;
-    let overviewClicked = false;
-    let detailsClicked = false;
-    let reviewsClicked = false;
-    switch (currentItem.textContent) {
-      case TabVariantValues.OVERVIEW:
-        overviewClicked = true;
-        break;
-      case TabVariantValues.DETAILS:
-        detailsClicked = true;
-        break;
-      case TabVariantValues.REVIEWS:
-        reviewsClicked = true;
-        break;
-    }
-
-    this.setState({
-      isOverview: overviewClicked,
-      isDetails: detailsClicked,
-      isReviews: reviewsClicked
-    });
-  }
-}
+  return <React.Fragment>
+    <nav className="movie-nav movie-card__nav">
+      <ul className="movie-nav__list">
+        {tabVariants.map((tab, i) => <TabVariants
+          key={tab.title + i}
+          title={tab.title}
+          active={tab.active}
+          onTabClick={onTabClick}
+        />)}
+      </ul>
+    </nav>
+    <TabsInner overview={overview} details={details} filmID={filmID} isOverview={isOverview} isDetails={isDetails} isReviews={isReviews}/>
+  </React.Fragment>;
+};
 
 Tabs.propTypes = {
   overview: PropTypes.shape({
@@ -96,7 +57,11 @@ Tabs.propTypes = {
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired
   }).isRequired,
-  filmID: PropTypes.number.isRequired
+  filmID: PropTypes.number.isRequired,
+  isOverview: PropTypes.bool.isRequired,
+  isDetails: PropTypes.bool.isRequired,
+  isReviews: PropTypes.bool.isRequired,
+  onTabClick: PropTypes.func.isRequired
 };
 
 export default Tabs;

@@ -20,7 +20,7 @@ const details = {
 
 it(`Render Tabs`, () => {
   const tree = renderer
-    .create(<Tabs overview={overview} details={details} filmID={0} />)
+    .create(<Tabs overview={overview} details={details} filmID={0} isOverview={true} isDetails={false} isReviews={false} onTabClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

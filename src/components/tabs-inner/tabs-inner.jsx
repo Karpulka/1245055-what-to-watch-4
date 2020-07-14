@@ -1,24 +1,22 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import FilmDetails from "../film-details/film-details.jsx";
 import FilmReviews from "../film-reviews/film-reviews.jsx";
 import FilmOverview from "../film-overview/film-overview.jsx";
 
-class TabsInner extends PureComponent {
-  render() {
-    const {overview, details, filmID, isDetails, isReviews} = this.props;
+const TabsInner = (props) => {
+  const {overview, details, filmID, isDetails, isReviews} = props;
 
-    if (isDetails) {
-      return <FilmDetails details={details}/>;
-    }
-
-    if (isReviews) {
-      return <FilmReviews filmID={filmID}/>;
-    }
-
-    return <FilmOverview overview={overview}/>;
+  if (isDetails) {
+    return <FilmDetails details={details}/>;
   }
-}
+
+  if (isReviews) {
+    return <FilmReviews filmID={filmID}/>;
+  }
+
+  return <FilmOverview overview={overview}/>;
+};
 
 TabsInner.propTypes = {
   overview: PropTypes.shape({
