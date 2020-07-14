@@ -4,11 +4,7 @@ import VideoPlayer from "./video-palyer.jsx";
 
 it(`Render VideoPlayer`, () => {
   const tree = renderer
-    .create(<VideoPlayer
-      src={`1234`}
-      poster={`pwd/poster.png`}
-      isPlaying={false}
-    />, {
+    .create(<VideoPlayer><video/></VideoPlayer>, {
       createNodeMock: () => {
         return {};
       }
