@@ -58,6 +58,9 @@ it(`Render FilmsList`, () => {
     .create(<FilmsList
       films={films}
       onFilmClick={() => {}}
+      onFilmHover={() => {}}
+      onFilmBlur={() => {}}
+      activeFilmID={1}
     />, {
       createNodeMock: () => {
         return {};

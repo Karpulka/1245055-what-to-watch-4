@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmsList from "../films-list/films-list.jsx";
+import withFilmsList from "../../hocs/with-films-list/with-films-list";
 
 const FilmDetail = (props) => {
   const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, likeFilms, onFilmClick} = props;
   const overview = {rating, voiceCount, description, director, actorList};
   const details = {director, actorList, runtime, genre, year};
+  const FilmsListComponent = withFilmsList(FilmsList);
 
   return <React.Fragment>
     <section className="movie-card movie-card--full">
@@ -77,7 +79,7 @@ const FilmDetail = (props) => {
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
 
-        <FilmsList films={likeFilms} onFilmClick={onFilmClick} />
+        <FilmsListComponent films={likeFilms} onFilmClick={onFilmClick} />
       </section>
     </div> : ``}
   </React.Fragment>;

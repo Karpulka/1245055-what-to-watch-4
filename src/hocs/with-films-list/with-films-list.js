@@ -16,21 +16,14 @@ const withFilmsList = (Component) => {
     }
 
     render() {
-      const {films, onFilmClick} = this.props;
       const {activeFilmID} = this.state;
 
-      return <div className="catalog__movies-list">
-        {films.map((film, id) => <Component
-          {...this.props}
-          key={film.title + id}
-          film={film}
-          onFilmHover={this.handleFilmHover}
-          onFilmClick={onFilmClick}
-          onFilmBlur={this.handleFilmBlur}
-          isPlaying={activeFilmID === film.id}
-        />
-        )}
-      </div>;
+      return <Component
+        {...this.props}
+        onFilmHover={this.handleFilmHover}
+        onFilmBlur={this.handleFilmBlur}
+        activeFilmID={activeFilmID}
+      />;
     }
 
     componentWillUnmount() {
