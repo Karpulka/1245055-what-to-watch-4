@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-palyer.jsx";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 
 const handleFilmClick = (onFilmClick, film, evt) => {
   evt.preventDefault();
@@ -9,10 +10,11 @@ const handleFilmClick = (onFilmClick, film, evt) => {
 
 const Film = (props) => {
   const {film, onFilmHover, onFilmClick, isPlaying, onFilmBlur} = props;
+  const VideoPlayerComponent = withVideoPlayer(VideoPlayer);
 
   return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onFilmHover(film)} onMouseLeave={() => onFilmBlur()}>
     <div className="small-movie-card__image" onClick={handleFilmClick.bind(null, onFilmClick, film)}>
-      <VideoPlayer src={film.video} poster={film.src} width="280" height="175" isMuted={true} isPlaying={isPlaying}/>
+      <VideoPlayerComponent src={film.video} poster={film.src} width="280" height="175" isMuted={true} isPlaying={isPlaying}/>
     </div>
     <h3 className="small-movie-card__title">
       <a className="small-movie-card__link" href="movie-page.html" onClick={handleFilmClick.bind(null, onFilmClick, film)}>{film.title}</a>

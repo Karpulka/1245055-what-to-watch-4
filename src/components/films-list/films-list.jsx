@@ -1,59 +1,31 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Film from "../film/film.jsx";
 
-class FilmsList extends PureComponent {
-  constructor(props) {
-    super(props);
+const FilmsList = (props) => {
+  const {films, onFilmClick, onFilmHover, onFilmBlur, activeFilmID} = props;
 
-    this.state = {
-      activeFilmID: null
-    };
-
-    this.handleFilmHover = this.handleFilmHover.bind(this);
-    this.handleFilmBlur = this.handleFilmBlur.bind(this);
-    this._timeoutID = null;
-  }
-
-  render() {
-    const {films, onFilmClick} = this.props;
-    const {activeFilmID} = this.state;
-
-    return <div className="catalog__movies-list">
-      {films.map((film, id) => <Film
-        key={film.title + id}
-        film={film}
-        onFilmHover={this.handleFilmHover}
-        onFilmClick={onFilmClick}
-        onFilmBlur={this.handleFilmBlur}
-        isPlaying={activeFilmID === film.id}
-      />
-      )}
-    </div>;
-  }
-
-  componentWillUnmount() {
-    if (this._timeoutID) {
-      clearTimeout(this._timeoutID);
-    }
-  }
-
-  handleFilmHover(film) {
-    this._timeoutID = setTimeout(() => this.setState({activeFilmID: film.id}), 1000);
-  }
-
-  handleFilmBlur() {
-    clearTimeout(this._timeoutID);
-    this.setState({activeFilmID: null});
-  }
-}
+  return <div className="catalog__movies-list">
+    {films.map((film, id) => <Film
+      key={film.title + id}
+      film={film}
+      onFilmHover={onFilmHover}
+      onFilmClick={onFilmClick}
+      onFilmBlur={onFilmBlur}
+      isPlaying={activeFilmID === film.id}
+    />)}
+  </div>;
+};
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
   })),
-  onFilmClick: PropTypes.func.isRequired
+  onFilmClick: PropTypes.func.isRequired,
+  onFilmHover: PropTypes.func.isRequired,
+  onFilmBlur: PropTypes.func.isRequired,
+  activeFilmID: PropTypes.number,
 };
 
 export default FilmsList;

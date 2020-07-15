@@ -1,9 +1,11 @@
 import React from "react";
 import FilmsList from "../films-list/films-list.jsx";
 import PropTypes from "prop-types";
+import withFilmsList from "../../hocs/with-films-list/with-films-list";
 
 const Main = (props) => {
   const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick} = props;
+  const FilmsListComponent = withFilmsList(FilmsList);
 
   return <React.Fragment>
     <section className="movie-card">
@@ -98,7 +100,7 @@ const Main = (props) => {
           </li>
         </ul>
 
-        <FilmsList films={films} onFilmClick={onFilmClick} />
+        <FilmsListComponent films={films} onFilmClick={onFilmClick} />
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
