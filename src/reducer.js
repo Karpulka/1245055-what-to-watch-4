@@ -13,10 +13,11 @@ const getFilters = (allFilms) => {
     });
   });
 
-  return filters;
+  return filters.slice(0, MAX_GENRES);
 };
 
 const promoFilm = films[0];
+const MAX_GENRES = 10;
 
 const initialState = {
   genre: `All genres`,
