@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configeStore from "redux-mock-store";
 
@@ -66,15 +66,12 @@ const films = [
 it(`Render App`, () => {
   const store = mockStore({
     genre: `All genres`,
-    films,
-    promoFilm,
-    allFilms: films,
     filters: [`All genres`]
   });
 
   const tree = renderer
     .create(<Provider store={store}>
-      <App />
+      <App promoFilm={promoFilm} allFilms={films} films={films}/>
     </Provider>, {
       createNodeMock: () => {
         return {};
