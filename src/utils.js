@@ -9,3 +9,7 @@ export const prepareFilmDuration = (time) => {
 export const prepareReviewDate = (date) => {
   return moment(date).format(`MMMM DD, YYYY`);
 };
+
+export const setNewObject = (a, b) => {
+  return Object.assign({}, a, b);
+};

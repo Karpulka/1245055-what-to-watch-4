@@ -3,6 +3,7 @@ import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import FilmDetail from "../film-detail/film-detail.jsx";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 
 const LIKE_FILMS_COUNT = 4;
 
@@ -17,7 +18,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {settings: {films}} = this.props;
+    const {films} = this.props;
 
     return <BrowserRouter>
       <Switch>
@@ -25,7 +26,7 @@ class App extends PureComponent {
           {this._renderFilmPage()}
         </Route>
         <Route exact path="/film-detail">
-          <FilmDetail {...films[1]} likeFilms={this._getLikeFilms(films, films[1].genre, films[1].id)} onFilmClick={this.handleFilmClick}/>
+          <FilmDetail {...films[0]} likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)} onFilmClick={this.handleFilmClick}/>
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -36,7 +37,7 @@ class App extends PureComponent {
   }
 
   _renderFilmPage() {
-    const {settings: {promoFilm: promoFilmSettings, films}} = this.props;
+    const {films, promoFilm} = this.props;
     const {selectedFilm} = this.state;
 
     if (selectedFilm) {
@@ -44,18 +45,19 @@ class App extends PureComponent {
     }
 
     return <Main
-      promoFilmTitle={promoFilmSettings.title}
-      promoFilmGenre={promoFilmSettings.genre}
-      promoFilmYear={promoFilmSettings.year}
+      promoFilmTitle={promoFilm.title}
+      promoFilmGenre={promoFilm.genre}
+      promoFilmYear={promoFilm.year}
       films={films}
       onFilmClick={this.handleFilmClick}
     />;
   }
 
   _getLikeFilms(films, genre, filmID) {
+    const {allFilms} = this.props;
     const genres = genre.split(`, `);
 
-    const sortedFilms = films.filter((film) => {
+    const sortedFilms = allFilms.filter((film) => {
       const currentGenres = film.genre.split(`, `);
 
       let isCoincidence = false;
@@ -73,27 +75,46 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  settings: PropTypes.shape({
-    promoFilm: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      year: PropTypes.number.isRequired
-    }).isRequired,
-    films: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-      background: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      year: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      voiceCount: PropTypes.number.isRequired,
-      director: PropTypes.string.isRequired,
-      actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-      runtime: PropTypes.number.isRequired
-    }))
-  }).isRequired
+  films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    voiceCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    runtime: PropTypes.number.isRequired
+  })),
+  allFilms: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    voiceCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    runtime: PropTypes.number.isRequired
+  })),
+  promoFilm: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+  })
 };
 
-export default App;
+const mapStoreToProps = (state) => ({
+  films: state.films,
+  promoFilm: state.promoFilm,
+  allFilms: state.allFilms
+});
+
+export {App};
+export default connect(mapStoreToProps)(App);
