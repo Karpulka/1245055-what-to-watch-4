@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmDetail from "./film-detail.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const film = {
   id: 0,
@@ -70,8 +74,15 @@ const likeFilms = [
 ];
 
 it(`Render FilmDetail`, () => {
+  const store = mockStore({
+    showingFilms: 5,
+    films: likeFilms
+  });
+
   const tree = renderer
-    .create(<FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {}}/>, {
+    .create(<Provider store={store}>
+      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {}}/>
+    </Provider>, {
       createNodeMock: () => {
         return {};
       }

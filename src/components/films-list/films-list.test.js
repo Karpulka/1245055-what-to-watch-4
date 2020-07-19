@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmsList from "./films-list.jsx";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 const films = [
   {
@@ -54,14 +58,19 @@ const films = [
 ];
 
 it(`Render FilmsList`, () => {
+  const store = mockStore({
+    showingFilms: 5
+  });
+
   const tree = renderer
-    .create(<FilmsList
-      films={films}
-      onFilmClick={() => {}}
-      onFilmHover={() => {}}
-      onFilmBlur={() => {}}
-      activeFilmID={1}
-    />, {
+    .create(<Provider store={store}>
+      <FilmsList
+        films={films}
+        onFilmClick={() => {}}
+        onFilmHover={() => {}}
+        onFilmBlur={() => {}}
+        activeFilmID={1}
+      /></Provider>, {
       createNodeMock: () => {
         return {};
       }

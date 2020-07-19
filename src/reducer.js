@@ -18,7 +18,7 @@ const getFilters = (allFilms) => {
 
 const promoFilm = films[0];
 const MAX_GENRES = 10;
-const DEFAULT_FILMS_COUNT = 3;
+const DEFAULT_FILMS_COUNT = 8;
 
 const initialState = {
   genre: `All genres`,
