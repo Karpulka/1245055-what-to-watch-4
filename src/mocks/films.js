@@ -102,7 +102,7 @@ export default [
     title: `Остров проклятых`,
     src: `${PATH}/shutter-island.jpg`,
     background: `${PATH}/shutter-island.jpg`,
-    genre: `Mystery, Thriller`,
+    genre: `Mystery, Thriller, Drama`,
     year: 2010,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     description: `<p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.</p>

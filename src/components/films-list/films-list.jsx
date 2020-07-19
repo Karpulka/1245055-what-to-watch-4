@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Film from "../film/film.jsx";
+import {connect} from "react-redux";
 
 const FilmsList = (props) => {
-  const {films, onFilmClick, onFilmHover, onFilmBlur, activeFilmID} = props;
+  const {films, onFilmClick, onFilmHover, onFilmBlur, activeFilmID, showingFilms} = props;
 
   return <div className="catalog__movies-list">
-    {films.map((film, id) => <Film
+    {films.slice(0, showingFilms).map((film, id) => <Film
       key={film.title + id}
       film={film}
       onFilmHover={onFilmHover}
@@ -26,6 +27,12 @@ FilmsList.propTypes = {
   onFilmHover: PropTypes.func.isRequired,
   onFilmBlur: PropTypes.func.isRequired,
   activeFilmID: PropTypes.number,
+  showingFilms: PropTypes.number.isRequired,
 };
 
-export default FilmsList;
+const mapPropsToState = (state) => ({
+  showingFilms: state.showingFilms
+});
+
+export {FilmsList};
+export default connect(mapPropsToState)(FilmsList);
