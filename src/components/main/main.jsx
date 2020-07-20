@@ -3,6 +3,7 @@ import FilmsList from "../films-list/films-list.jsx";
 import PropTypes from "prop-types";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import Filter from "../filter/filter.jsx";
+import ShowMore from "../show-more/show-more.jsx";
 
 const Main = (props) => {
   const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick} = props;
@@ -72,9 +73,7 @@ const Main = (props) => {
 
         <FilmsListComponent films={films} onFilmClick={onFilmClick} />
 
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        <ShowMore />
       </section>
 
       <footer className="page-footer">
