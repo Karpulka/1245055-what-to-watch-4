@@ -73,7 +73,7 @@ it(`Render App`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <App promoFilm={promoFilm} allFilms={films} films={films}/>
+      <App promoFilm={promoFilm} allFilms={films} films={films} handleFilmClick={() => {}}/>
     </Provider>, {
       createNodeMock: () => {
         return {};
