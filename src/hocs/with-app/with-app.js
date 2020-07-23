@@ -1,34 +1,34 @@
 import React, {PureComponent} from "react";
 
-const withApp = (Component) => {
-  class WithApp extends PureComponent {
+const withActiveItem = (Component) => {
+  class WithActiveItem extends PureComponent {
     constructor(props) {
       super(props);
       this.state = {
-        selectedFilm: null
+        activeItem: null
       };
 
-      this.handleFilmClick = this.handleFilmClick.bind(this);
+      this.handleItemClick = this.handleItemClick.bind(this);
     }
 
     render() {
-      const {selectedFilm} = this.state;
+      const {activeItem} = this.state;
 
       return <Component
         {...this.props}
-        handleFilmClick={this.handleFilmClick}
-        selectedFilm={selectedFilm}>
+        handleItemClick={this.handleItemClick}
+        activeItem={activeItem}>
       </Component>;
     }
 
-    handleFilmClick(film) {
-      this.setState({selectedFilm: film});
+    handleItemClick(film) {
+      this.setState({activeItem: film});
     }
   }
 
-  WithApp.propTypes = {};
+  WithActiveItem.propTypes = {};
 
-  return WithApp;
+  return WithActiveItem;
 };
 
-export default withApp;
+export default withActiveItem;

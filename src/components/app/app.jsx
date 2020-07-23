@@ -9,7 +9,7 @@ const LIKE_FILMS_COUNT = 4;
 
 class App extends PureComponent {
   render() {
-    const {films, handleFilmClick} = this.props;
+    const {films, handleItemClick} = this.props;
 
     return <BrowserRouter>
       <Switch>
@@ -17,17 +17,19 @@ class App extends PureComponent {
           {this._renderFilmPage()}
         </Route>
         <Route exact path="/film-detail">
-          <FilmDetail {...films[0]} likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)} onFilmClick={handleFilmClick}/>
+          <FilmDetail {...films[0]} likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
+                      onFilmClick={handleItemClick}/>
         </Route>
       </Switch>
     </BrowserRouter>;
   }
 
   _renderFilmPage() {
-    const {films, promoFilm, handleFilmClick, selectedFilm} = this.props;
+    const {films, promoFilm, handleItemClick, activeItem: selectedFilm} = this.props;
 
     if (selectedFilm) {
-      return <FilmDetail {...selectedFilm} likeFilms={this._getLikeFilms(films, selectedFilm.genre, selectedFilm.id)} onFilmClick={handleFilmClick}/>;
+      return <FilmDetail {...selectedFilm} likeFilms={this._getLikeFilms(films, selectedFilm.genre, selectedFilm.id)}
+                         onFilmClick={handleItemClick}/>;
     }
 
     return <Main
@@ -35,7 +37,7 @@ class App extends PureComponent {
       promoFilmGenre={promoFilm.genre}
       promoFilmYear={promoFilm.year}
       films={films}
-      onFilmClick={handleFilmClick}
+      onFilmClick={handleItemClick}
     />;
   }
 
@@ -94,8 +96,8 @@ App.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
-  handleFilmClick: PropTypes.func.isRequired,
-  selectedFilm: PropTypes.shape({
+  handleItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,

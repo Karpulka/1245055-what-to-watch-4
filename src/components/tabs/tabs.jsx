@@ -10,20 +10,20 @@ export const TabVariantValues = {
 };
 
 const Tabs = (props) => {
-  const {overview, details, filmID, isOverview, isDetails, isReviews, onTabClick} = props;
+  const {overview, details, filmID, activeItem, handleItemClick} = props;
 
   const tabVariants = [
     {
       title: `Overview`,
-      active: isOverview
+      value: overview
     },
     {
       title: `Details`,
-      active: isDetails
+      value: details
     },
     {
       title: `Reviews`,
-      active: isReviews
+      value: filmID
     },
   ];
 
@@ -32,13 +32,13 @@ const Tabs = (props) => {
       <ul className="movie-nav__list">
         {tabVariants.map((tab, i) => <TabVariants
           key={tab.title + i}
-          title={tab.title}
-          active={tab.active}
-          onTabClick={onTabClick}
+          active={activeItem ? activeItem.title : tabVariants[0].title}
+          tab={tab}
+          onTabClick={handleItemClick}
         />)}
       </ul>
     </nav>
-    <TabsInner overview={overview} details={details} filmID={filmID} isOverview={isOverview} isDetails={isDetails} isReviews={isReviews}/>
+    <TabsInner tabValue={activeItem || tabVariants[0]}/>
   </React.Fragment>;
 };
 
@@ -57,11 +57,12 @@ Tabs.propTypes = {
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired
   }).isRequired,
-  filmID: PropTypes.number.isRequired,
-  isOverview: PropTypes.bool.isRequired,
-  isDetails: PropTypes.bool.isRequired,
-  isReviews: PropTypes.bool.isRequired,
-  onTabClick: PropTypes.func.isRequired
+  handleItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.shape(), PropTypes.number])
+  }),
+  filmID: PropTypes.number.isRequired
 };
 
 export default Tabs;

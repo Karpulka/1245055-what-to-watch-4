@@ -3,25 +3,54 @@ import renderer from "react-test-renderer";
 import TabsInner from "./tabs-inner";
 
 const overview = {
-  description: `This is Description. TCHK.`,
-  rating: 8.5,
-  voiceCount: 214,
-  director: `And he's Director`,
-  actorList: [`Actor`, `Actor`, `Actor`]
+  title: `Overview`,
+  value: {
+    description: `This is Description. TCHK.`,
+    rating: 8.5,
+    voiceCount: 214,
+    director: `And he's Director`,
+    actorList: [`Actor`, `Actor`, `Actor`]
+  }
 };
 
 const details = {
-  genre: `Drama`,
-  year: 2012,
-  director: `He's Director`,
-  actorList: [`Actor 1`, `Actor 2`],
-  runtime: 132
+  title: `Details`,
+  value: {
+    genre: `Drama`,
+    year: 2012,
+    director: `He's Director`,
+    actorList: [`Actor 1`, `Actor 2`],
+    runtime: 132
+  }
 };
 
-it(`Render TabsInner`, () => {
-  const tree = renderer
-    .create(<TabsInner overview={overview} details={details} filmID={1} isDetails={false} isReviews={true} />)
-    .toJSON();
+const reviews = {
+  title: `Reviews`,
+  value: 1
+};
 
-  expect(tree).toMatchSnapshot();
+describe(`Render Tabs Variants`, () => {
+  it(`Render TabsInner Overview`, () => {
+    const tree = renderer
+      .create(<TabsInner tabValue={overview}/>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render TabsInner Details`, () => {
+    const tree = renderer
+      .create(<TabsInner tabValue={details}/>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render TabsInner Reviews`, () => {
+    const tree = renderer
+      .create(<TabsInner tabValue={reviews}/>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });
