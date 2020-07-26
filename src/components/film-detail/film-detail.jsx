@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
-import withTabs from "../../hocs/with-tabs/with-tabs";
+import withActiveItem from "../../hocs/with-app/with-app";
 
 const FilmDetail = (props) => {
   const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, likeFilms, onFilmClick} = props;
   const overview = {rating, voiceCount, description, director, actorList};
   const details = {director, actorList, runtime, genre, year};
   const FilmsListComponent = withFilmsList(FilmsList);
-  const TabsComponent = withTabs(Tabs);
+  const TabsComponent = withActiveItem(Tabs);
 
   return <React.Fragment>
     <section className="movie-card movie-card--full">

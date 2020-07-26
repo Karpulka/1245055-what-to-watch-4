@@ -2,21 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TabVariants = (props) => {
-  const {title, active, onTabClick} = props;
+  const {active, onTabClick, tab} = props;
+  const {title} = tab;
   let itemClassName = `movie-nav__item`;
-  if (active) {
+  if (active === title) {
     itemClassName += ` movie-nav__item--active`;
   }
 
   return <li className={itemClassName}>
-    <a href="#" className="movie-nav__link" onClick={onTabClick}>{title}</a>
+    <a href="#" className="movie-nav__link" onClick={(evt) => {
+      evt.preventDefault();
+      onTabClick(tab);
+    }}>{title}</a>
   </li>;
 };
 
 TabVariants.propTypes = {
-  title: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  onTabClick: PropTypes.func.isRequired
+  active: PropTypes.string.isRequired,
+  onTabClick: PropTypes.func.isRequired,
+  tab: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.shape(), PropTypes.number])
+  }).isRequired
 };
 
 export default TabVariants;

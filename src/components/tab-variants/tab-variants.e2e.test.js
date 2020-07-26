@@ -7,23 +7,28 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
-const tabVariant = {
-  title: `Main`,
-  active: false
+const tab = {
+  title: `Overview`,
+  value: {
+    description: `This is Description. TCHK.`,
+    rating: 8.5,
+    voiceCount: 214,
+    director: `And he's Director`,
+    actorList: [`Actor`, `Actor`, `Actor`]
+  }
 };
 
 it(`Click by tab`, () => {
   const handleTabClick = jest.fn();
-  const {title, active} = tabVariant;
 
   const tabVariants = shallow(<TabVariants
-    title={title}
-    active={active}
+    tab={tab}
+    active={`Details`}
     onTabClick={handleTabClick}
   />);
 
   const link = tabVariants.find(`a`);
-  link.simulate(`click`);
+  link.simulate(`click`, {preventDefault: () => {}});
 
   expect(handleTabClick.mock.calls.length).toBe(1);
 });

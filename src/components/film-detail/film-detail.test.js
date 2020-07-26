@@ -22,6 +22,15 @@ const film = {
   runtime: 99
 };
 
+const overview = {
+  rating: 9.1,
+  voiceCount: 240,
+  director: `Wes Andreson`,
+  actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+  description: `<p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.</p>
+                  <p>Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>`
+};
+
 const likeFilms = [
   {
     id: 2,
@@ -74,14 +83,21 @@ const likeFilms = [
 ];
 
 it(`Render FilmDetail`, () => {
+  const activeItem = {
+    title: `Overview`,
+    value: overview
+  };
+
   const store = mockStore({
     showingFilms: 5,
-    films: likeFilms
+    films: likeFilms,
+    activeItem
   });
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {}}/>
+      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {
+      }}/>
     </Provider>, {
       createNodeMock: () => {
         return {};

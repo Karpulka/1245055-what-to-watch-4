@@ -29,7 +29,7 @@ const initialState = {
   showingFilms: DEFAULT_FILMS_COUNT
 };
 
-const ActionTypes = {
+export const ActionTypes = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   GET_FILM_BY_GENRE: `GET_FILM_BY_GENRE`,
   SHOW_MORE: `SHOW_MORE`
@@ -78,7 +78,7 @@ export const reducer = (state = initialState, action) => {
     case ActionTypes.CHANGE_GENRE:
       return setNewObject(state, {genre: action.payload, showingFilms: DEFAULT_FILMS_COUNT});
     case ActionTypes.GET_FILM_BY_GENRE:
-      return setNewObject(state, {films: filteredFilms(action.payload)});
+      return setNewObject(state, {films: filteredFilms(action.payload), showingFilms: DEFAULT_FILMS_COUNT});
     case ActionTypes.SHOW_MORE:
       let showingFilms = state.showingFilms + DEFAULT_FILMS_COUNT;
       if (showingFilms > state.films.length) {
