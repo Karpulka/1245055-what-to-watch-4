@@ -28,7 +28,7 @@ it(`Click by tab`, () => {
   />);
 
   const link = tabVariants.find(`a`);
-  link.simulate(`click`);
+  link.simulate(`click`, {preventDefault: () => {}});
 
   expect(handleTabClick.mock.calls.length).toBe(1);
 });

@@ -10,7 +10,10 @@ const TabVariants = (props) => {
   }
 
   return <li className={itemClassName}>
-    <a href="#" className="movie-nav__link" onClick={() => onTabClick(tab)}>{title}</a>
+    <a href="#" className="movie-nav__link" onClick={(evt) => {
+      evt.preventDefault();
+      onTabClick(tab);
+    }}>{title}</a>
   </li>;
 };
 

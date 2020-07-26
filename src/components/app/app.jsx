@@ -18,7 +18,7 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/film-detail">
           <FilmDetail {...films[0]} likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
-                      onFilmClick={handleItemClick}/>
+            onFilmClick={handleItemClick}/>
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -29,7 +29,7 @@ class App extends PureComponent {
 
     if (selectedFilm) {
       return <FilmDetail {...selectedFilm} likeFilms={this._getLikeFilms(films, selectedFilm.genre, selectedFilm.id)}
-                         onFilmClick={handleItemClick}/>;
+        onFilmClick={handleItemClick}/>;
     }
 
     return <Main
