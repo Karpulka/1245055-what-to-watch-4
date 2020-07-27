@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import {formatTimeLeft} from "../../utils";
 
 const FullVideoPlayer = (props) => {
-  const {children, onPlayButtonClick, isPlaying, title, timeLeft, progressBar, onFullScreenButtonClick} = props;
+  const {children, onPlayButtonClick, isPlaying, title, timeLeft, progressBar, onFullScreenButtonClick, onExitButtonClick} = props;
   return <div className="player">
     {React.cloneElement(children, {className: `player__video`})}
 
-    <button type="button" className="player__exit">Exit</button>
+    <button type="button" className="player__exit" onClick={onExitButtonClick}>Exit</button>
 
     <div className="player__controls">
       <div className="player__controls-row">

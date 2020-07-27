@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-const SECONDS_IN_MINUTE = 60000;
+const SECONDS_IN_MINUTE = 60;
 
 const withVideoPlayer = (Component) => {
   class WithVideoPlayer extends PureComponent {
@@ -53,8 +53,8 @@ const withVideoPlayer = (Component) => {
       video.ontimeupdate = () => {
         this.setState({
           progress: video.currentTime,
-          timeLeft: this.state.timeLeft - video.currentTime,
-          progressBar: video.currentTime / (SECONDS_IN_MINUTE * this._fullTime) * 100
+          timeLeft: video.duration - video.currentTime,
+          progressBar: video.currentTime / video.duration * 100
         });
       };
     }
@@ -101,7 +101,8 @@ const withVideoPlayer = (Component) => {
 
     handleFullScreenButtonClick() {
       const video = this._ref.current;
-      video.requestFullScreen();
+      const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+      rfs.call(video);
     }
   }
 

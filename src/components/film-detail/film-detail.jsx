@@ -6,7 +6,7 @@ import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import withActiveItem from "../../hocs/with-app/with-app";
 
 const FilmDetail = (props) => {
-  const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, likeFilms, onFilmClick} = props;
+  const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, likeFilms, onFilmClick, onPlayButtonClick} = props;
   const overview = {rating, voiceCount, description, director, actorList};
   const details = {director, actorList, runtime, genre, year};
   const FilmsListComponent = withFilmsList(FilmsList);
@@ -46,7 +46,7 @@ const FilmDetail = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>

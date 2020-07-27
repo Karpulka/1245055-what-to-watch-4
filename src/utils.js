@@ -7,7 +7,7 @@ export const prepareFilmDuration = (time) => {
 };
 
 export const formatTimeLeft = (time) => {
-  return moment.duration(time, `milliseconds`).format(`h:m:s`);
+  return moment.duration(time, `seconds`).format(`hh:mm:ss`);
 };
 
 export const prepareReviewDate = (date) => {
