@@ -4,12 +4,15 @@ import PropTypes from "prop-types";
 import FilmDetail from "../film-detail/film-detail.jsx";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
+import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 
 const LIKE_FILMS_COUNT = 4;
 
 class App extends PureComponent {
   render() {
     const {films, handleItemClick} = this.props;
+    const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
 
     return <BrowserRouter>
       <Switch>
@@ -19,6 +22,9 @@ class App extends PureComponent {
         <Route exact path="/film-detail">
           <FilmDetail {...films[0]} likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
             onFilmClick={handleItemClick}/>
+        </Route>
+        <Route exact path="/full-video">
+          <FullVideoPlayerComponent src={films[1].video} poster={films[1].src} title={films[1].title} isPlaying={true} runtime={films[1].runtime} />
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -75,7 +81,8 @@ App.propTypes = {
     voiceCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired
+    runtime: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired
   })),
   allFilms: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -89,7 +96,8 @@ App.propTypes = {
     voiceCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired
+    runtime: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired
   })),
   promoFilm: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -109,7 +117,8 @@ App.propTypes = {
     voiceCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired
+    runtime: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired
   })
 };
 

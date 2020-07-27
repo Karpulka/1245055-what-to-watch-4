@@ -14,7 +14,7 @@ const Film = (props) => {
 
   return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onFilmHover(film)} onMouseLeave={() => onFilmBlur()}>
     <div className="small-movie-card__image" onClick={handleFilmClick.bind(null, onFilmClick, film)}>
-      <VideoPlayerComponent src={film.video} poster={film.src} width="280" height="175" isMuted={true} isPlaying={isPlaying}/>
+      <VideoPlayerComponent src={film.video} poster={film.src} width="280" height="175" isMuted={true} isPlaying={isPlaying} wasHover={!isPlaying}/>
     </div>
     <h3 className="small-movie-card__title">
       <a className="small-movie-card__link" href="movie-page.html" onClick={handleFilmClick.bind(null, onFilmClick, film)}>{film.title}</a>

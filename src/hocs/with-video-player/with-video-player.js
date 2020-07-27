@@ -1,17 +1,26 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
+const SECONDS_IN_MINUTE = 60000;
+
 const withVideoPlayer = (Component) => {
-  class WithAudioPlayer extends PureComponent {
+  class WithVideoPlayer extends PureComponent {
     constructor(props) {
       super(props);
 
       this._ref = React.createRef();
 
+      this.handlePlayButtonClick = this.handlePlayButtonClick.bind(this);
+      this.handleFullScreenButtonClick = this.handleFullScreenButtonClick.bind(this);
+
+      this._fullTime = props.runtime * SECONDS_IN_MINUTE;
+
       this.state = {
         progress: 0,
+        progressBar: 0,
         isLoading: true,
-        isPlaying: props.isPlaying
+        isPlaying: props.isPlaying,
+        timeLeft: this._fullTime || 0
       };
     }
 
@@ -43,13 +52,19 @@ const withVideoPlayer = (Component) => {
 
       video.ontimeupdate = () => {
         this.setState({
-          progress: video.currentTime
+          progress: video.currentTime,
+          timeLeft: this.state.timeLeft - video.currentTime,
+          progressBar: video.currentTime / (SECONDS_IN_MINUTE * this._fullTime) * 100
         });
       };
     }
 
     render() {
-      return <Component {...this.props}>
+      return <Component {...this.props}
+        onPlayButtonClick={this.handlePlayButtonClick}
+        timeLeft={this.state.timeLeft}
+        progressBar={this.state.progressBar}
+        onFullScreenButtonClick={this.handleFullScreenButtonClick}>
         <video ref={this._ref}/>
       </Component>;
     }
@@ -70,27 +85,38 @@ const withVideoPlayer = (Component) => {
     componentDidUpdate() {
       const video = this._ref.current;
 
-      if (this.props.isPlaying) {
+      if (this.state.isPlaying) {
         video.play();
       } else {
         video.pause();
-        video.load();
+        if (this.props.wasHover) {
+          video.load();
+        }
       }
+    }
+
+    handlePlayButtonClick() {
+      this.setState({isPlaying: !this.state.isPlaying});
+    }
+
+    handleFullScreenButtonClick() {
+      const video = this._ref.current;
+      video.requestFullScreen();
     }
   }
 
-  WithAudioPlayer.defaultProps = {
+  WithVideoPlayer.defaultProps = {
     isMuted: false
   };
 
-  WithAudioPlayer.propTypes = {
+  WithVideoPlayer.propTypes = {
     src: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     isMuted: PropTypes.bool,
     isPlaying: PropTypes.bool.isRequired
   };
 
-  return WithAudioPlayer;
+  return WithVideoPlayer;
 };
 
 export default withVideoPlayer;
