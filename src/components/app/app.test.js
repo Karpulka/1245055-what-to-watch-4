@@ -9,7 +9,10 @@ const mockStore = configeStore([]);
 const promoFilm = {
   title: `Promo Film`,
   genre: `Comedy`,
-  year: 1998
+  year: 1998,
+  src: `src`,
+  video: `video`,
+  runtime: 123
 };
 
 const films = [
@@ -73,8 +76,16 @@ it(`Render App`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <App promoFilm={promoFilm} allFilms={films} films={films} handleItemClick={() => {
-      }}/>
+      <App
+        promoFilm={promoFilm}
+        allFilms={films}
+        films={films}
+        handleItemClick={() => {}}
+        onItemClick={() => {}}
+        onExitButtonClick={() => {}}
+        isShowFilm={false}
+        onPlayButtonClick={() => {}}
+      />
     </Provider>, {
       createNodeMock: () => {
         return {};

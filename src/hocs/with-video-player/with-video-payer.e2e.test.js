@@ -22,7 +22,7 @@ MockComponent.propTypes = {
 const MockComponentWrapped = withVideoPlayer(MockComponent);
 
 it(`Test pause video`, () => {
-  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.pause = () => {};
   const video = mount(
       <MockComponentWrapped
         src={src}

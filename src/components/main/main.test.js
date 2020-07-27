@@ -77,7 +77,8 @@ it(`Render Main`, () => {
         promoFilmGenre={promoFilm.genre}
         promoFilmTitle={promoFilm.title}
         promoFilmYear={promoFilm.year}
-        onFilmClick={() => {}}/>
+        onFilmClick={() => {}}
+        onPlayButtonClick={() => {}}/>
     </Provider>)
     .toJSON();
 

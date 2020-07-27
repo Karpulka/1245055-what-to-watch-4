@@ -96,8 +96,7 @@ it(`Render FilmDetail`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {
-      }}/>
+      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
     </Provider>, {
       createNodeMock: () => {
         return {};

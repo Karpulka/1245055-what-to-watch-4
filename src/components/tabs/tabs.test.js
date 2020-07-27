@@ -25,8 +25,12 @@ it(`Render Tabs`, () => {
   };
 
   const tree = renderer
-    .create(<Tabs overview={overview} details={details} filmID={0} activeItem={activeItem} handleItemClick={() => {
-    }}/>)
+    .create(<Tabs
+      overview={overview}
+      details={details}
+      filmID={0}
+      activeItem={activeItem}
+      onItemClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

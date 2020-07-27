@@ -77,7 +77,7 @@ const FilmDetail = (props) => {
       </div>
     </section>
 
-    {likeFilms.length > 0 ? <div className="page-content">
+    {likeFilms && likeFilms.length > 0 ? <div className="page-content">
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
 
