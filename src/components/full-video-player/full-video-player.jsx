@@ -38,4 +38,15 @@ const FullVideoPlayer = (props) => {
   </div>;
 };
 
+FullVideoPlayer.propTypes = {
+  children: PropTypes.element.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  timeLeft: PropTypes.number.isRequired,
+  progressBar: PropTypes.number.isRequired,
+  onFullScreenButtonClick: PropTypes.func.isRequired,
+  onExitButtonClick: PropTypes.func.isRequired
+};
+
 export default FullVideoPlayer;

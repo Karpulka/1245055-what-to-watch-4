@@ -12,7 +12,7 @@ const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
 
 class App extends PureComponent {
   render() {
-    const {films, onItemClick, promoFilm, onExitButtonClick} = this.props;
+    const {films, onItemClick, promoFilm, onExitButtonClick, onPlayButtonClick} = this.props;
 
     return <BrowserRouter>
       <Switch>
@@ -20,7 +20,9 @@ class App extends PureComponent {
           {this._renderFilmPage()}
         </Route>
         <Route exact path="/film-detail">
-          <FilmDetail {...films[0]} likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
+          <FilmDetail {...films[0]}
+            likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
+            onPlayButtonClick={onPlayButtonClick}
             onFilmClick={onItemClick}/>
         </Route>
         <Route exact path="/full-video">
@@ -124,8 +126,14 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
+    src: PropTypes.string.isRequired,
+    runtime: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired
   }),
   onItemClick: PropTypes.func.isRequired,
+  onExitButtonClick: PropTypes.func.isRequired,
+  isShowFilm: PropTypes.bool.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   activeItem: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

@@ -114,7 +114,9 @@ const withVideoPlayer = (Component) => {
     src: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     isMuted: PropTypes.bool,
-    isPlaying: PropTypes.bool.isRequired
+    isPlaying: PropTypes.bool.isRequired,
+    runtime: PropTypes.number,
+    wasHover: PropTypes.bool
   };
 
   return WithVideoPlayer;
