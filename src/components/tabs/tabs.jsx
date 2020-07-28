@@ -10,7 +10,7 @@ export const TabVariantValues = {
 };
 
 const Tabs = (props) => {
-  const {overview, details, filmID, activeItem, handleItemClick} = props;
+  const {overview, details, filmID, activeItem, onItemClick} = props;
 
   const tabVariants = [
     {
@@ -34,7 +34,7 @@ const Tabs = (props) => {
           key={tab.title + i}
           active={activeItem ? activeItem.title : tabVariants[0].title}
           tab={tab}
-          onTabClick={handleItemClick}
+          onTabClick={onItemClick}
         />)}
       </ul>
     </nav>
@@ -57,7 +57,7 @@ Tabs.propTypes = {
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired
   }).isRequired,
-  handleItemClick: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.shape({
     title: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.shape(), PropTypes.number])

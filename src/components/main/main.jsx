@@ -6,7 +6,7 @@ import Filter from "../filter/filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 
 const Main = (props) => {
-  const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick} = props;
+  const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick, onPlayButtonClick} = props;
   const FilmsListComponent = withFilmsList(FilmsList);
 
   return <React.Fragment>
@@ -47,7 +47,7 @@ const Main = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -105,7 +105,8 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
   })),
-  onFilmClick: PropTypes.func.isRequired
+  onFilmClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired
 };
 
 export default Main;

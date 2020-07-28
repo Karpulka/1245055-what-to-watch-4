@@ -1,17 +1,26 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
+const SECONDS_IN_MINUTE = 60;
+
 const withVideoPlayer = (Component) => {
-  class WithAudioPlayer extends PureComponent {
+  class WithVideoPlayer extends PureComponent {
     constructor(props) {
       super(props);
 
       this._ref = React.createRef();
 
+      this.handlePlayButtonClick = this.handlePlayButtonClick.bind(this);
+      this.handleFullScreenButtonClick = this.handleFullScreenButtonClick.bind(this);
+
+      this._fullTime = props.runtime * SECONDS_IN_MINUTE;
+
       this.state = {
         progress: 0,
+        progressBar: 0,
         isLoading: true,
-        isPlaying: props.isPlaying
+        isPlaying: props.isStartPlaying,
+        timeLeft: this._fullTime || 0
       };
     }
 
@@ -43,13 +52,20 @@ const withVideoPlayer = (Component) => {
 
       video.ontimeupdate = () => {
         this.setState({
-          progress: video.currentTime
+          progress: video.currentTime,
+          timeLeft: video.duration - video.currentTime,
+          progressBar: video.currentTime / video.duration * 100
         });
       };
     }
 
     render() {
-      return <Component {...this.props}>
+      return <Component {...this.props}
+        onPlayButtonClick={this.handlePlayButtonClick}
+        isPlaying={this.state.isPlaying}
+        timeLeft={this.state.timeLeft}
+        progressBar={this.state.progressBar}
+        onFullScreenButtonClick={this.handleFullScreenButtonClick}>
         <video ref={this._ref}/>
       </Component>;
     }
@@ -70,27 +86,41 @@ const withVideoPlayer = (Component) => {
     componentDidUpdate() {
       const video = this._ref.current;
 
-      if (this.props.isPlaying) {
+      if (this.state.isPlaying) {
         video.play();
       } else {
         video.pause();
-        video.load();
+        if (this.props.wasHover) {
+          video.load();
+        }
       }
+    }
+
+    handlePlayButtonClick() {
+      this.setState({isPlaying: !this.state.isPlaying});
+    }
+
+    handleFullScreenButtonClick() {
+      const video = this._ref.current;
+      const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+      rfs.call(video);
     }
   }
 
-  WithAudioPlayer.defaultProps = {
+  WithVideoPlayer.defaultProps = {
     isMuted: false
   };
 
-  WithAudioPlayer.propTypes = {
+  WithVideoPlayer.propTypes = {
     src: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     isMuted: PropTypes.bool,
-    isPlaying: PropTypes.bool.isRequired
+    isStartPlaying: PropTypes.bool.isRequired,
+    runtime: PropTypes.number,
+    wasHover: PropTypes.bool
   };
 
-  return WithAudioPlayer;
+  return WithVideoPlayer;
 };
 
 export default withVideoPlayer;
