@@ -9,12 +9,12 @@ const handleFilmClick = (onFilmClick, film, evt) => {
 };
 
 const Film = (props) => {
-  const {film, onFilmHover, onFilmClick, isPlaying, onFilmBlur} = props;
+  const {film, onFilmHover, onFilmClick, isStartPlaying, onFilmBlur} = props;
   const VideoPlayerComponent = withVideoPlayer(VideoPlayer);
 
   return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onFilmHover(film)} onMouseLeave={() => onFilmBlur()}>
     <div className="small-movie-card__image" onClick={handleFilmClick.bind(null, onFilmClick, film)}>
-      <VideoPlayerComponent src={film.video} poster={film.src} width="280" height="175" isMuted={true} isPlaying={isPlaying} wasHover={!isPlaying}/>
+      <VideoPlayerComponent src={film.video} poster={film.src} width="280" height="175" isMuted={true} isStartPlaying={isStartPlaying} wasHover={!isStartPlaying}/>
     </div>
     <h3 className="small-movie-card__title">
       <a className="small-movie-card__link" href="movie-page.html" onClick={handleFilmClick.bind(null, onFilmClick, film)}>{film.title}</a>
@@ -31,7 +31,7 @@ Film.propTypes = {
   onFilmClick: PropTypes.func.isRequired,
   onFilmHover: PropTypes.func.isRequired,
   onFilmBlur: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool
+  isStartPlaying: PropTypes.bool
 };
 
 export default Film;

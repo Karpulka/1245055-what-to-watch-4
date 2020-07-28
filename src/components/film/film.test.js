@@ -27,7 +27,7 @@ it(`Render Film`, () => {
       onFilmClick={() => {}}
       onFilmHover={() => {}}
       onFilmBlur={() => {}}
-      isPlaying={false}
+      isStartPlaying={false}
     />, {
       createNodeMock: () => {
         return {};

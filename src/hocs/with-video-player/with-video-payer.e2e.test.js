@@ -27,7 +27,7 @@ it(`Test pause video`, () => {
       <MockComponentWrapped
         src={src}
         poster={poster}
-        isPlaying={true}
+        isStartPlaying={true}
       />
   );
 

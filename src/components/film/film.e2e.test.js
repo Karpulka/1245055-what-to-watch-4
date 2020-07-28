@@ -34,7 +34,7 @@ describe(`USer events by Film Element`, () => {
       onFilmClick={onFilmTitleClick}
       onFilmHover={() => {}}
       onFilmBlur={() => {}}
-      isPlaying={false}
+      isStartPlaying={false}
     />);
 
     const filmTitle = filmElement.find(`.small-movie-card__link`);
@@ -51,7 +51,7 @@ describe(`USer events by Film Element`, () => {
       onFilmClick={() => {}}
       onFilmHover={handleFilmHover}
       onFilmBlur={() => {}}
-      isPlaying={false}
+      isStartPlaying={false}
     />);
 
     filmElement.simulate(`mouseenter`);
@@ -68,7 +68,7 @@ describe(`USer events by Film Element`, () => {
       onFilmClick={handleFilmClick}
       onFilmHover={() => {}}
       onFilmBlur={() => {}}
-      isPlaying={false}
+      isStartPlaying={false}
     />);
 
     const poster = filmElement.find(`.small-movie-card__image`);

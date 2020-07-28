@@ -30,7 +30,7 @@ class App extends PureComponent {
             src={promoFilm.video}
             poster={promoFilm.src}
             title={promoFilm.title}
-            isPlaying={true}
+            isStartPlaying={true}
             onExitButtonClick={onExitButtonClick}
             runtime={promoFilm.runtime} />
         </Route>
@@ -47,7 +47,7 @@ class App extends PureComponent {
         src={showingFilm.video}
         poster={showingFilm.src}
         title={showingFilm.title}
-        isPlaying={true}
+        isStartPlaying={true}
         onExitButtonClick={onExitButtonClick}
         runtime={showingFilm.runtime}
       />;

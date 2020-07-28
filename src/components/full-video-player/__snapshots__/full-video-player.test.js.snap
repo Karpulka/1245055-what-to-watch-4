@@ -59,7 +59,7 @@ exports[`Render VideoPlayer 1`] = `
           width="19"
         >
           <use
-            xlinkHref="#play-s"
+            xlinkHref="#pause"
           />
         </svg>
         <span>

@@ -13,7 +13,7 @@ const FilmsList = (props) => {
       onFilmHover={onFilmHover}
       onFilmClick={onFilmClick}
       onFilmBlur={onFilmBlur}
-      isPlaying={activeFilmID === film.id}
+      isStartPlaying={activeFilmID === film.id}
     />)}
   </div>;
 };

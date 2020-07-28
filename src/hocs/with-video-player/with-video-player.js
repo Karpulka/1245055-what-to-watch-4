@@ -19,7 +19,7 @@ const withVideoPlayer = (Component) => {
         progress: 0,
         progressBar: 0,
         isLoading: true,
-        isPlaying: props.isPlaying,
+        isPlaying: props.isStartPlaying,
         timeLeft: this._fullTime || 0
       };
     }
@@ -62,6 +62,7 @@ const withVideoPlayer = (Component) => {
     render() {
       return <Component {...this.props}
         onPlayButtonClick={this.handlePlayButtonClick}
+        isPlaying={this.state.isPlaying}
         timeLeft={this.state.timeLeft}
         progressBar={this.state.progressBar}
         onFullScreenButtonClick={this.handleFullScreenButtonClick}>
@@ -114,7 +115,7 @@ const withVideoPlayer = (Component) => {
     src: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     isMuted: PropTypes.bool,
-    isPlaying: PropTypes.bool.isRequired,
+    isStartPlaying: PropTypes.bool.isRequired,
     runtime: PropTypes.number,
     wasHover: PropTypes.bool
   };

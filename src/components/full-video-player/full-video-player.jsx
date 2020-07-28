@@ -21,7 +21,7 @@ const FullVideoPlayer = (props) => {
       <div className="player__controls-row">
         <button type="button" className="player__play" onClick={onPlayButtonClick}>
           <svg viewBox="0 0 19 19" width="19" height="19">
-            <use xlinkHref="#play-s"></use>
+            <use xlinkHref={isPlaying ? `#pause` : `#play-s`}></use>
           </svg>
           <span>{isPlaying ? `Pause` : `Play`}</span>
         </button>
