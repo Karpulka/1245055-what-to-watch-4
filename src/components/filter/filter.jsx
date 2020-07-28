@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/film/film";
+import {getFilters, getGenre} from "../../reducer/film/selectors";
 
 const Filter = (props) => {
   const {filters, genre, handleGenreChange, getFilmByGenre} = props;
@@ -28,8 +29,8 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filters: state.filters,
-  genre: state.genre
+  filters: getFilters(state),
+  genre: getGenre(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

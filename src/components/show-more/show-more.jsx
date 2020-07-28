@@ -1,7 +1,8 @@
 import React from "react";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/film/film";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {getFilms, getShowingFilms} from "../../reducer/film/selectors";
 
 const ShowMore = (props) => {
   const {showingFilms, filmsLength, handleShowMoreClick} = props;
@@ -22,8 +23,8 @@ ShowMore.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filmsLength: state.films.length,
-  showingFilms: state.showingFilms
+  filmsLength: getFilms(state).length,
+  showingFilms: getShowingFilms(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

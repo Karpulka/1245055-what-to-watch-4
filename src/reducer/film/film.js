@@ -1,4 +1,37 @@
-import {setNewObject} from "./utils";
+import {setNewObject} from "../../utils";
+
+const MAX_GENRES = 10;
+const DEFAULT_FILMS_COUNT = 8;
+
+const initialState = {
+  genre: `All genres`,
+  films: [],
+  filters: [],
+  showingFilms: DEFAULT_FILMS_COUNT
+};
+
+export const ActionType = {
+  CHANGE_GENRE: `CHANGE_GENRE`,
+  GET_FILM_BY_GENRE: `GET_FILM_BY_GENRE`,
+  SHOW_MORE: `SHOW_MORE`
+};
+
+export const ActionCreator = {
+  changeGenre: (genre) => ({
+    type: ActionType.CHANGE_GENRE,
+    payload: genre
+  }),
+
+  getFilmByGenre: (genre) => ({
+    type: ActionType.GET_FILM_BY_GENRE,
+    payload: genre
+  }),
+
+  handleShowMoreClick: () => ({
+    type: ActionType.SHOW_MORE,
+    payload: DEFAULT_FILMS_COUNT
+  })
+};
 
 const getFilters = (allFilms) => {
   const filters = [`All genres`];
@@ -13,42 +46,6 @@ const getFilters = (allFilms) => {
   });
 
   return filters.slice(0, MAX_GENRES);
-};
-
-const promoFilm = films[0];
-const MAX_GENRES = 10;
-const DEFAULT_FILMS_COUNT = 8;
-
-const initialState = {
-  genre: `All genres`,
-  films,
-  allFilms: films,
-  filters: getFilters(films),
-  promoFilm,
-  showingFilms: DEFAULT_FILMS_COUNT
-};
-
-export const ActionTypes = {
-  CHANGE_GENRE: `CHANGE_GENRE`,
-  GET_FILM_BY_GENRE: `GET_FILM_BY_GENRE`,
-  SHOW_MORE: `SHOW_MORE`
-};
-
-export const ActionCreator = {
-  changeGenre: (genre) => ({
-    type: ActionTypes.CHANGE_GENRE,
-    payload: genre
-  }),
-
-  getFilmByGenre: (genre) => ({
-    type: ActionTypes.GET_FILM_BY_GENRE,
-    payload: genre
-  }),
-
-  handleShowMoreClick: () => ({
-    type: ActionTypes.SHOW_MORE,
-    payload: DEFAULT_FILMS_COUNT
-  })
 };
 
 const filteredFilms = (genre) => {
@@ -74,12 +71,15 @@ const filteredFilms = (genre) => {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.CHANGE_GENRE:
+    case ActionType.CHANGE_GENRE:
       return setNewObject(state, {genre: action.payload, showingFilms: DEFAULT_FILMS_COUNT});
-    case ActionTypes.GET_FILM_BY_GENRE:
-      return setNewObject(state, {films: filteredFilms(action.payload), showingFilms: DEFAULT_FILMS_COUNT});
-    case ActionTypes.SHOW_MORE:
-      let showingFilms = state.showingFilms + action.payload;
+
+    case ActionType.GET_FILM_BY_GENRE:
+      const films = filteredFilms(action.payload);
+      return setNewObject(state, {films, filters: getFilters(films), showingFilms: DEFAULT_FILMS_COUNT});
+
+    case ActionType.SHOW_MORE:
+      let showingFilms = state.showingFilms + DEFAULT_FILMS_COUNT;
       if (showingFilms > state.films.length) {
         showingFilms = state.films.length;
       }

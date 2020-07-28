@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Film from "../film/film.jsx";
 import {connect} from "react-redux";
+import {getShowingFilms} from "../../reducer/film/selectors";
 
 const FilmsList = (props) => {
   const {films, onFilmClick, onFilmHover, onFilmBlur, activeFilmID, showingFilms} = props;
@@ -31,7 +32,7 @@ FilmsList.propTypes = {
 };
 
 const mapPropsToState = (state) => ({
-  showingFilms: state.showingFilms
+  showingFilms: getShowingFilms(state)
 });
 
 export {FilmsList};

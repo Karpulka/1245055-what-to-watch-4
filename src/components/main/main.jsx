@@ -98,9 +98,9 @@ Main.defaultProps = {
 };
 
 Main.propTypes = {
-  promoFilmTitle: PropTypes.string.isRequired,
-  promoFilmGenre: PropTypes.string.isRequired,
-  promoFilmYear: PropTypes.number.isRequired,
+  promoFilmTitle: PropTypes.string,
+  promoFilmGenre: PropTypes.string,
+  promoFilmYear: PropTypes.number,
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired

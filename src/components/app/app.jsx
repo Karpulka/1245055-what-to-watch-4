@@ -6,6 +6,10 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
+import {getFilms} from "../../reducer/film/selectors";
+import {getPromoFilm, getAllFilms} from "../../reducer/data/selectors";
+import {getGenre} from "../../reducer/film/selectors";
+import {ActionCreator} from "../../reducer/film/film";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
@@ -17,22 +21,22 @@ class App extends PureComponent {
     return <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {this._renderFilmPage()}
+          {films && promoFilm !== {} ? this._renderFilmPage() : ``}
         </Route>
         <Route exact path="/film-detail">
-          <FilmDetail {...films[0]}
+          {films.length > 0 ? (<FilmDetail {...films[0]}
             likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
             onPlayButtonClick={onPlayButtonClick}
-            onFilmClick={onItemClick}/>
+            onFilmClick={onItemClick}/>) : ``}
         </Route>
         <Route exact path="/full-video">
-          <FullVideoPlayerComponent
+          {Object.keys(promoFilm).length > 0 ? (<FullVideoPlayerComponent
             src={promoFilm.video}
             poster={promoFilm.src}
             title={promoFilm.title}
             isStartPlaying={true}
             onExitButtonClick={onExitButtonClick}
-            runtime={promoFilm.runtime} />
+            runtime={promoFilm.runtime} />) : ``}
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -40,7 +44,8 @@ class App extends PureComponent {
 
   _renderFilmPage() {
     const {films, promoFilm, onItemClick, activeItem: selectedFilm, isShowFilm, onPlayButtonClick, onExitButtonClick} = this.props;
-
+    console.log(films);
+    console.log(promoFilm);
     if (isShowFilm) {
       const showingFilm = selectedFilm || promoFilm;
       return <FullVideoPlayerComponent
@@ -123,12 +128,12 @@ App.propTypes = {
     video: PropTypes.string.isRequired
   })),
   promoFilm: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    src: PropTypes.string.isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    year: PropTypes.number,
+    src: PropTypes.string,
+    runtime: PropTypes.number,
+    video: PropTypes.string
   }),
   onItemClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
@@ -148,14 +153,22 @@ App.propTypes = {
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired,
     video: PropTypes.string.isRequired
-  })
+  }),
+  genre: PropTypes.string.isRequired
 };
 
-const mapStoreToProps = (state) => ({
-  films: state.films,
-  promoFilm: state.promoFilm,
-  allFilms: state.allFilms
+const mapStateToProps = (state) => ({
+  genre: getGenre(state),
+  films: getFilms(state),
+  promoFilm: getPromoFilm(state),
+  allFilms: getAllFilms(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setFilms(genre) {
+    dispatch(ActionCreator.getFilmByGenre(genre));
+  }
 });
 
 export {App};
-export default connect(mapStoreToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
