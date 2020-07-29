@@ -9,7 +9,6 @@ import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import {getFilms} from "../../reducer/film/selectors";
 import {getPromoFilm, getAllFilms} from "../../reducer/data/selectors";
 import {getGenre} from "../../reducer/film/selectors";
-import {ActionCreator} from "../../reducer/film/film";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
@@ -44,8 +43,7 @@ class App extends PureComponent {
 
   _renderFilmPage() {
     const {films, promoFilm, onItemClick, activeItem: selectedFilm, isShowFilm, onPlayButtonClick, onExitButtonClick} = this.props;
-    console.log(films);
-    console.log(promoFilm);
+
     if (isShowFilm) {
       const showingFilm = selectedFilm || promoFilm;
       return <FullVideoPlayerComponent
@@ -164,11 +162,5 @@ const mapStateToProps = (state) => ({
   allFilms: getAllFilms(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setFilms(genre) {
-    dispatch(ActionCreator.getFilmByGenre(genre));
-  }
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

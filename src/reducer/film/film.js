@@ -13,7 +13,8 @@ const initialState = {
 export const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   GET_FILM_BY_GENRE: `GET_FILM_BY_GENRE`,
-  SHOW_MORE: `SHOW_MORE`
+  SHOW_MORE: `SHOW_MORE`,
+  SET_FILMS: `SET_FILMS`
 };
 
 export const ActionCreator = {
@@ -25,6 +26,11 @@ export const ActionCreator = {
   getFilmByGenre: (genre) => ({
     type: ActionType.GET_FILM_BY_GENRE,
     payload: genre
+  }),
+
+  setInitialFilms: (films) => ({
+    type: ActionType.SET_FILMS,
+    payload: films
   }),
 
   handleShowMoreClick: () => ({
@@ -85,6 +91,10 @@ export const reducer = (state = initialState, action) => {
       }
 
       return setNewObject(state, {showingFilms});
+
+    case ActionType.SET_FILMS:
+      return setNewObject(state, {films: action.payload});
+
     default:
       return state;
   }

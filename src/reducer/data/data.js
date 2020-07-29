@@ -1,4 +1,5 @@
 import {setNewObject} from "../../utils";
+import {ActionCreator as FilmActionCreator} from "../film/film";
 
 const initialState = {
   allFilms: [],
@@ -26,19 +27,22 @@ const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.loadFilms(response.data));
+        const films = response.data.map((film) => prepareFilmData(film));
+        dispatch(ActionCreator.loadFilms(films));
+        dispatch(FilmActionCreator.setInitialFilms(films));
       });
   },
 
   loadPromoFilm: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then((response) => {
-        dispatch(ActionCreator.loadPromoFilm(response.data));
+        const promoFilm = prepareFilmData(response.data);
+        dispatch(ActionCreator.loadPromoFilm(promoFilm));
       });
   }
 };
 
-const prepareFilmData = (film) => ({
+export const prepareFilmData = (film) => ({
   id: film.id,
   title: film.name,
   src: film.poster_image,
@@ -60,11 +64,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       return setNewObject(state, {
-        allFilms: action.payload.map((film) => prepareFilmData(film))
+        allFilms: action.payload
       });
     case ActionType.LOAD_PROMOFILM:
       return setNewObject(state, {
-        promoFilm: prepareFilmData(action.payload)
+        promoFilm: action.payload
       });
   }
 

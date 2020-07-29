@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configeStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space";
 
 const mockStore = configeStore([]);
 
@@ -68,10 +69,12 @@ const films = [
 
 it(`Render App`, () => {
   const store = mockStore({
-    genre: `All genres`,
-    filters: [`All genres`],
-    showingFilms: 5,
-    films
+    [NameSpace.FILM]: {
+      genre: `All genres`,
+      filters: [`All genres`],
+      showingFilms: 5,
+      films
+    }
   });
 
   const tree = renderer
@@ -85,6 +88,7 @@ it(`Render App`, () => {
         onExitButtonClick={() => {}}
         isShowFilm={false}
         onPlayButtonClick={() => {}}
+        genre={`All films`}
       />
     </Provider>, {
       createNodeMock: () => {

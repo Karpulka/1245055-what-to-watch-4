@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import FilmsList from "./films-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import NameSpace from "../../reducer/name-space";
 
 const mockStore = configureStore([]);
 
@@ -59,7 +60,9 @@ const films = [
 
 it(`Render FilmsList`, () => {
   const store = mockStore({
-    showingFilms: 5
+    [NameSpace.FILM]: {
+      showingFilms: 5
+    }
   });
 
   const tree = renderer
