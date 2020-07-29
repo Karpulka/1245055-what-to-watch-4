@@ -27,7 +27,7 @@ const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        const films = response.data.map((film) => prepareFilmData(film));
+        const films = response.data && response.data.length > 0 ? response.data.map((film) => prepareFilmData(film)) : null;
         dispatch(ActionCreator.loadFilms(films));
         dispatch(FilmActionCreator.setInitialFilms(films));
       });
@@ -36,7 +36,7 @@ const Operation = {
   loadPromoFilm: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then((response) => {
-        const promoFilm = prepareFilmData(response.data);
+        const promoFilm = response.data ? prepareFilmData(response.data) : null;
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
       });
   }

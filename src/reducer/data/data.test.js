@@ -1,11 +1,16 @@
-const PATH = `/img`;
+import MockAdapter from "axios-mock-adapter";
+import {createApi} from "../../api";
+import {reducer, ActionType, Operation} from "./data";
+import {ActionType as FilmActionType} from "../film/film";
 
-export default [
+const api = createApi(() => {});
+
+const films = [
   {
     id: 0,
     title: `Фантастические твари и места их обитания`,
-    src: `${PATH}/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    background: `${PATH}/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    src: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    background: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Fantasy`,
     year: 2018,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -20,8 +25,8 @@ export default [
   {
     id: 1,
     title: `Богемская рапсодия`,
-    src: `${PATH}/bohemian-rhapsody.jpg`,
-    background: `${PATH}/bohemian-rhapsody.jpg`,
+    src: `/img/bohemian-rhapsody.jpg`,
+    background: `/img/bohemian-rhapsody.jpg`,
     genre: `Biography, Drama`,
     year: 2018,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -36,8 +41,8 @@ export default [
   {
     id: 2,
     title: `Авиатор`,
-    src: `${PATH}/aviator.jpg`,
-    background: `${PATH}/aviator.jpg`,
+    src: `/img/aviator.jpg`,
+    background: `/img/aviator.jpg`,
     genre: `Drama`,
     year: 2004,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -52,8 +57,8 @@ export default [
   {
     id: 3,
     title: `Большой куш`,
-    src: `${PATH}/snatch.jpg`,
-    background: `${PATH}/snatch.jpg`,
+    src: `/img/snatch.jpg`,
+    background: `/img/snatch.jpg`,
     genre: `Comedy, Crime`,
     year: 2000,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -68,8 +73,8 @@ export default [
   {
     id: 4,
     title: `Война миров`,
-    src: `${PATH}/war-of-the-worlds.jpg`,
-    background: `${PATH}/war-of-the-worlds.jpg`,
+    src: `/img/war-of-the-worlds.jpg`,
+    background: `/img/war-of-the-worlds.jpg`,
     genre: `Adventure, War Drama`,
     year: 2005,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -84,8 +89,8 @@ export default [
   {
     id: 5,
     title: `Revenant`,
-    src: `${PATH}/revenant.jpg`,
-    background: `${PATH}/revenant.jpg`,
+    src: `/img/revenant.jpg`,
+    background: `/img/revenant.jpg`,
     genre: `Action, Adventure`,
     year: 2015,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -100,8 +105,8 @@ export default [
   {
     id: 6,
     title: `Остров проклятых`,
-    src: `${PATH}/shutter-island.jpg`,
-    background: `${PATH}/shutter-island.jpg`,
+    src: `/img/shutter-island.jpg`,
+    background: `/img/shutter-island.jpg`,
     genre: `Mystery, Thriller, Drama`,
     year: 2010,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -116,8 +121,8 @@ export default [
   {
     id: 7,
     title: `Королевство полной луны`,
-    src: `${PATH}/moonrise-kingdom.jpg`,
-    background: `${PATH}/moonrise-kingdom.jpg`,
+    src: `/img/moonrise-kingdom.jpg`,
+    background: `/img/moonrise-kingdom.jpg`,
     genre: `Comedy, Drama, Romance`,
     year: 2012,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -128,5 +133,85 @@ export default [
     director: `Wes Andreson`,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
     runtime: 167
-  },
+  }
 ];
+const promoFilm = films[0];
+
+describe(`Reduser state tests`, () => {
+  it(`Reducer without additional parameters should return initial state`, () => {
+    expect(reducer(void 0, {})).toEqual({
+      allFilms: [],
+      promoFilm: {}
+    });
+  });
+
+  it(`Reducer should update films by load films`, () => {
+    expect(reducer({
+      allFilms: [],
+      promoFilm: {}
+    }, {
+      type: ActionType.LOAD_FILMS,
+      payload: films
+    })).toEqual({
+      allFilms: films,
+      promoFilm: {}
+    });
+  });
+
+  it(`Reducer should update promoFilm by load promoFilm`, () => {
+    expect(reducer({
+      allFilms: [],
+      promoFilm: {}
+    }, {
+      type: ActionType.LOAD_PROMOFILM,
+      payload: promoFilm
+    })).toEqual({
+      allFilms: [],
+      promoFilm
+    });
+  });
+});
+
+describe(`Operation work correctly`, () => {
+  it(`Should make a correct API call to /films`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const filmLoader = Operation.loadFilms();
+
+    apiMock
+      .onGet(`/films`)
+      .reply(200, []);
+
+    return filmLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FILMS,
+          payload: null,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: FilmActionType.SET_FILMS,
+          payload: null,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /films/promo`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const promoFilmLoader = Operation.loadPromoFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, false);
+
+    return promoFilmLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMOFILM,
+          payload: null,
+        });
+      });
+  });
+});

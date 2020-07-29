@@ -6,7 +6,7 @@ const filters = [`All genres`, `Drama`, `Comwdy`];
 
 it(`Render Filter`, () => {
   const tree = renderer
-    .create(<Filter filters={filters} handleGenreChange={() => {}} genre={`Drama`} getFilmByGenre={() => {}} />)
+    .create(<Filter filters={filters} handleGenreChange={() => {}} genre={`Drama`} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
