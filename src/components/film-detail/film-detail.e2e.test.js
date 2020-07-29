@@ -7,21 +7,28 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
+const film = {
+  id: 0,
+  title: `Большой куш`,
+  src: `/snatch.jpg`,
+  background: `/snatch.jpg`,
+  genre: `Comedy, Crime`,
+  year: 2000,
+  description: `<p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.</p>
+                  <p>Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>`,
+  rating: 9.1,
+  voiceCount: 240,
+  director: `Wes Andreson`,
+  actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+  runtime: 99,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+};
+
 it(`Click Play button on Film Detail Page`, () => {
   const handlePlayButtonClick = jest.fn();
   const filmDetail = shallow(<FilmDetail
-    id={0}
-    title={`Test title`}
-    src={`src`}
-    background={`bg`}
-    genre={`genre`}
-    year={2013}
-    description={`test test test`}
-    rating={5.2}
-    voiceCount={222}
-    director={`Director`}
-    actorList={[`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`]}
-    runtime={115}
+    film={film}
+    likeFilms={[film]}
     onFilmClick={() => {}}
     onPlayButtonClick={handlePlayButtonClick}/>);
 

@@ -20,7 +20,8 @@ const film = {
   voiceCount: 240,
   director: `Wes Andreson`,
   actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
-  runtime: 99
+  runtime: 99,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
 const overview = {
@@ -99,7 +100,7 @@ it(`Render FilmDetail`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+      <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
     </Provider>, {
       createNodeMock: () => {
         return {};

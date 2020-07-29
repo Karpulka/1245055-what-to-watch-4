@@ -20,10 +20,11 @@ class App extends PureComponent {
     return <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {films && promoFilm !== {} ? this._renderFilmPage() : ``}
+          {films && Object.keys(promoFilm).length > 0 ? this._renderFilmPage() : ``}
         </Route>
         <Route exact path="/film-detail">
-          {films.length > 0 ? (<FilmDetail {...films[0]}
+          {films.length > 0 ? (<FilmDetail
+            film={films[0]}
             likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
             onPlayButtonClick={onPlayButtonClick}
             onFilmClick={onItemClick}/>) : ``}
@@ -57,20 +58,23 @@ class App extends PureComponent {
     }
 
     if (selectedFilm) {
-      return <FilmDetail {...selectedFilm}
+      return <FilmDetail
+        film={selectedFilm}
         likeFilms={this._getLikeFilms(films, selectedFilm.genre, selectedFilm.id)}
         onPlayButtonClick={onPlayButtonClick}
         onFilmClick={onItemClick}/>;
     }
 
-    return <Main
-      promoFilmTitle={promoFilm.title}
-      promoFilmGenre={promoFilm.genre}
-      promoFilmYear={promoFilm.year}
-      films={films}
-      onPlayButtonClick={onPlayButtonClick}
-      onFilmClick={onItemClick}
-    />;
+    if (Object.keys(promoFilm).length > 0) {
+      return <Main
+        promoFilm={promoFilm}
+        films={films}
+        onPlayButtonClick={onPlayButtonClick}
+        onFilmClick={onItemClick}
+      />;
+    }
+
+    return null;
   }
 
   _getLikeFilms(films, genre, filmID) {
@@ -126,10 +130,17 @@ App.propTypes = {
     video: PropTypes.string.isRequired
   })),
   promoFilm: PropTypes.shape({
+    id: PropTypes.number,
     title: PropTypes.string,
+    src: PropTypes.string,
+    background: PropTypes.string,
     genre: PropTypes.string,
     year: PropTypes.number,
-    src: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    voiceCount: PropTypes.number,
+    director: PropTypes.string,
+    actorList: PropTypes.arrayOf(PropTypes.string),
     runtime: PropTypes.number,
     video: PropTypes.string
   }),

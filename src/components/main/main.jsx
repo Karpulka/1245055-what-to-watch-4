@@ -6,13 +6,13 @@ import Filter from "../filter/filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 
 const Main = (props) => {
-  const {promoFilmTitle, promoFilmGenre, promoFilmYear, films, onFilmClick, onPlayButtonClick} = props;
+  const {promoFilm, films, onFilmClick, onPlayButtonClick} = props;
   const FilmsListComponent = withFilmsList(FilmsList);
 
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+        <img src={promoFilm.background} alt={promoFilm.title}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -36,14 +36,14 @@ const Main = (props) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt={promoFilmTitle} width="218" height="327"/>
+            <img src={promoFilm.src} alt={promoFilm.title} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{promoFilmTitle}</h2>
+            <h2 className="movie-card__title">{promoFilm.title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{promoFilmGenre}</span>
-              <span className="movie-card__year">{promoFilmYear}</span>
+              <span className="movie-card__genre">{promoFilm.genre}</span>
+              <span className="movie-card__year">{promoFilm.year}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -98,9 +98,21 @@ Main.defaultProps = {
 };
 
 Main.propTypes = {
-  promoFilmTitle: PropTypes.string,
-  promoFilmGenre: PropTypes.string,
-  promoFilmYear: PropTypes.number,
+  promoFilm: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    voiceCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    runtime: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired
+  }),
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
