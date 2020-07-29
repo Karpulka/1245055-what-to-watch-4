@@ -2,7 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer/film/film";
-import {getFilters, getGenre} from "../../reducer/film/selectors";
+import {getGenre} from "../../reducer/film/selectors";
+import {getFilters} from "../../reducer/data/selectors";
 
 const Filter = (props) => {
   const {filters, genre, handleGenreChange, getFilmByGenre} = props;

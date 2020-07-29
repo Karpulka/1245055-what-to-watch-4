@@ -62,7 +62,11 @@ it(`Render ShowMore`, () => {
   const store = mockStore({
     [NameSpace.FILM]: {
       showingFilms: 5,
-      films
+      films,
+      genre: `Comedy`
+    },
+    [NameSpace.DATA]: {
+      allFilms: films
     }
   });
 

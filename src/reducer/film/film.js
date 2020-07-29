@@ -1,12 +1,11 @@
 import {setNewObject} from "../../utils";
 
-const MAX_GENRES = 10;
 const DEFAULT_FILMS_COUNT = 8;
+export const DEFAULT_GENRE = `All genres`;
 
 const initialState = {
-  genre: `All genres`,
+  genre: DEFAULT_GENRE,
   films: [],
-  filters: [],
   showingFilms: DEFAULT_FILMS_COUNT
 };
 
@@ -39,50 +38,13 @@ export const ActionCreator = {
   })
 };
 
-const getFilters = (allFilms) => {
-  const filters = [`All genres`];
-
-  allFilms.forEach((film) => {
-    const filmGenres = film.genre.split(`, `);
-    filmGenres.forEach((genre) => {
-      if (filters.indexOf(genre) === -1) {
-        filters.push(genre);
-      }
-    });
-  });
-
-  return filters.slice(0, MAX_GENRES);
-};
-
-const filteredFilms = (genre) => {
-  if (genre !== initialState.genre) {
-    const genres = genre.split(`, `);
-
-    return initialState.films.filter((film) => {
-      const filmGenres = film.genre.split(`, `);
-      let isGenre = false;
-
-      filmGenres.forEach((filmGenre) => {
-        if (genres.indexOf(filmGenre) > -1) {
-          isGenre = true;
-        }
-      });
-
-      return isGenre;
-    });
-  }
-
-  return initialState.films;
-};
-
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
       return setNewObject(state, {genre: action.payload, showingFilms: DEFAULT_FILMS_COUNT});
 
     case ActionType.GET_FILM_BY_GENRE:
-      const films = filteredFilms(action.payload);
-      return setNewObject(state, {films, filters: getFilters(films), showingFilms: DEFAULT_FILMS_COUNT});
+      return setNewObject(state, {films: action.payload, showingFilms: DEFAULT_FILMS_COUNT});
 
     case ActionType.SHOW_MORE:
       let showingFilms = state.showingFilms + DEFAULT_FILMS_COUNT;

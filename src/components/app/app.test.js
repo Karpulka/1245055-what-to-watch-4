@@ -82,6 +82,9 @@ it(`Render App`, () => {
       filters: [`All genres`],
       showingFilms: 5,
       films
+    },
+    [NameSpace.DATA]: {
+      allFilms: films
     }
   });
 

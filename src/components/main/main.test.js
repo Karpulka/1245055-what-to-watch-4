@@ -82,6 +82,9 @@ it(`Render Main`, () => {
       genre: `All genres`,
       showingFilms: 5,
       films
+    },
+    [NameSpace.DATA]: {
+      allFilms: films
     }
   });
 
