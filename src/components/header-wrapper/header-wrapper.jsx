@@ -16,7 +16,7 @@ const HeaderWrapper = (props) => {
     </div>
 
     <Header pageType={pageType} />
-  </header>
+  </header>;
 };
 
 HeaderWrapper.propTypes = {

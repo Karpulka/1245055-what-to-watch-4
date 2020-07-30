@@ -5,21 +5,21 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 const HeaderMovie = (props) => {
-  const {isAuth} = props;
+  const {auth} = props;
 
   return <div className="user-block">
-    {isAuth === AuthorizationStatus.AUTH ? <div className="user-block__avatar">
+    {auth === AuthorizationStatus.AUTH ? <div className="user-block__avatar">
       <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
     </div> : <a href="/login" className="user-block__link">Sign in</a>}
   </div>;
 };
 
 HeaderMovie.propTypes = {
-  isAuth: PropTypes.string.isRequired
+  auth: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: getAuthorizationStatus(state)
+  auth: getAuthorizationStatus(state)
 });
 
 export {HeaderMovie};
