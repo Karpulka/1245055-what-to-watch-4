@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import FilmDetail from "./film-detail.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space";
 
 const mockStore = configureStore([]);
 
@@ -19,7 +20,8 @@ const film = {
   voiceCount: 240,
   director: `Wes Andreson`,
   actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
-  runtime: 99
+  runtime: 99,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
 const overview = {
@@ -89,14 +91,16 @@ it(`Render FilmDetail`, () => {
   };
 
   const store = mockStore({
-    showingFilms: 5,
-    films: likeFilms,
-    activeItem
+    [NameSpace.FILM]: {
+      showingFilms: 5,
+      films: likeFilms,
+      activeItem
+    }
   });
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmDetail {...film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+      <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
     </Provider>, {
       createNodeMock: () => {
         return {};

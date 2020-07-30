@@ -9,13 +9,11 @@ Enzyme.configure({
 
 it(`Click by link`, () => {
   const handleGenreChange = jest.fn();
-  const getFilmByGenre = jest.fn();
 
   const filterComponent = shallow(
       <Filter
         genre={`All genres`}
         filters={[`All genres`, `Drama`, `Comedy`]}
-        getFilmByGenre={getFilmByGenre}
         handleGenreChange={handleGenreChange}
       />
   );
@@ -24,5 +22,4 @@ it(`Click by link`, () => {
   link.simulate(`click`, {preventDefault() {}, currentTarget: {textContent: `Drama`}});
 
   expect(handleGenreChange.mock.calls.length).toBe(1);
-  expect(getFilmByGenre.mock.calls.length).toBe(1);
 });

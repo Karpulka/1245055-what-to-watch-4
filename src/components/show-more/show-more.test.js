@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import ShowMore from "./show-more";
+import NameSpace from "../../reducer/name-space";
 
 const mockStore = configureStore([]);
 
@@ -59,8 +60,14 @@ const films = [
 
 it(`Render ShowMore`, () => {
   const store = mockStore({
-    showingFilms: 5,
-    films
+    [NameSpace.FILM]: {
+      showingFilms: 5,
+      films,
+      genre: `Comedy`
+    },
+    [NameSpace.DATA]: {
+      allFilms: films
+    }
   });
 
   const tree = renderer

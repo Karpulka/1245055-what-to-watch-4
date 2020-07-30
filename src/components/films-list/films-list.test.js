@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import FilmsList from "./films-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import NameSpace from "../../reducer/name-space";
 
 const mockStore = configureStore([]);
 
@@ -12,6 +13,7 @@ const films = [
     title: `Большой куш`,
     src: `/snatch.jpg`,
     background: `/snatch.jpg`,
+    promoImage: `/snatch.jpg`,
     genre: `Comedy, Crime`,
     year: 2000,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -28,6 +30,7 @@ const films = [
     title: `Война миров`,
     src: `/war-of-the-worlds.jpg`,
     background: `/war-of-the-worlds.jpg`,
+    promoImage: `/war-of-the-worlds.jpg`,
     genre: `Adventure, War Drama`,
     year: 2005,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -44,6 +47,7 @@ const films = [
     title: `Revenant`,
     src: `/revenant.jpg`,
     background: `/revenant.jpg`,
+    promoImage: `/revenant.jpg`,
     genre: `Action, Adventure`,
     year: 2015,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -59,7 +63,9 @@ const films = [
 
 it(`Render FilmsList`, () => {
   const store = mockStore({
-    showingFilms: 5
+    [NameSpace.FILM]: {
+      showingFilms: 5
+    }
   });
 
   const tree = renderer

@@ -8,6 +8,7 @@ const film = {
   title: `Остров проклятых`,
   src: `/shutter-island.jpg`,
   background: `/shutter-island.jpg`,
+  promoImage: `/shutter-island.jpg`,
   genre: `Mystery, Thriller`,
   year: 2010,
   video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,

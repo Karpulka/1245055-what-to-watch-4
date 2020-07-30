@@ -6,7 +6,8 @@ import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import withActiveItem from "../../hocs/with-app/with-app";
 
 const FilmDetail = (props) => {
-  const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, likeFilms, onFilmClick, onPlayButtonClick} = props;
+  const {film, likeFilms, onFilmClick, onPlayButtonClick} = props;
+  const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime} = film;
   const overview = {rating, voiceCount, description, director, actorList};
   const details = {director, actorList, runtime, genre, year};
   const FilmsListComponent = withFilmsList(FilmsList);
@@ -88,18 +89,21 @@ const FilmDetail = (props) => {
 };
 
 FilmDetail.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  voiceCount: PropTypes.number.isRequired,
-  director: PropTypes.string.isRequired,
-  actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  runtime: PropTypes.number.isRequired,
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    voiceCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    runtime: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired
+  }),
   likeFilms: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

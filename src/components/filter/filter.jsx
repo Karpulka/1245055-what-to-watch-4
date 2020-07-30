@@ -1,10 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/film/film";
+import {getGenre} from "../../reducer/film/selectors";
+import {getFilters} from "../../reducer/data/selectors";
 
 const Filter = (props) => {
-  const {filters, genre, handleGenreChange, getFilmByGenre} = props;
+  const {filters, genre, handleGenreChange} = props;
 
   return <ul className="catalog__genres-list">
     {filters.map((filter, i) => {
@@ -13,7 +15,6 @@ const Filter = (props) => {
         <a href="#" className="catalog__genres-link" onClick={(evt) => {
           evt.preventDefault();
           handleGenreChange(evt.currentTarget.textContent);
-          getFilmByGenre(evt.currentTarget.textContent);
         }}>{filter}</a>
       </li>;
     })}
@@ -23,22 +24,17 @@ const Filter = (props) => {
 Filter.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   genre: PropTypes.string.isRequired,
-  handleGenreChange: PropTypes.func.isRequired,
-  getFilmByGenre: PropTypes.func.isRequired
+  handleGenreChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  filters: state.filters,
-  genre: state.genre
+  filters: getFilters(state),
+  genre: getGenre(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleGenreChange: (genre) => {
     dispatch(ActionCreator.changeGenre(genre));
-  },
-
-  getFilmByGenre: (genre) => {
-    dispatch(ActionCreator.getFilmByGenre(genre));
   }
 });
 

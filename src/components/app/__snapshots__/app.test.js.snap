@@ -9,8 +9,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Богемская рапсодия"
+        src="/bohemian-rhapsody.jpg"
       />
     </div>
     <h1
@@ -69,9 +69,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="Promo Film"
+            alt="Богемская рапсодия"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="/bohemian-rhapsody.jpg"
             width="218"
           />
         </div>
@@ -81,7 +81,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Promo Film
+            Богемская рапсодия
           </h2>
           <p
             className="movie-card__meta"
@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Comedy
+              Biography, Drama
             </span>
             <span
               className="movie-card__year"
             >
-              1998
+              2018
             </span>
           </p>
           <div
@@ -163,6 +163,39 @@ Array [
             onClick={[Function]}
           >
             All genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Fantasy
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Biography
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Drama
           </a>
         </li>
       </ul>
