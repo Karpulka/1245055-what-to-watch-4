@@ -175,7 +175,7 @@ App.propTypes = {
     video: PropTypes.string.isRequired
   }),
   genre: PropTypes.string.isRequired,
-  isAuth: PropTypes.func.isRequired,
+  isAuth: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

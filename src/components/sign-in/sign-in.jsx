@@ -5,7 +5,7 @@ import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 import {Operation} from "../../reducer/user/user";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
+import {getErrorMessage, getIsEmailValid} from "../../reducer/user/selectors";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -18,13 +18,19 @@ class SignIn extends PureComponent {
   }
 
   render() {
+    const {errorMessage, isEmailValid} = this.props;
+    const emailClassName = `sign-in__field${!isEmailValid ? ` sign-in__field--error` : ``}`;
+
     return <div className="user-page">
       <HeaderWrapper pageType={PageType.AUTH}/>
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
+          {errorMessage ? <div className="sign-in__message">
+            <p>{errorMessage}</p>
+          </div> : ``}
           <div className="sign-in__fields">
-            <div className="sign-in__field">
+            <div className={emailClassName}>
               <input className="sign-in__input" ref={this.emailRef} type="email" placeholder="Email address" name="user-email" id="user-email"/>
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
@@ -57,8 +63,15 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  login: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  isEmailValid: PropTypes.bool.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  errorMessage: getErrorMessage(state),
+  isEmailValid: getIsEmailValid(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
@@ -67,4 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {SignIn};
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
