@@ -5,6 +5,7 @@ import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 import {Operation} from "../../reducer/user/user";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
 class SignIn extends PureComponent {
   constructor(props) {
