@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import Filter from "../filter/filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
+import Footer from "../footer/footer.jsx";
+import {PageType} from "../app/app.jsx";
+import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 
 const Main = (props) => {
   const {promoFilm, films, onFilmClick, onPlayButtonClick} = props;
@@ -17,21 +20,7 @@ const Main = (props) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <header className="page-header movie-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
-        </div>
-      </header>
+      <HeaderWrapper pageType={PageType.MOVIE}/>
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -76,19 +65,7 @@ const Main = (props) => {
         <ShowMore />
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </React.Fragment>;
 };

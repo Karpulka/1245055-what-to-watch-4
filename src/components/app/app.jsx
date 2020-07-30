@@ -9,9 +9,15 @@ import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import {getFilms} from "../../reducer/film/selectors";
 import {getPromoFilm, getAllFilms} from "../../reducer/data/selectors";
 import {getGenre} from "../../reducer/film/selectors";
+import SignIn from "../sign-in/sign-in.jsx";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
+
+const PageType = {
+  AUTH: `AUTH`,
+  MOVIE: `MOVIE`
+};
 
 class App extends PureComponent {
   render() {
@@ -37,6 +43,9 @@ class App extends PureComponent {
             isStartPlaying={true}
             onExitButtonClick={onExitButtonClick}
             runtime={promoFilm.runtime} />) : ``}
+        </Route>
+        <Route exact path="/login">
+          <SignIn />
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -173,5 +182,5 @@ const mapStateToProps = (state) => ({
   allFilms: getAllFilms(state)
 });
 
-export {App};
+export {App, PageType};
 export default connect(mapStateToProps)(App);
