@@ -14,18 +14,8 @@ const ratings = [
 ];
 
 class AddReview extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this._rating = 1;
-    this._textRef = createRef();
-
-    this.handlePostButtonclick = this.handlePostButtonclick.bind(this);
-    this._changeRating = this._changeRating.bind(this);
-  }
-
   render() {
-    const {title, background, src} = this.props;
+    const {title, background, src, onSubmitComment, onChangeRating, isDisableSubmit, children, isDisableForm} = this.props;
 
     return <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -44,41 +34,27 @@ class AddReview extends PureComponent {
 
       <div className="add-review">
         <form action="#" className="add-review__form">
-          <div className="rating">
-            <div className="rating__stars">
-              {ratings.map((rating, i) => <React.Fragment key={rating + i + 1}>
-                <input className="rating__input" id={`star-${i}`} defaultChecked={i === 0 ? true : false} onChange={this._changeRating} type="radio" name="rating" defaultValue={i + 1}/>
-                <label className="rating__label" htmlFor={`star-${i}`}>{rating}</label>
-              </React.Fragment>)}
-            </div>
-          </div>
-
-          <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" ref={this._textRef} id="review-text" placeholder="Review text"></textarea>
-            <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" onClick={this.handlePostButtonclick}>Post</button>
+          <fieldset disabled={isDisableForm}>
+            <div className="rating">
+              <div className="rating__stars">
+                {ratings.map((rating, i) => <React.Fragment key={rating + i + 1}>
+                  <input className="rating__input" id={`star-${i}`} defaultChecked={i === 0 ? true : false} onChange={onChangeRating} type="radio" name="rating" defaultValue={i + 1}/>
+                  <label className="rating__label" htmlFor={`star-${i}`}>{rating}</label>
+                </React.Fragment>)}
+              </div>
             </div>
 
-          </div>
+            <div className="add-review__text">
+              {children}
+              <div className="add-review__submit">
+                <button className="add-review__btn" type="submit" disabled={isDisableSubmit} onClick={onSubmitComment}>Post</button>
+              </div>
+            </div>
+          </fieldset>
         </form>
       </div>
 
     </section>;
-  }
-
-  handlePostButtonclick(evt) {
-    evt.preventDefault();
-    const {addComment, id} = this.props;
-
-    addComment(id, {
-      rating: this._rating,
-      comment: this._textRef.current.value
-    });
-  }
-
-  _changeRating(evt) {
-    evt.preventDefault();
-    this._rating = evt.currentTarget.value;
   }
 }
 
@@ -87,14 +63,12 @@ AddReview.propTypes = {
   background: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  addComment: PropTypes.func.isRequired
+  addComment: PropTypes.func.isRequired,
+  isDisableSubmit: PropTypes.bool.isRequired,
+  onSubmitComment: PropTypes.func.isRequired,
+  onChangeRating: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
+  isDisableForm: PropTypes.bool.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addComment(filmID, comment) {
-    dispatch(Operation.sendComment(filmID, comment));
-  }
-});
-
-export {AddReview};
-export default connect(null, mapDispatchToProps)(AddReview);
+export default AddReview;

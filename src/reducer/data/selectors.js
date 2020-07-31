@@ -17,6 +17,10 @@ export const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
+export const getIsDisableComentForm = (state) => {
+  return state[NAME_SPACE].isDisableCommentForm;
+};
+
 export const getFilters = createSelector(
     getAllFilms,
     (films) => {

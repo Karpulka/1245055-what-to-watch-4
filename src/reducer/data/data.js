@@ -6,7 +6,8 @@ const initialState = {
   allFilms: [],
   promoFilm: {},
   comments: [],
-  errorText: ``
+  errorText: ``,
+  isDisableCommentForm: false
 };
 
 const ERROR_TEXT = `Произошла ошибка отправки комментария. Попробуйте повторить отправку позже.`;
@@ -15,7 +16,8 @@ const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMOFILM: `LOAD_PROMOFILM`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  ERROR_SEND_COMMENT: `ERROR_SEND_COMMENT`
+  ERROR_SEND_COMMENT: `ERROR_SEND_COMMENT`,
+  SET_DISABLE_COMMENT_FORM: `SET_DISABLE_COMMENT_FORM`
 };
 
 const ActionCreator = {
@@ -37,6 +39,11 @@ const ActionCreator = {
   setErrorText: (text) => ({
     type: ActionType.ERROR_SEND_COMMENT,
     payload: text
+  }),
+
+  setDisableCommentForm: (isDisable) => ({
+    type: ActionType.SET_DISABLE_COMMENT_FORM,
+    payload: isDisable
   })
 };
 
@@ -67,13 +74,16 @@ const Operation = {
   },
 
   sendComment: (filmID, comment) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setDisableCommentForm(true));
     return api.post(`/comments/${filmID}`, comment)
       .then(() => {
         dispatch(ActionCreator.setErrorText(``));
+        dispatch(ActionCreator.setDisableCommentForm(false));
       })
-      .catch(() => {
-        dispatch(ActionCreator.setErrorText(ERROR_TEXT));
-      });
+    .catch(() => {
+      dispatch(ActionCreator.setErrorText(ERROR_TEXT));
+      dispatch(ActionCreator.setDisableCommentForm(false));
+    });
   }
 };
 
@@ -97,6 +107,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.ERROR_SEND_COMMENT:
       return setNewObject(state, {
         errorText: action.payload
+      });
+
+    case ActionType.SET_DISABLE_COMMENT_FORM:
+      return setNewObject(state, {
+        isDisableCommentForm: action.payload
       });
   }
 

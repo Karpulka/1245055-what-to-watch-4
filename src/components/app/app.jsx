@@ -13,6 +13,7 @@ import SignIn from "../sign-in/sign-in.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import AddReview from "../add-review/add-review.jsx";
+import withAddReview from "../../hocs/with-add-review/with-add-review";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
@@ -22,6 +23,8 @@ const PageType = {
   ADD_REVIEW: `ADD_REVIEW`,
   MOVIE: `MOVIE`
 };
+
+const AddReviewComponent = withAddReview(AddReview);
 
 class App extends PureComponent {
   render() {
@@ -52,7 +55,7 @@ class App extends PureComponent {
           {isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/dev-review">
-          {films.length > 0 ? (<AddReview
+          {films.length > 0 ? (<AddReviewComponent
             id={films[0].id}
             background={films[0].background}
             src={films[0].src}
