@@ -4,7 +4,7 @@ import Header from "../header/header.jsx";
 import {PageType} from "../app/app.jsx";
 
 const HeaderWrapper = (props) => {
-  const {pageType} = props;
+  const {pageType, isBreadcrumbs} = props;
 
   return <header className={`page-header ${pageType === PageType.AUTH ? `user-page__head` : `movie-card__head`}`}>
     <div className="logo">
@@ -15,12 +15,13 @@ const HeaderWrapper = (props) => {
       </a>
     </div>
 
-    <Header pageType={pageType} />
+    <Header pageType={pageType} isBreadcrumbs={isBreadcrumbs}/>
   </header>;
 };
 
 HeaderWrapper.propTypes = {
-  pageType: PropTypes.string.isRequired
+  pageType: PropTypes.string.isRequired,
+  isBreadcrumbs: PropTypes.bool
 };
 
 export default HeaderWrapper;

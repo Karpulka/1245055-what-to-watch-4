@@ -1,30 +1,59 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import comments from "../../mocks/comments";
 import Review from "../review/review.jsx";
+import {connect} from "react-redux";
+import {Operation} from "../../reducer/data/data";
+import {getComments} from "../../reducer/data/selectors";
 
-const FilmReviews = (props) => {
-  const {filmID} = props;
-  const filmComments = comments[filmID];
+class FilmReviews extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  if (filmComments && filmComments.length > 0) {
-    const colDelimeterKey = filmComments ? Math.ceil(filmComments.length / 2) : 0;
-
-    return <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
-        {filmComments.slice(0, colDelimeterKey).map((review, i) => <Review review={review} key={review.user + i}/>)}
-      </div>
-      <div className="movie-card__reviews-col">
-        {filmComments.slice(colDelimeterKey).map((review, i) => <Review review={review} key={review.user + i}/>)}
-      </div>
-    </div>;
+    const {setComments, filmID} = props;
+    setComments(filmID);
   }
 
-  return null;
-};
+  render() {
+    const {comments} = this.props;
+
+    if (comments && comments.length > 0) {
+      const colDelimeterKey = comments ? Math.ceil(comments.length / 2) : 0;
+
+      return <div className="movie-card__reviews movie-card__row">
+        <div className="movie-card__reviews-col">
+          {comments.slice(0, colDelimeterKey).map((review, i) => <Review review={review} key={review.user + i}/>)}
+        </div>
+        <div className="movie-card__reviews-col">
+          {comments.slice(colDelimeterKey).map((review, i) => <Review review={review} key={review.user + i}/>)}
+        </div>
+      </div>;
+    }
+
+    return null;
+  }
+}
 
 FilmReviews.propTypes = {
-  filmID: PropTypes.number.isRequired
+  filmID: PropTypes.number.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
+  })),
+  setComments: PropTypes.func.isRequired
 };
 
-export default FilmReviews;
+const mapStateToProps = (state) => ({
+  comments: getComments(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setComments(filmID) {
+    dispatch(Operation.loadComments(filmID));
+  }
+});
+
+export {FilmReviews};
+export default connect(mapStateToProps, mapDispatchToProps)(FilmReviews);
