@@ -35,12 +35,12 @@ class SignIn extends PureComponent {
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"/>
+              <input className="sign-in__input" ref={this.passwordRef} type="password" placeholder="Password" name="user-password" id="user-password"/>
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" ref={this.passwordRef} type="submit" onClick={this.handleFormSubmit}>Sign in
+            <button className="sign-in__btn" type="submit" onClick={this.handleFormSubmit}>Sign in
             </button>
           </div>
         </form>
