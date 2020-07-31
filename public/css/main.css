@@ -1255,6 +1255,7 @@ main {
   .sign-in__link:hover, .sign-in__link:focus {
     color: #DFCF77; }
 
+.add-review__message,
 .sign-in__message {
   text-align: center;
   font-size: 22px;
@@ -1262,9 +1263,10 @@ main {
   text-align: center;
   line-height: 26px;
   margin-bottom: 42px; }
+.add-review__message p,
   .sign-in__message p {
     margin: 0; }
-
+.add-review__error-message,
 .sign-in__error-message {
   font-size: 22px;
   line-height: 26px;

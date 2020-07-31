@@ -2,7 +2,7 @@ import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Operation} from "../../reducer/data/data";
 import {connect} from "react-redux";
-import {getIsDisableComentForm} from "../../reducer/data/selectors";
+import {getIsDisableComentForm, getErrorText} from "../../reducer/data/selectors";
 
 const MIN_TEXT_LENGTH = 50;
 const MAX_TEXT_LENGTH = 400;
@@ -71,7 +71,8 @@ const withAddReview = (Component) => {
 };
 
 const mapStateToProps = (state) => ({
-  isDisableForm: getIsDisableComentForm(state)
+  isDisableForm: getIsDisableComentForm(state),
+  errorText: getErrorText(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

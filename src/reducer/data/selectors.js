@@ -21,6 +21,10 @@ export const getIsDisableComentForm = (state) => {
   return state[NAME_SPACE].isDisableCommentForm;
 };
 
+export const getErrorText = (state) => {
+  return state[NAME_SPACE].errorText;
+};
+
 export const getFilters = createSelector(
     getAllFilms,
     (films) => {
