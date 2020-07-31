@@ -75,7 +75,7 @@ const films = [
   }
 ];
 
-it(`Render Main`, () => {
+it(`Render Main Is Auth`, () => {
   const store = mockStore({
     [NameSpace.FILM]: {
       filters: [`All genres`, `Drama`],
@@ -85,6 +85,37 @@ it(`Render Main`, () => {
     },
     [NameSpace.DATA]: {
       allFilms: films
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`
+    }
+  });
+
+  const tree = renderer
+    .create(<Provider store={store}>
+      <Main
+        promoFilm={promoFilm}
+        onFilmClick={() => {}}
+        onPlayButtonClick={() => {}}/>
+    </Provider>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render Main No Auth`, () => {
+  const store = mockStore({
+    [NameSpace.FILM]: {
+      filters: [`All genres`, `Drama`],
+      genre: `All genres`,
+      showingFilms: 5,
+      films
+    },
+    [NameSpace.DATA]: {
+      allFilms: films
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `NO_AUTH`
     }
   });
 

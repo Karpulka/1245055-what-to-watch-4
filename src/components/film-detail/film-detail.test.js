@@ -84,7 +84,7 @@ const likeFilms = [
   }
 ];
 
-it(`Render FilmDetail`, () => {
+it(`Render FilmDetail is Auth`, () => {
   const activeItem = {
     title: `Overview`,
     value: overview
@@ -95,6 +95,39 @@ it(`Render FilmDetail`, () => {
       showingFilms: 5,
       films: likeFilms,
       activeItem
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`
+    }
+  });
+
+  const tree = renderer
+    .create(<Provider store={store}>
+      <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+    </Provider>, {
+      createNodeMock: () => {
+        return {};
+      }
+    })
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render FilmDetail No Auth`, () => {
+  const activeItem = {
+    title: `Overview`,
+    value: overview
+  };
+
+  const store = mockStore({
+    [NameSpace.FILM]: {
+      showingFilms: 5,
+      films: likeFilms,
+      activeItem
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `NO_AUTH`
     }
   });
 

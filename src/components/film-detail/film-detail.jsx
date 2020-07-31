@@ -4,6 +4,9 @@ import Tabs from "../tabs/tabs.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import withActiveItem from "../../hocs/with-app/with-app";
+import Footer from "../footer/footer.jsx";
+import {PageType} from "../app/app.jsx";
+import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 
 const FilmDetail = (props) => {
   const {film, likeFilms, onFilmClick, onPlayButtonClick} = props;
@@ -22,21 +25,7 @@ const FilmDetail = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a href="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
-        </header>
+        <HeaderWrapper pageType={PageType.MOVIE} />
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
@@ -78,13 +67,14 @@ const FilmDetail = (props) => {
       </div>
     </section>
 
-    {likeFilms && likeFilms.length > 0 ? <div className="page-content">
-      <section className="catalog catalog--like-this">
+    <div className="page-content">
+      {likeFilms && likeFilms.length > 0 ? <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
 
         <FilmsListComponent films={likeFilms} onFilmClick={onFilmClick} />
-      </section>
-    </div> : ``}
+      </section> : ``}
+      <Footer />
+    </div>
   </React.Fragment>;
 };
 

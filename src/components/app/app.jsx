@@ -2,20 +2,28 @@ import React, {PureComponent} from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import FilmDetail from "../film-detail/film-detail.jsx";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import {getFilms} from "../../reducer/film/selectors";
 import {getPromoFilm, getAllFilms} from "../../reducer/data/selectors";
 import {getGenre} from "../../reducer/film/selectors";
+import SignIn from "../sign-in/sign-in.jsx";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
 
+const PageType = {
+  AUTH: `AUTH`,
+  MOVIE: `MOVIE`
+};
+
 class App extends PureComponent {
   render() {
-    const {films, onItemClick, promoFilm, onExitButtonClick, onPlayButtonClick} = this.props;
+    const {films, onItemClick, promoFilm, onExitButtonClick, onPlayButtonClick, isAuth} = this.props;
 
     return <BrowserRouter>
       <Switch>
@@ -37,6 +45,9 @@ class App extends PureComponent {
             isStartPlaying={true}
             onExitButtonClick={onExitButtonClick}
             runtime={promoFilm.runtime} />) : ``}
+        </Route>
+        <Route exact path="/login">
+          {isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -163,15 +174,17 @@ App.propTypes = {
     runtime: PropTypes.number.isRequired,
     video: PropTypes.string.isRequired
   }),
-  genre: PropTypes.string.isRequired
+  genre: PropTypes.string.isRequired,
+  isAuth: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   genre: getGenre(state),
   films: getFilms(state),
   promoFilm: getPromoFilm(state),
-  allFilms: getAllFilms(state)
+  allFilms: getAllFilms(state),
+  isAuth: getAuthorizationStatus(state)
 });
 
-export {App};
+export {App, PageType};
 export default connect(mapStateToProps)(App);

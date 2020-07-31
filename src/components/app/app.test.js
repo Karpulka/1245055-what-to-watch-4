@@ -75,7 +75,7 @@ const films = [
   }
 ];
 
-it(`Render App`, () => {
+it(`Render App Is Auth`, () => {
   const store = mockStore({
     [NameSpace.FILM]: {
       genre: `All genres`,
@@ -85,6 +85,9 @@ it(`Render App`, () => {
     },
     [NameSpace.DATA]: {
       allFilms: films
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`
     }
   });
 
@@ -100,6 +103,47 @@ it(`Render App`, () => {
         isShowFilm={false}
         onPlayButtonClick={() => {}}
         genre={`All films`}
+        isAuth={`AUTH`}
+      />
+    </Provider>, {
+      createNodeMock: () => {
+        return {};
+      }
+    })
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render App No Auth`, () => {
+  const store = mockStore({
+    [NameSpace.FILM]: {
+      genre: `All genres`,
+      filters: [`All genres`],
+      showingFilms: 5,
+      films
+    },
+    [NameSpace.DATA]: {
+      allFilms: films
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `NO_AUTH`
+    }
+  });
+
+  const tree = renderer
+    .create(<Provider store={store}>
+      <App
+        promoFilm={promoFilm}
+        allFilms={films}
+        films={films}
+        handleItemClick={() => {}}
+        onItemClick={() => {}}
+        onExitButtonClick={() => {}}
+        isShowFilm={false}
+        onPlayButtonClick={() => {}}
+        genre={`All films`}
+        isAuth={`NO_AUTH`}
       />
     </Provider>, {
       createNodeMock: () => {
