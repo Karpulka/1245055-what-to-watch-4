@@ -55,7 +55,7 @@ const AddReview = (props) => {
     </div>
 
   </section>;
-}
+};
 
 AddReview.propTypes = {
   title: PropTypes.string.isRequired,

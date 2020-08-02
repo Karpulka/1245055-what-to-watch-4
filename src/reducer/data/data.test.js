@@ -141,33 +141,48 @@ describe(`Reduser state tests`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       allFilms: [],
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     });
   });
 
   it(`Reducer should update films by load films`, () => {
     expect(reducer({
       allFilms: [],
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     }, {
       type: ActionType.LOAD_FILMS,
       payload: films
     })).toEqual({
       allFilms: films,
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     });
   });
 
   it(`Reducer should update promoFilm by load promoFilm`, () => {
     expect(reducer({
       allFilms: [],
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     }, {
       type: ActionType.LOAD_PROMOFILM,
       payload: promoFilm
     })).toEqual({
       allFilms: [],
-      promoFilm
+      promoFilm,
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     });
   });
 });
