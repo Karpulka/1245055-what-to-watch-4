@@ -12,8 +12,8 @@ import {getGenre} from "../../reducer/film/selectors";
 import SignIn from "../sign-in/sign-in.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import AddReview from "../add-review/add-review.jsx";
-import withAddReview from "../../hocs/with-add-review/with-add-review";
+import Review from "../review/review.jsx";
+import withReview from "../../hocs/with-review/with-review";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
@@ -24,7 +24,7 @@ const PageType = {
   MOVIE: `MOVIE`
 };
 
-const AddReviewComponent = withAddReview(AddReview);
+const AddReviewComponent = withReview(Review);
 
 class App extends PureComponent {
   render() {

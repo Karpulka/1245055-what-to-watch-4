@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Review from "../review/review.jsx";
+import ReviewItem from "../review-item/review-item.jsx";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/data/data";
 import {getComments} from "../../reducer/data/selectors";
@@ -21,10 +21,10 @@ class FilmReviews extends PureComponent {
 
       return <div className="movie-card__reviews movie-card__row">
         <div className="movie-card__reviews-col">
-          {comments.slice(0, colDelimeterKey).map((review, i) => <Review review={review} key={review.user + i}/>)}
+          {comments.slice(0, colDelimeterKey).map((review, i) => <ReviewItem review={review} key={review.user + i}/>)}
         </div>
         <div className="movie-card__reviews-col">
-          {comments.slice(colDelimeterKey).map((review, i) => <Review review={review} key={review.user + i}/>)}
+          {comments.slice(colDelimeterKey).map((review, i) => <ReviewItem review={review} key={review.user + i}/>)}
         </div>
       </div>;
     }

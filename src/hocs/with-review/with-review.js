@@ -7,18 +7,18 @@ import {getIsDisableComentForm, getErrorText} from "../../reducer/data/selectors
 const MIN_TEXT_LENGTH = 50;
 const MAX_TEXT_LENGTH = 400;
 
-const withAddReview = (Component) => {
+const withReview = (Component) => {
   class WithAddReview extends PureComponent {
     constructor(props) {
       super(props);
-
-      this.handleChangeText = this.handleChangeText.bind(this);
 
       this._rating = 1;
       this._textRef = createRef();
 
       this.handlePostButtonclick = this.handlePostButtonclick.bind(this);
       this.handleChangeRating = this.handleChangeRating.bind(this);
+      this.handleChangeText = this.handleChangeText.bind(this);
+
 
       this.state = {
         isDisableSubmit: true
@@ -48,9 +48,9 @@ const withAddReview = (Component) => {
 
     handlePostButtonclick(evt) {
       evt.preventDefault();
-      const {addComment, id} = this.props;
+      const {handleAddComment, id} = this.props;
 
-      addComment(id, {
+      handleAddComment(id, {
         rating: this._rating,
         comment: this._textRef.current.value
       });
@@ -64,7 +64,7 @@ const withAddReview = (Component) => {
 
   WithAddReview.propTypes = {
     id: PropTypes.number.isRequired,
-    addComment: PropTypes.func.isRequired
+    handleAddComment: PropTypes.func.isRequired
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(WithAddReview);
@@ -76,9 +76,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment(filmID, comment) {
+  handleAddComment(filmID, comment) {
     dispatch(Operation.sendComment(filmID, comment));
   }
 });
 
-export default withAddReview;
+export default withReview;
