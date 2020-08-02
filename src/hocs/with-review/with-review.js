@@ -1,24 +1,14 @@
-import React, {createRef, PureComponent} from "react";
-import PropTypes from "prop-types";
-import {Operation} from "../../reducer/data/data";
-import {connect} from "react-redux";
-import {getIsDisableComentForm, getErrorText} from "../../reducer/data/selectors";
+import React, {PureComponent} from "react";
 
 const MIN_TEXT_LENGTH = 50;
 const MAX_TEXT_LENGTH = 400;
 
 const withReview = (Component) => {
-  class WithAddReview extends PureComponent {
+  class WithReview extends PureComponent {
     constructor(props) {
       super(props);
 
-      this._rating = 1;
-      this._textRef = createRef();
-
-      this.handlePostButtonclick = this.handlePostButtonclick.bind(this);
-      this.handleChangeRating = this.handleChangeRating.bind(this);
       this.handleChangeText = this.handleChangeText.bind(this);
-
 
       this.state = {
         isDisableSubmit: true
@@ -30,55 +20,22 @@ const withReview = (Component) => {
 
       return <Component {...this.props}
         isDisableSubmit={isDisableSubmit}
-        onSubmitComment={this.handlePostButtonclick}
-        onChangeRating={this.handleChangeRating}>
-        <textarea className="add-review__textarea" name="review-text" onChange={this.handleChangeText} ref={this._textRef} id="review-text" placeholder="Review text"></textarea>
-      </Component>;
+        onChangeText={this.handleChangeText}
+      />;
     }
 
-    handleChangeText(evt) {
-      evt.preventDefault();
-
-      if (evt.currentTarget.value.length >= MIN_TEXT_LENGTH && evt.currentTarget.value.length <= MAX_TEXT_LENGTH) {
+    handleChangeText(text) {
+      if (text.length >= MIN_TEXT_LENGTH && text.length <= MAX_TEXT_LENGTH) {
         this.setState({isDisableSubmit: false});
       } else {
         this.setState({isDisableSubmit: true});
       }
     }
-
-    handlePostButtonclick(evt) {
-      evt.preventDefault();
-      const {handleAddComment, id} = this.props;
-
-      handleAddComment(id, {
-        rating: this._rating,
-        comment: this._textRef.current.value
-      });
-    }
-
-    handleChangeRating(evt) {
-      evt.preventDefault();
-      this._rating = evt.currentTarget.value;
-    }
   }
 
-  WithAddReview.propTypes = {
-    id: PropTypes.number.isRequired,
-    handleAddComment: PropTypes.func.isRequired
-  };
+  WithReview.propTypes = {};
 
-  return connect(mapStateToProps, mapDispatchToProps)(WithAddReview);
+  return WithReview;
 };
-
-const mapStateToProps = (state) => ({
-  isDisableForm: getIsDisableComentForm(state),
-  errorText: getErrorText(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleAddComment(filmID, comment) {
-    dispatch(Operation.sendComment(filmID, comment));
-  }
-});
 
 export default withReview;

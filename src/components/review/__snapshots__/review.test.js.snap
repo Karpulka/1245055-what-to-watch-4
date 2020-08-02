@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Review Component 1`] = `
+exports[`Render Review Component is Auth 1`] = `
 <section
   className="movie-card movie-card--full"
 >
@@ -197,7 +197,13 @@ exports[`Render Review Component 1`] = `
         <div
           className="add-review__text"
         >
-          <textarea />
+          <textarea
+            className="add-review__textarea"
+            id="review-text"
+            name="review-text"
+            onChange={[Function]}
+            placeholder="Review text"
+          />
           <div
             className="add-review__submit"
           >
@@ -410,7 +416,13 @@ exports[`Render Review Component is No Auth 1`] = `
         <div
           className="add-review__text"
         >
-          <textarea />
+          <textarea
+            className="add-review__textarea"
+            id="review-text"
+            name="review-text"
+            onChange={[Function]}
+            placeholder="Review text"
+          />
           <div
             className="add-review__submit"
           >

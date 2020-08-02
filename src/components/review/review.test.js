@@ -17,6 +17,10 @@ const film = {
 
 it(`Render Review Component is Auth`, () => {
   const store = mockStore({
+    [NameSpace.DATA]: {
+      isDisableCommentForm: false,
+      errorText: ``
+    },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.AUTH
     }
@@ -31,11 +35,9 @@ it(`Render Review Component is Auth`, () => {
       src={src}
       id={id}
       isDisableSubmit={true}
-      onSubmitComment={() => {}}
-      onChangeRating={() => {}}
-      isDisableForm={false}>
-      <textarea/>
-    </Review></Provider>)
+      onChangeText={() => {}}
+      isDisableForm={false}/>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -43,6 +45,10 @@ it(`Render Review Component is Auth`, () => {
 
 it(`Render Review Component is No Auth`, () => {
   const store = mockStore({
+    [NameSpace.DATA]: {
+      isDisableCommentForm: false,
+      errorText: ``
+    },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH
     }
@@ -55,11 +61,9 @@ it(`Render Review Component is No Auth`, () => {
       src={film.src}
       id={film.id}
       isDisableSubmit={true}
-      onSubmitComment={() => {}}
-      onChangeRating={() => {}}
-      isDisableForm={false}>
-      <textarea/>
-    </Review></Provider>)
+      onChangeText={() => {}}
+      isDisableForm={false}/>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
