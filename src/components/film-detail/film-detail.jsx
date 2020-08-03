@@ -13,7 +13,7 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 
 const FilmDetail = (props) => {
   const {film, likeFilms, onFilmClick, onPlayButtonClick, authorizationStatus} = props;
-  const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime} = film;
+  const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, isFavorite} = film;
   const overview = {rating, voiceCount, description, director, actorList};
   const details = {director, actorList, runtime, genre, year};
   const FilmsListComponent = withFilmsList(FilmsList);
@@ -47,7 +47,7 @@ const FilmDetail = (props) => {
               </button>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
+                  {isFavorite ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
                 </svg>
                 <span>My list</span>
               </button>
@@ -96,21 +96,14 @@ FilmDetail.propTypes = {
     director: PropTypes.string.isRequired,
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
+    video: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired
   }),
   likeFilms: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired
+    video: PropTypes.string.isRequired
   })),
   onFilmClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,

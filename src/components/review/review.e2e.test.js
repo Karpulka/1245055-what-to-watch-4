@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -37,14 +38,16 @@ it(`Test change text`, () => {
   store.dispatch = jest.fn();
 
   const review = mount(<Provider store={store}>
-    <Review
-      title={title}
-      background={background}
-      src={src}
-      id={id}
-      isDisableSubmit={false}
-      onChangeText={handleChangeText}
-      isDisableForm={false}/>
+    <StaticRouter>
+      <Review
+        title={title}
+        background={background}
+        src={src}
+        id={id}
+        isDisableSubmit={false}
+        onChangeText={handleChangeText}
+        isDisableForm={false}/>
+    </StaticRouter>
   </Provider>
   );
 

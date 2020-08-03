@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -28,6 +29,7 @@ const film = {
   director: `Wes Andreson`,
   actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   runtime: 99,
+  isFavorite: true,
   video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
@@ -113,11 +115,13 @@ it(`Click Play button on Film Detail Page`, () => {
 
   const handlePlayButtonClick = jest.fn();
   const filmDetail = mount(<Provider store={store}>
-    <FilmDetail
-      film={film}
-      likeFilms={[film]}
-      onFilmClick={() => {}}
-      onPlayButtonClick={handlePlayButtonClick}/>
+    <StaticRouter>
+      <FilmDetail
+        film={film}
+        likeFilms={[film]}
+        onFilmClick={() => {}}
+        onPlayButtonClick={handlePlayButtonClick}/>
+    </StaticRouter>
   </Provider>);
 
   const playButton = filmDetail.find(`.btn--play.movie-card__button`);

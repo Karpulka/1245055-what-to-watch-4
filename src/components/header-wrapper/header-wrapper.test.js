@@ -4,6 +4,7 @@ import HeaderWrapper from "./header-wrapper";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -15,7 +16,11 @@ it(`Render HeaderWrapper Movie isAuth`, () => {
   });
 
   const tree = renderer
-    .create(<Provider store={store}><HeaderWrapper pageType={`MOVIE`} /></Provider>)
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <HeaderWrapper pageType={`MOVIE`} />
+      </StaticRouter>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -29,7 +34,11 @@ it(`Render HeaderWrapper Movie No Auth`, () => {
   });
 
   const tree = renderer
-    .create(<Provider store={store}><HeaderWrapper pageType={`MOVIE`} /></Provider>)
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <HeaderWrapper pageType={`MOVIE`} />
+      </StaticRouter>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -43,7 +52,11 @@ it(`Render HeaderWrapper Auth isAuth`, () => {
   });
 
   const tree = renderer
-    .create(<Provider store={store}><HeaderWrapper pageType={`AUTH`} /></Provider>)
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <HeaderWrapper pageType={`AUTH`} />
+      </StaticRouter>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -57,7 +70,11 @@ it(`Render HeaderWrapper Auth No Auth`, () => {
   });
 
   const tree = renderer
-    .create(<Provider store={store}><HeaderWrapper pageType={`AUTH`} /></Provider>)
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <HeaderWrapper pageType={`AUTH`} />
+      </StaticRouter>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
