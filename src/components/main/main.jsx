@@ -7,9 +7,10 @@ import ShowMore from "../show-more/show-more.jsx";
 import Footer from "../footer/footer.jsx";
 import {PageType} from "../app/app.jsx";
 import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import {Link} from "react-router-dom";
 
 const Main = (props) => {
-  const {promoFilm, films, onFilmClick, onPlayButtonClick, onChangeFavorite} = props;
+  const {promoFilm, films, onFilmClick, onChangeFavorite} = props;
   const {background, title, src, genre, year, isFavorite, id} = promoFilm;
   const FilmsListComponent = withFilmsList(FilmsList);
 
@@ -37,12 +38,12 @@ const Main = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
+              <Link to={`/films/${id}/player`} className="btn btn--play movie-card__button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
               <button className="btn btn--list movie-card__button" type="button" onClick={(evt) => {
                 evt.preventDefault();
                 const status = isFavorite ? 0 : 1;
@@ -94,6 +95,7 @@ Main.propTypes = {
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired,
     video: PropTypes.string.isRequired,
+    fullVideo: PropTypes.string.isRequired,
     isFavorite: PropTypes.bool.isRequired
   }),
   films: PropTypes.arrayOf(PropTypes.shape({
@@ -101,7 +103,6 @@ Main.propTypes = {
     src: PropTypes.string.isRequired
   })),
   onFilmClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
   onChangeFavorite: PropTypes.func.isRequired
 };
 

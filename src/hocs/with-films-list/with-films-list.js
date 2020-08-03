@@ -42,13 +42,7 @@ const withFilmsList = (Component) => {
     }
   }
 
-  WithFilmsList.propTypes = {
-    films: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired
-    })),
-    onFilmClick: PropTypes.func.isRequired
-  };
+  WithFilmsList.propTypes = {};
 
   return WithFilmsList;
 };
