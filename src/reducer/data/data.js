@@ -81,12 +81,13 @@ const Operation = {
       });
   },
 
-  sendComment: (filmID, comment) => (dispatch, getState, api) => {
+  sendComment: (filmID, comment, callback) => (dispatch, getState, api) => {
     dispatch(ActionCreator.setDisableCommentForm(true));
     return api.post(`/comments/${filmID}`, comment)
       .then(() => {
         dispatch(ActionCreator.setErrorText(``));
         dispatch(ActionCreator.setDisableCommentForm(false));
+        callback();
       })
     .catch(() => {
       dispatch(ActionCreator.setErrorText(ERROR_TEXT));

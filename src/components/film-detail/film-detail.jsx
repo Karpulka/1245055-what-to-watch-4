@@ -58,7 +58,7 @@ class FilmDetail extends PureComponent {
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH ?
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``}
+                  <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link> : ``}
               </div>
             </div>
           </div>

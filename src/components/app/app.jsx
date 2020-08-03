@@ -14,8 +14,11 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import MyList from "../mylist/mylist.jsx";
 import {Operation} from "../../reducer/data/data";
+import withReview from "../../hocs/with-review/with-review";
+import Review from "../review/review.jsx";
 
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
+const AddReviewComponent = withReview(Review);
 
 const PageType = {
   AUTH: `AUTH`,
@@ -60,6 +63,17 @@ class App extends PureComponent {
             runtime={runtime}
           />;
         }} />
+        <Route exact path="/films/:id/review" render={(props) => {
+          const film = this._getFilmByID(parseInt(props.match.params.id, 10));
+          const {id, background, title, src} = film;
+          return <AddReviewComponent
+            id={id}
+            background={background}
+            src={src}
+            title={title}
+            onSubmitReview={props.history.goBack}
+          />;
+        }}/>
         <Route exact path="/login" render={() => {
           return isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />;
         }}>

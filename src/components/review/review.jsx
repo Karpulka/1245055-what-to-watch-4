@@ -79,12 +79,12 @@ class Review extends PureComponent {
 
   _handlePostButtonclick(evt) {
     evt.preventDefault();
-    const {handleSubmitComment, id} = this.props;
+    const {handleSubmitComment, id, onSubmitReview} = this.props;
 
     handleSubmitComment(id, {
       rating: this._rating,
       comment: this._textRef.current.value
-    });
+    }, onSubmitReview);
   }
 
   _handleChangeRating(evt) {
@@ -100,6 +100,7 @@ Review.propTypes = {
   isDisableSubmit: PropTypes.bool.isRequired,
   handleSubmitComment: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
+  onSubmitReview: PropTypes.func.isRequired,
   isDisableForm: PropTypes.bool.isRequired,
   errorText: PropTypes.string
 };
@@ -110,8 +111,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSubmitComment(filmID, comment) {
-    dispatch(Operation.sendComment(filmID, comment));
+  handleSubmitComment(filmID, comment, callback) {
+    dispatch(Operation.sendComment(filmID, comment, callback));
   }
 });
 
