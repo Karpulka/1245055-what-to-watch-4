@@ -88,7 +88,6 @@ class Review extends PureComponent {
   }
 
   _handleChangeRating(evt) {
-    evt.preventDefault();
     this._rating = evt.currentTarget.value;
   }
 }
