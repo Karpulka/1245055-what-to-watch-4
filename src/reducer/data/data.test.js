@@ -141,33 +141,48 @@ describe(`Reduser state tests`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       allFilms: [],
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     });
   });
 
   it(`Reducer should update films by load films`, () => {
     expect(reducer({
       allFilms: [],
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     }, {
       type: ActionType.LOAD_FILMS,
       payload: films
     })).toEqual({
       allFilms: films,
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     });
   });
 
   it(`Reducer should update promoFilm by load promoFilm`, () => {
     expect(reducer({
       allFilms: [],
-      promoFilm: {}
+      promoFilm: {},
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     }, {
       type: ActionType.LOAD_PROMOFILM,
       payload: promoFilm
     })).toEqual({
       allFilms: [],
-      promoFilm
+      promoFilm,
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
     });
   });
 });
@@ -211,6 +226,55 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMOFILM,
           payload: null,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/:filmID`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const commentsLoader = Operation.loadComments(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, false);
+
+    return commentsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: [],
+        });
+      });
+  });
+
+  it(`Should make a correct API call sent comment /comments/:filmID`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const commentsSend = Operation.sendComment(1, {
+      rating: 8,
+      comment: `test`
+    });
+
+    apiMock
+      .onPost(`/comments/1`)
+      .reply(200, []);
+
+    return commentsSend(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_DISABLE_COMMENT_FORM,
+          payload: true,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.ERROR_SEND_COMMENT,
+          payload: ``,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_DISABLE_COMMENT_FORM,
+          payload: false,
         });
       });
   });

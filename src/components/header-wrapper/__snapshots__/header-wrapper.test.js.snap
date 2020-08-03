@@ -100,6 +100,7 @@ exports[`Render HeaderWrapper Movie No Auth 1`] = `
       </span>
     </a>
   </div>
+  
   <div
     className="user-block"
   >
@@ -141,6 +142,7 @@ exports[`Render HeaderWrapper Movie isAuth 1`] = `
       </span>
     </a>
   </div>
+  
   <div
     className="user-block"
   >

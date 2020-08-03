@@ -1,14 +1,23 @@
 import {setNewObject} from "../../utils";
 import {ActionCreator as FilmActionCreator} from "../film/film";
+import {prepareFilmData, prepareCommentDataForShow} from "../../prepare-data";
 
 const initialState = {
   allFilms: [],
-  promoFilm: {}
+  promoFilm: {},
+  comments: [],
+  errorText: ``,
+  isDisableCommentForm: false
 };
+
+const ERROR_TEXT = `Произошла ошибка отправки комментария. Попробуйте повторить отправку позже.`;
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
-  LOAD_PROMOFILM: `LOAD_PROMOFILM`
+  LOAD_PROMOFILM: `LOAD_PROMOFILM`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
+  ERROR_SEND_COMMENT: `ERROR_SEND_COMMENT`,
+  SET_DISABLE_COMMENT_FORM: `SET_DISABLE_COMMENT_FORM`
 };
 
 const ActionCreator = {
@@ -20,6 +29,21 @@ const ActionCreator = {
   loadPromoFilm: (promoFilm) => ({
     type: ActionType.LOAD_PROMOFILM,
     payload: promoFilm
+  }),
+
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments
+  }),
+
+  setErrorText: (text) => ({
+    type: ActionType.ERROR_SEND_COMMENT,
+    payload: text
+  }),
+
+  setDisableCommentForm: (isDisable) => ({
+    type: ActionType.SET_DISABLE_COMMENT_FORM,
+    payload: isDisable
   })
 };
 
@@ -39,26 +63,29 @@ const Operation = {
         const promoFilm = response.data ? prepareFilmData(response.data) : null;
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
       });
+  },
+
+  loadComments: (filmID) => (dispatch, getState, api) => {
+    return api.get(`/comments/${filmID}`)
+      .then((response) => {
+        const comments = response.data && response.data.length > 0 ? response.data.map((comment) => prepareCommentDataForShow(comment)) : [];
+        dispatch(ActionCreator.loadComments(comments));
+      });
+  },
+
+  sendComment: (filmID, comment) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setDisableCommentForm(true));
+    return api.post(`/comments/${filmID}`, comment)
+      .then(() => {
+        dispatch(ActionCreator.setErrorText(``));
+        dispatch(ActionCreator.setDisableCommentForm(false));
+      })
+    .catch(() => {
+      dispatch(ActionCreator.setErrorText(ERROR_TEXT));
+      dispatch(ActionCreator.setDisableCommentForm(false));
+    });
   }
 };
-
-export const prepareFilmData = (film) => ({
-  id: film.id,
-  title: film.name,
-  src: film.poster_image,
-  background: film.background_image,
-  genre: film.genre,
-  year: film.released,
-  video: film.preview_video_link,
-  fullVideo: film.video_link,
-  description: film.description,
-  rating: film.rating,
-  voiceCount: film.scores_count,
-  director: film.director,
-  actorList: film.starring,
-  runtime: film.run_time,
-  isFavorite: film.is_favorite
-});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -66,9 +93,25 @@ const reducer = (state = initialState, action) => {
       return setNewObject(state, {
         allFilms: action.payload
       });
+
+    case ActionType.LOAD_COMMENTS:
+      return setNewObject(state, {
+        comments: action.payload
+      });
+
     case ActionType.LOAD_PROMOFILM:
       return setNewObject(state, {
         promoFilm: action.payload
+      });
+
+    case ActionType.ERROR_SEND_COMMENT:
+      return setNewObject(state, {
+        errorText: action.payload
+      });
+
+    case ActionType.SET_DISABLE_COMMENT_FORM:
+      return setNewObject(state, {
+        isDisableCommentForm: action.payload
       });
   }
 

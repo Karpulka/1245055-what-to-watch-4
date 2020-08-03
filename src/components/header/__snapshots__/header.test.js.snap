@@ -1,33 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Header Movie NoIsAuth 1`] = `
-<div
-  className="user-block"
->
-  <a
-    className="user-block__link"
-    href="/login"
+Array [
+  "",
+  <div
+    className="user-block"
   >
-    Sign in
-  </a>
-</div>
+    <a
+      className="user-block__link"
+      href="/login"
+    >
+      Sign in
+    </a>
+  </div>,
+]
 `;
 
 exports[`Render Header Movie isAuth 1`] = `
-<div
-  className="user-block"
->
+Array [
+  "",
   <div
-    className="user-block__avatar"
+    className="user-block"
   >
-    <img
-      alt="User avatar"
-      height="63"
-      src="img/avatar.jpg"
-      width="63"
-    />
-  </div>
-</div>
+    <div
+      className="user-block__avatar"
+    >
+      <img
+        alt="User avatar"
+        height="63"
+        src="img/avatar.jpg"
+        width="63"
+      />
+    </div>
+  </div>,
+]
 `;
 
 exports[`Render Header Sign In Auth 1`] = `

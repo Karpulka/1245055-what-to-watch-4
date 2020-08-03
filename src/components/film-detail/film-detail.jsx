@@ -7,9 +7,12 @@ import withActiveItem from "../../hocs/with-app/with-app";
 import Footer from "../footer/footer.jsx";
 import {PageType} from "../app/app.jsx";
 import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const FilmDetail = (props) => {
-  const {film, likeFilms, onFilmClick, onPlayButtonClick} = props;
+  const {film, likeFilms, onFilmClick, onPlayButtonClick, authorizationStatus} = props;
   const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime} = film;
   const overview = {rating, voiceCount, description, director, actorList};
   const details = {director, actorList, runtime, genre, year};
@@ -48,7 +51,8 @@ const FilmDetail = (props) => {
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              {authorizationStatus === AuthorizationStatus.AUTH ?
+                <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``}
             </div>
           </div>
         </div>
@@ -109,7 +113,13 @@ FilmDetail.propTypes = {
     runtime: PropTypes.number.isRequired
   })),
   onFilmClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired
+  onPlayButtonClick: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
-export default FilmDetail;
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state)
+});
+
+export {FilmDetail};
+export default connect(mapStateToProps)(FilmDetail);

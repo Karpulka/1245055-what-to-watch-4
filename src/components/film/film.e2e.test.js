@@ -8,6 +8,7 @@ const film = {
   title: `Остров проклятых`,
   src: `/shutter-island.jpg`,
   background: `/shutter-island.jpg`,
+  preview: `/shutter-island.jpg`,
   promoImage: `/shutter-island.jpg`,
   genre: `Mystery, Thriller`,
   year: 2010,

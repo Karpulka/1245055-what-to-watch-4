@@ -45,6 +45,7 @@ Array [
           </span>
         </a>
       </div>
+      
       <div
         className="user-block"
       >
@@ -358,6 +359,7 @@ Array [
           </span>
         </a>
       </div>
+      
       <div
         className="user-block"
       >
