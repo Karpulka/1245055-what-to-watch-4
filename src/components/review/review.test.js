@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -29,14 +30,17 @@ it(`Render Review Component is Auth`, () => {
   const {title, background, src, id} = film;
 
   const tree = renderer
-    .create(<Provider store={store}><Review
-      title={title}
-      background={background}
-      src={src}
-      id={id}
-      isDisableSubmit={true}
-      onChangeText={() => {}}
-      isDisableForm={false}/>
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <Review
+          title={title}
+          background={background}
+          src={src}
+          id={id}
+          isDisableSubmit={true}
+          onChangeText={() => {}}
+          isDisableForm={false}/>
+      </StaticRouter>
     </Provider>)
     .toJSON();
 
@@ -55,14 +59,17 @@ it(`Render Review Component is No Auth`, () => {
   });
 
   const tree = renderer
-    .create(<Provider store={store}><Review
-      title={film.title}
-      background={film.background}
-      src={film.src}
-      id={film.id}
-      isDisableSubmit={true}
-      onChangeText={() => {}}
-      isDisableForm={false}/>
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <Review
+          title={film.title}
+          background={film.background}
+          src={film.src}
+          id={film.id}
+          isDisableSubmit={true}
+          onChangeText={() => {}}
+          isDisableForm={false}/>
+      </StaticRouter>
     </Provider>)
     .toJSON();
 

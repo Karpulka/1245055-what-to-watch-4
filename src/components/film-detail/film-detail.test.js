@@ -4,6 +4,7 @@ import FilmDetail from "./film-detail.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -21,6 +22,7 @@ const film = {
   director: `Wes Andreson`,
   actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   runtime: 99,
+  isFavorite: false,
   video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
@@ -106,7 +108,9 @@ it(`Render FilmDetail is Auth`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+      <StaticRouter>
+        <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+      </StaticRouter>
     </Provider>, {
       createNodeMock: () => {
         return {};
@@ -136,7 +140,9 @@ it(`Render FilmDetail No Auth`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+      <StaticRouter>
+        <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+      </StaticRouter>
     </Provider>, {
       createNodeMock: () => {
         return {};

@@ -2,10 +2,10 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
 import {Provider} from "react-redux";
-import configeStore from "redux-mock-store";
+import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 
-const mockStore = configeStore([]);
+const mockStore = configureStore([]);
 
 const promoFilm = {
   id: 1,
@@ -22,6 +22,7 @@ const promoFilm = {
   voiceCount: 240,
   director: `Wes Andreson`,
   actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+  isFavorite: true,
   runtime: 99
 };
 
@@ -41,6 +42,7 @@ const films = [
     voiceCount: 240,
     director: `Wes Andreson`,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    isFavorite: false,
     runtime: 114
   },
   {
@@ -58,6 +60,7 @@ const films = [
     voiceCount: 240,
     director: `Wes Andreson`,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    isFavorite: true,
     runtime: 99
   },
   {
@@ -74,6 +77,7 @@ const films = [
     rating: 7.65,
     voiceCount: 240,
     director: `Wes Andreson`,
+    isFavorite: false,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
     runtime: 164
   }
@@ -108,6 +112,7 @@ it(`Render App Is Auth`, () => {
         onPlayButtonClick={() => {}}
         genre={`All films`}
         isAuth={`AUTH`}
+        handleChangeFavorite={() => {}}
       />
     </Provider>, {
       createNodeMock: () => {
@@ -148,6 +153,7 @@ it(`Render App No Auth`, () => {
         onPlayButtonClick={() => {}}
         genre={`All films`}
         isAuth={`NO_AUTH`}
+        handleChangeFavorite={() => {}}
       />
     </Provider>, {
       createNodeMock: () => {

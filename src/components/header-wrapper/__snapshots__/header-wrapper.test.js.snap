@@ -107,6 +107,7 @@ exports[`Render HeaderWrapper Movie No Auth 1`] = `
     <a
       className="user-block__link"
       href="/login"
+      onClick={[Function]}
     >
       Sign in
     </a>
@@ -149,12 +150,17 @@ exports[`Render HeaderWrapper Movie isAuth 1`] = `
     <div
       className="user-block__avatar"
     >
-      <img
-        alt="User avatar"
-        height="63"
-        src="img/avatar.jpg"
-        width="63"
-      />
+      <a
+        href="/mylist"
+        onClick={[Function]}
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </a>
     </div>
   </div>
 </header>

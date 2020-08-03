@@ -4,6 +4,7 @@ import Main from "./main.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -21,6 +22,7 @@ const promoFilm = {
   voiceCount: 240,
   director: `Wes Andreson`,
   actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+  isFavorite: false,
   runtime: 145
 };
 
@@ -39,6 +41,7 @@ const films = [
     voiceCount: 240,
     director: `Wes Andreson`,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    isFavorite: false,
     runtime: 136
   },
   {
@@ -55,6 +58,7 @@ const films = [
     voiceCount: 240,
     director: `Wes Andreson`,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    isFavorite: false,
     runtime: 122
   },
   {
@@ -71,6 +75,7 @@ const films = [
     voiceCount: 240,
     director: `Wes Andreson`,
     actorList: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    isFavorite: false,
     runtime: 145
   }
 ];
@@ -93,10 +98,14 @@ it(`Render Main Is Auth`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <Main
-        promoFilm={promoFilm}
-        onFilmClick={() => {}}
-        onPlayButtonClick={() => {}}/>
+      <StaticRouter>
+        <Main
+          promoFilm={promoFilm}
+          onFilmClick={() => {}}
+          onPlayButtonClick={() => {}}
+          onChangeFavorite={() => {}}
+        />
+      </StaticRouter>
     </Provider>)
     .toJSON();
 
@@ -121,10 +130,14 @@ it(`Render Main No Auth`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <Main
-        promoFilm={promoFilm}
-        onFilmClick={() => {}}
-        onPlayButtonClick={() => {}}/>
+      <StaticRouter>
+        <Main
+          promoFilm={promoFilm}
+          onFilmClick={() => {}}
+          onPlayButtonClick={() => {}}
+          onChangeFavorite={() => {}}
+        />
+      </StaticRouter>
     </Provider>)
     .toJSON();
 

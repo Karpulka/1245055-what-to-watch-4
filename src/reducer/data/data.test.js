@@ -2,6 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import {createApi} from "../../api";
 import {reducer, ActionType, Operation} from "./data";
 import {ActionType as FilmActionType} from "../film/film";
+import NameSpace from "../name-space";
 
 const api = createApi(() => {});
 
@@ -137,11 +138,26 @@ const films = [
 ];
 const promoFilm = films[0];
 
+const comments = [{
+  comment: `Test`,
+  date: `2020-07-07T16:06:01.831Z`,
+  id: 1,
+  rating: 8.8,
+  user: `Author`
+}, {
+  comment: `It was well acted, directed, and the music was good. But the story is yawn. Not trying to rip anybody but I checked my watch a dozen times during this movie.`,
+  date: `2020-07-07T16:06:01.831Z`,
+  id: 2,
+  rating: 4.8,
+  user: `Zak`
+}];
+
 describe(`Reduser state tests`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       allFilms: [],
       promoFilm: {},
+      favoriteFilms: [],
       comments: [],
       errorText: ``,
       isDisableCommentForm: false
@@ -152,6 +168,7 @@ describe(`Reduser state tests`, () => {
     expect(reducer({
       allFilms: [],
       promoFilm: {},
+      favoriteFilms: [],
       comments: [],
       errorText: ``,
       isDisableCommentForm: false
@@ -161,6 +178,7 @@ describe(`Reduser state tests`, () => {
     })).toEqual({
       allFilms: films,
       promoFilm: {},
+      favoriteFilms: [],
       comments: [],
       errorText: ``,
       isDisableCommentForm: false
@@ -171,6 +189,7 @@ describe(`Reduser state tests`, () => {
     expect(reducer({
       allFilms: [],
       promoFilm: {},
+      favoriteFilms: [],
       comments: [],
       errorText: ``,
       isDisableCommentForm: false
@@ -181,6 +200,91 @@ describe(`Reduser state tests`, () => {
       allFilms: [],
       promoFilm,
       comments: [],
+      favoriteFilms: [],
+      errorText: ``,
+      isDisableCommentForm: false
+    });
+  });
+
+  it(`Reducer should update comments by load comments`, () => {
+    expect(reducer({
+      allFilms: [],
+      promoFilm: {},
+      favoriteFilms: [],
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
+    }, {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments
+    })).toEqual({
+      allFilms: [],
+      promoFilm: {},
+      comments,
+      favoriteFilms: [],
+      errorText: ``,
+      isDisableCommentForm: false
+    });
+  });
+
+  it(`Reducer should update error send comment`, () => {
+    expect(reducer({
+      allFilms: [],
+      promoFilm: {},
+      favoriteFilms: [],
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
+    }, {
+      type: ActionType.ERROR_SEND_COMMENT,
+      payload: `Error text`
+    })).toEqual({
+      allFilms: [],
+      promoFilm: {},
+      comments: [],
+      favoriteFilms: [],
+      errorText: `Error text`,
+      isDisableCommentForm: false
+    });
+  });
+
+  it(`Reducer should disable comment form`, () => {
+    expect(reducer({
+      allFilms: [],
+      promoFilm: {},
+      favoriteFilms: [],
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
+    }, {
+      type: ActionType.SET_DISABLE_COMMENT_FORM,
+      payload: true
+    })).toEqual({
+      allFilms: [],
+      promoFilm: {},
+      comments: [],
+      favoriteFilms: [],
+      errorText: ``,
+      isDisableCommentForm: true
+    });
+  });
+
+  it(`Reducer should update favorite films`, () => {
+    expect(reducer({
+      allFilms: [],
+      promoFilm: {},
+      favoriteFilms: [],
+      comments: [],
+      errorText: ``,
+      isDisableCommentForm: false
+    }, {
+      type: ActionType.SET_FAVORITE_FILMS,
+      payload: films
+    })).toEqual({
+      allFilms: [],
+      promoFilm: {},
+      comments: [],
+      favoriteFilms: films,
       errorText: ``,
       isDisableCommentForm: false
     });
@@ -249,6 +353,25 @@ describe(`Operation work correctly`, () => {
       });
   });
 
+  it(`Should make a correct API call to /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteFilmsLoader = Operation.getFavoriteFilms();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, []);
+
+    return favoriteFilmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_FAVORITE_FILMS,
+          payload: []
+        });
+      });
+  });
+
   it(`Should make a correct API call sent comment /comments/:filmID`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
@@ -275,6 +398,33 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.SET_DISABLE_COMMENT_FORM,
           payload: false,
+        });
+      });
+  });
+
+  it(`Should make a correct API add favorite /favorite/:filmID/:status`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const filmID = 6;
+    const status = 1;
+    const addFavorite = Operation.changeFavorite(filmID, status);
+
+    const index = films.findIndex((filmItem) => filmItem.id === filmID);
+
+    apiMock
+      .onPost(`/favorite/${filmID}/${status}`)
+      .reply(200, {});
+
+    return addFavorite(dispatch, () => ({[NameSpace.DATA]: {
+      allFilms: films,
+      promoFilm
+    }}), api)
+      .then(() => {
+        const newFilms = [].concat(films.slice(0, index), {}, films.slice(index + 1));
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FILMS,
+          payload: newFilms
         });
       });
   });

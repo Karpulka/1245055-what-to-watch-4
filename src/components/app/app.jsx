@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import FilmDetail from "../film-detail/film-detail.jsx";
-import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import {Router, Route, Switch, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
@@ -12,8 +12,9 @@ import {getGenre} from "../../reducer/film/selectors";
 import SignIn from "../sign-in/sign-in.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import Review from "../review/review.jsx";
-import withReview from "../../hocs/with-review/with-review";
+import history from "../../history";
+import MyList from "../mylist/mylist.jsx";
+import {Operation} from "../../reducer/data/data";
 
 const LIKE_FILMS_COUNT = 4;
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
@@ -24,49 +25,26 @@ const PageType = {
   MOVIE: `MOVIE`
 };
 
-const AddReviewComponent = withReview(Review);
-
 class App extends PureComponent {
   render() {
-    const {films, onItemClick, promoFilm, onExitButtonClick, onPlayButtonClick, isAuth} = this.props;
+    const {films, promoFilm, isAuth} = this.props;
 
-    return <BrowserRouter>
+    return <Router history={history}>
       <Switch>
         <Route exact path="/">
           {films && Object.keys(promoFilm).length > 0 ? this._renderFilmPage() : ``}
         </Route>
-        <Route exact path="/film-detail">
-          {films.length > 0 ? (<FilmDetail
-            film={films[0]}
-            likeFilms={this._getLikeFilms(films, films[0].genre, films[0].id)}
-            onPlayButtonClick={onPlayButtonClick}
-            onFilmClick={onItemClick}/>) : ``}
+        <Route exact path="/login" render={() => {
+          return isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />;
+        }}>
         </Route>
-        <Route exact path="/full-video">
-          {Object.keys(promoFilm).length > 0 ? (<FullVideoPlayerComponent
-            src={promoFilm.video}
-            poster={promoFilm.src}
-            title={promoFilm.title}
-            isStartPlaying={true}
-            onExitButtonClick={onExitButtonClick}
-            runtime={promoFilm.runtime} />) : ``}
-        </Route>
-        <Route exact path="/login">
-          {isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />}
-        </Route>
-        <Route exact path="/dev-review">
-          {films.length > 0 ? (<AddReviewComponent
-            id={films[0].id}
-            background={films[0].background}
-            src={films[0].src}
-            title={films[0].title} />) : ``}
-        </Route>
+        <Route exact path="/mylist" component={MyList} />
       </Switch>
-    </BrowserRouter>;
+    </Router>;
   }
 
   _renderFilmPage() {
-    const {films, promoFilm, onItemClick, activeItem: selectedFilm, isShowFilm, onPlayButtonClick, onExitButtonClick} = this.props;
+    const {films, promoFilm, onItemClick, activeItem: selectedFilm, isShowFilm, onPlayButtonClick, onExitButtonClick, handleChangeFavorite} = this.props;
 
     if (isShowFilm) {
       const showingFilm = selectedFilm || promoFilm;
@@ -94,6 +72,7 @@ class App extends PureComponent {
         films={films}
         onPlayButtonClick={onPlayButtonClick}
         onFilmClick={onItemClick}
+        onChangeFavorite={handleChangeFavorite}
       />;
     }
 
@@ -169,6 +148,7 @@ App.propTypes = {
   }),
   onItemClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
+  handleChangeFavorite: PropTypes.func.isRequired,
   isShowFilm: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   activeItem: PropTypes.shape({
@@ -198,5 +178,11 @@ const mapStateToProps = (state) => ({
   isAuth: getAuthorizationStatus(state)
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handleChangeFavorite: (filmID, status) => {
+    dispatch(Operation.changeFavorite(filmID, status));
+  }
+});
+
 export {App, PageType};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

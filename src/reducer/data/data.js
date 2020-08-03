@@ -1,13 +1,15 @@
 import {setNewObject} from "../../utils";
 import {ActionCreator as FilmActionCreator} from "../film/film";
 import {prepareFilmData, prepareCommentDataForShow} from "../../prepare-data";
+import NameSpace from "../name-space";
 
 const initialState = {
   allFilms: [],
   promoFilm: {},
   comments: [],
   errorText: ``,
-  isDisableCommentForm: false
+  isDisableCommentForm: false,
+  favoriteFilms: []
 };
 
 const ERROR_TEXT = `Произошла ошибка отправки комментария. Попробуйте повторить отправку позже.`;
@@ -17,7 +19,8 @@ const ActionType = {
   LOAD_PROMOFILM: `LOAD_PROMOFILM`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   ERROR_SEND_COMMENT: `ERROR_SEND_COMMENT`,
-  SET_DISABLE_COMMENT_FORM: `SET_DISABLE_COMMENT_FORM`
+  SET_DISABLE_COMMENT_FORM: `SET_DISABLE_COMMENT_FORM`,
+  SET_FAVORITE_FILMS: `SET_FAVORITE_FILMS`
 };
 
 const ActionCreator = {
@@ -44,6 +47,11 @@ const ActionCreator = {
   setDisableCommentForm: (isDisable) => ({
     type: ActionType.SET_DISABLE_COMMENT_FORM,
     payload: isDisable
+  }),
+
+  setFavoriteFilms: (films) => ({
+    type: ActionType.SET_FAVORITE_FILMS,
+    payload: films
   })
 };
 
@@ -84,6 +92,32 @@ const Operation = {
       dispatch(ActionCreator.setErrorText(ERROR_TEXT));
       dispatch(ActionCreator.setDisableCommentForm(false));
     });
+  },
+
+  changeFavorite: (filmID, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${filmID}/${status}`)
+      .then((response) => {
+        const film = response.data ? prepareFilmData(response.data) : null;
+
+        if (film) {
+          const allFilms = getState()[NameSpace.DATA].allFilms;
+          const isPromoFilm = filmID === getState()[NameSpace.DATA].promoFilm.id;
+          const index = allFilms.findIndex((filmItem) => filmItem.id === filmID);
+          const films = [].concat(allFilms.slice(0, index), film, allFilms.slice(index + 1));
+
+          dispatch(ActionCreator.loadFilms(films));
+          if (isPromoFilm) {
+            dispatch(ActionCreator.loadPromoFilm(film));
+          }
+        }
+      });
+  },
+
+  getFavoriteFilms: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.setFavoriteFilms(response.data));
+      });
   }
 };
 
@@ -112,6 +146,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_DISABLE_COMMENT_FORM:
       return setNewObject(state, {
         isDisableCommentForm: action.payload
+      });
+
+    case ActionType.SET_FAVORITE_FILMS:
+      return setNewObject(state, {
+        favoriteFilms: action.payload
       });
   }
 

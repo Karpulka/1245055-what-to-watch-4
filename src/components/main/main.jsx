@@ -9,13 +9,14 @@ import {PageType} from "../app/app.jsx";
 import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 
 const Main = (props) => {
-  const {promoFilm, films, onFilmClick, onPlayButtonClick} = props;
+  const {promoFilm, films, onFilmClick, onPlayButtonClick, onChangeFavorite} = props;
+  const {background, title, src, genre, year, isFavorite, id} = promoFilm;
   const FilmsListComponent = withFilmsList(FilmsList);
 
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src={promoFilm.background} alt={promoFilm.title}/>
+        <img src={background} alt={title}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -25,14 +26,14 @@ const Main = (props) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src={promoFilm.src} alt={promoFilm.title} width="218" height="327"/>
+            <img src={src} alt={title} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{promoFilm.title}</h2>
+            <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{promoFilm.genre}</span>
-              <span className="movie-card__year">{promoFilm.year}</span>
+              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__year">{year}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -42,9 +43,13 @@ const Main = (props) => {
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list movie-card__button" type="button">
+              <button className="btn btn--list movie-card__button" type="button" onClick={(evt) => {
+                evt.preventDefault();
+                const status = isFavorite ? 0 : 1;
+                onChangeFavorite(id, status);
+              }}>
                 <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
+                  {isFavorite ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
                 </svg>
                 <span>My list</span>
               </button>
@@ -88,14 +93,16 @@ Main.propTypes = {
     director: PropTypes.string.isRequired,
     actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
     runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
+    video: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired
   }),
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
   })),
   onFilmClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired
+  onPlayButtonClick: PropTypes.func.isRequired,
+  onChangeFavorite: PropTypes.func.isRequired
 };
 
 export default Main;
