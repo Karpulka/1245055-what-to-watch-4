@@ -22,7 +22,7 @@ class SignIn extends PureComponent {
     const emailClassName = `sign-in__field${!isEmailValid ? ` sign-in__field--error` : ``}`;
 
     return <div className="user-page">
-      <HeaderWrapper pageType={PageType.AUTH} pageTitle={`Sign In`}/>
+      <HeaderWrapper pageType={PageType.AUTH} pageTitle={`Sign In`} isUserBlock={false}/>
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">

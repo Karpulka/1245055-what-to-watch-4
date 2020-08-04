@@ -10,6 +10,7 @@ exports[`Render HeaderWrapper Auth No Auth 1`] = `
     <a
       className="logo__link"
       href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -54,6 +55,7 @@ exports[`Render HeaderWrapper Auth isAuth 1`] = `
     <a
       className="logo__link"
       href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -106,6 +108,7 @@ exports[`Render HeaderWrapper Movie No Auth 1`] = `
     <a
       className="logo__link"
       href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -150,6 +153,7 @@ exports[`Render HeaderWrapper Movie isAuth 1`] = `
     <a
       className="logo__link"
       href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"

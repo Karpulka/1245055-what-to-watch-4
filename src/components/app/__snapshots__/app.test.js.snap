@@ -27,6 +27,7 @@ Array [
         <a
           className="logo__link"
           href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -168,7 +169,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             All genres
@@ -179,7 +180,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Fantasy
@@ -190,7 +191,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Biography
@@ -201,7 +202,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Drama
@@ -290,7 +291,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -348,6 +350,7 @@ Array [
         <a
           className="logo__link"
           href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -481,7 +484,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             All genres
@@ -492,7 +495,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Fantasy
@@ -503,7 +506,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Biography
@@ -514,7 +517,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Drama
@@ -603,7 +606,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

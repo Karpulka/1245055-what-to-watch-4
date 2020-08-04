@@ -14,7 +14,7 @@ const Film = (props) => {
       <VideoPlayerComponent src={video} poster={preview} width="280" height="175" isMuted={true} isStartPlaying={isStartPlaying} wasHover={!isStartPlaying}/>
     </div>
     <h3 className="small-movie-card__title">
-      <Link className="small-movie-card__link" to={`/films/${id}`}>{title}</Link>
+      <Link to={`/films/${id}`} className="small-movie-card__link">{title}</Link>
     </h3>
   </article>;
 };

@@ -28,6 +28,11 @@ const PageType = {
 };
 
 class App extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._getFilmByID = this._getFilmByID.bind(this);
+  }
   render() {
     const {isAuth, promoFilm, films, handleChangeFavorite} = this.props;
 
@@ -47,34 +52,43 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/films/:id" render={(props) => {
           const film = this._getFilmByID(parseInt(props.match.params.id, 10));
-          return <FilmDetail
-            film={film}
-            onFilmClick={(id) => props.history.push(`/films/${id}`)}
-            onChangeFavorite={handleChangeFavorite}
-          />;
+          if (film) {
+            return <FilmDetail
+              film={film}
+              onFilmClick={(id) => props.history.push(`/films/${id}`)}
+              onChangeFavorite={handleChangeFavorite}
+            />;
+          }
+          return null;
         }}/>
         <Route exact path="/films/:id/player" render={(props) => {
           const film = this._getFilmByID(parseInt(props.match.params.id, 10));
-          const {fullVideo, src, title, runtime} = film;
-          return <FullVideoPlayerComponent
-            src={fullVideo}
-            poster={src}
-            title={title}
-            isStartPlaying={true}
-            onExitButtonClick={props.history.goBack}
-            runtime={runtime}
-          />;
+          if (film) {
+            const {fullVideo, src, title, runtime} = film;
+            return <FullVideoPlayerComponent
+              src={fullVideo}
+              poster={src}
+              title={title}
+              isStartPlaying={true}
+              onExitButtonClick={props.history.goBack}
+              runtime={runtime}
+            />;
+          }
+          return null;
         }} />
         <Route exact path="/films/:id/review" render={(props) => {
           const film = this._getFilmByID(parseInt(props.match.params.id, 10));
-          const {id, background, title, src} = film;
-          return <RedirectToAuth><AddReviewComponent
-            id={id}
-            background={background}
-            src={src}
-            title={title}
-            onSubmitReview={props.history.goBack}
-          /></RedirectToAuth>;
+          if (film) {
+            const {id, background, title, src} = film;
+            return <RedirectToAuth><AddReviewComponent
+              id={id}
+              background={background}
+              src={src}
+              title={title}
+              onSubmitReview={props.history.goBack}
+            /></RedirectToAuth>;
+          }
+          return null;
         }}/>
         <Route exact path="/mylist" render={(props) => <RedirectToAuth><MyList onFilmClick={(id) => props.history.push(`/films/${id}`)}/></RedirectToAuth>} />
         <Route exact path="/login" render={() => {

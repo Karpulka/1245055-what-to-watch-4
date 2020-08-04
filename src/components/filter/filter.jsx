@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer/film/film";
 import {getGenre} from "../../reducer/film/selectors";
 import {getFilters} from "../../reducer/data/selectors";
+import {Link} from "react-router-dom";
 
 const Filter = (props) => {
   const {filters, genre, handleGenreChange} = props;
@@ -12,10 +13,10 @@ const Filter = (props) => {
     {filters.map((filter, i) => {
       const itemClass = filter === genre ? `catalog__genres-item catalog__genres-item--active` : `catalog__genres-item`;
       return <li key={`filter-${i}`} className={itemClass}>
-        <a href="#" className="catalog__genres-link" onClick={(evt) => {
+        <Link to="#" className="catalog__genres-link" onClick={(evt) => {
           evt.preventDefault();
           handleGenreChange(evt.currentTarget.textContent);
-        }}>{filter}</a>
+        }}>{filter}</Link>
       </li>;
     })}
   </ul>;

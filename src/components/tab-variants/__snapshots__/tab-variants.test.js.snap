@@ -6,7 +6,7 @@ exports[`Render TabVariants Active Tab 1`] = `
 >
   <a
     className="movie-nav__link"
-    href="#"
+    href="/"
     onClick={[Function]}
   >
     Overview
@@ -20,7 +20,7 @@ exports[`Render TabVariants No Active Tab 1`] = `
 >
   <a
     className="movie-nav__link"
-    href="#"
+    href="/"
     onClick={[Function]}
   >
     Overview

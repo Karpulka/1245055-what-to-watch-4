@@ -26,7 +26,7 @@ class Review extends PureComponent {
   }
 
   render() {
-    const {title, background, src, onChangeText, isDisableSubmit, isDisableForm, errorText} = this.props;
+    const {title, background, src, onChangeText, isDisableSubmit, isDisableForm, errorText, id} = this.props;
 
     return <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -36,7 +36,7 @@ class Review extends PureComponent {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <HeaderWrapper pageType={PageType.ADD_REVIEW} isBreadcrumbs={true}/>
+        <HeaderWrapper pageType={PageType.ADD_REVIEW} breadcrumbTitle={title} isBreadcrumbs={true} filmID={id}/>
 
         <div className="movie-card__poster movie-card__poster--small">
           <img src={src} alt="The Grand Budapest Hotel poster" width="218" height="327"/>

@@ -7,12 +7,12 @@ import {Link} from "react-router-dom";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
 const Header = (props) => {
-  const {auth, isBreadcrumbs, pageTitle, isAvatar} = props;
+  const {auth, isBreadcrumbs, pageTitle, isUserBlock, filmID, breadcrumbTitle} = props;
 
   return <React.Fragment>
-    {isBreadcrumbs ? <Breadcrumbs /> : ``}
+    {isBreadcrumbs ? <Breadcrumbs id={filmID} title={breadcrumbTitle}/> : ``}
     {pageTitle ? <h1 className="page-title user-page__title">{pageTitle}</h1> : ``}
-    {isAvatar ? <div className="user-block">
+    {isUserBlock ? <div className="user-block">
       {auth === AuthorizationStatus.AUTH ? <div className="user-block__avatar">
         <Link to="/mylist">
           <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
@@ -24,15 +24,17 @@ const Header = (props) => {
 
 Header.defaultProps = {
   isBreadcrumbs: false,
-  isAvatar: true,
+  isUserBlock: true,
   pageTitle: ``
 };
 
 Header.propTypes = {
   auth: PropTypes.string.isRequired,
   isBreadcrumbs: PropTypes.bool,
-  isAvatar: PropTypes.bool,
-  pageTitle: PropTypes.string
+  isUserBlock: PropTypes.bool,
+  pageTitle: PropTypes.string,
+  breadcrumbTitle: PropTypes.string,
+  filmID: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
