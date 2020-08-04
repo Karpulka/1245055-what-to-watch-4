@@ -74,6 +74,7 @@ exports[`Render Review Component is Auth 1`] = `
           </li>
         </ul>
       </nav>
+      
       <div
         className="user-block"
       >
@@ -87,7 +88,7 @@ exports[`Render Review Component is Auth 1`] = `
             <img
               alt="User avatar"
               height="63"
-              src="img/avatar.jpg"
+              src="/img/avatar.jpg"
               width="63"
             />
           </a>
@@ -302,6 +303,7 @@ exports[`Render Review Component is No Auth 1`] = `
           </li>
         </ul>
       </nav>
+      
       <div
         className="user-block"
       >

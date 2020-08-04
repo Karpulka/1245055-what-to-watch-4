@@ -4,6 +4,7 @@ import FilmsList from "./films-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -73,13 +74,15 @@ it(`Render FilmsList`, () => {
 
   const tree = renderer
     .create(<Provider store={store}>
-      <FilmsList
-        films={films}
-        onFilmClick={() => {}}
-        onFilmHover={() => {}}
-        onFilmBlur={() => {}}
-        activeFilmID={1}
-      /></Provider>, {
+      <StaticRouter>
+        <FilmsList
+          films={films}
+          onFilmClick={() => {}}
+          onFilmHover={() => {}}
+          onFilmBlur={() => {}}
+          activeFilmID={1}
+        /></StaticRouter>
+    </Provider>, {
       createNodeMock: () => {
         return {};
       }

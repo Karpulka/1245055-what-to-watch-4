@@ -79,3 +79,21 @@ it(`Render Header Sign In Auth`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it(`Render Header Sign In WithTitle Auth`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`
+    }
+  });
+
+  const tree = renderer
+    .create(<Provider store={store}>
+      <StaticRouter>
+        <Header pageType={`AUTH`} pageTitle={`Page Name`}/>
+      </StaticRouter>
+    </Provider>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

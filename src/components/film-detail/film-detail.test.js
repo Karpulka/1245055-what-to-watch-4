@@ -101,6 +101,9 @@ it(`Render FilmDetail is Auth`, () => {
       films: likeFilms,
       activeItem
     },
+    [NameSpace.DATA]: {
+      allFilms: likeFilms
+    },
     [NameSpace.USER]: {
       authorizationStatus: `AUTH`
     }
@@ -109,7 +112,7 @@ it(`Render FilmDetail is Auth`, () => {
   const tree = renderer
     .create(<Provider store={store}>
       <StaticRouter>
-        <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+        <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}} onChangeFavorite={() => {}}/>
       </StaticRouter>
     </Provider>, {
       createNodeMock: () => {
@@ -133,6 +136,9 @@ it(`Render FilmDetail No Auth`, () => {
       films: likeFilms,
       activeItem
     },
+    [NameSpace.DATA]: {
+      allFilms: likeFilms
+    },
     [NameSpace.USER]: {
       authorizationStatus: `NO_AUTH`
     }
@@ -141,7 +147,7 @@ it(`Render FilmDetail No Auth`, () => {
   const tree = renderer
     .create(<Provider store={store}>
       <StaticRouter>
-        <FilmDetail film={film} likeFilms={likeFilms} onFilmClick={() => {}} onPlayButtonClick={() => {}}/>
+        <FilmDetail film={film} onChangeFavorite={() => {}} onFilmClick={() => {}} onPlayButtonClick={() => {}} />
       </StaticRouter>
     </Provider>, {
       createNodeMock: () => {

@@ -49,6 +49,7 @@ Array [
           </a>
         </div>
         
+        
         <div
           className="user-block"
         >
@@ -89,10 +90,10 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/films/0/player"
               onClick={[Function]}
-              type="button"
             >
               <svg
                 height="19"
@@ -106,9 +107,10 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -270,56 +272,10 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Авиатор
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/3"
               onClick={[Function]}
             >
               Большой куш
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Война миров
             </a>
           </h3>
         </article>
@@ -413,6 +369,7 @@ Array [
           </a>
         </div>
         
+        
         <div
           className="user-block"
         >
@@ -426,7 +383,7 @@ Array [
               <img
                 alt="User avatar"
                 height="63"
-                src="img/avatar.jpg"
+                src="/img/avatar.jpg"
                 width="63"
               />
             </a>
@@ -461,10 +418,10 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/films/0/player"
               onClick={[Function]}
-              type="button"
             >
               <svg
                 height="19"
@@ -478,9 +435,10 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -498,7 +456,8 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="/films/0/review"
+              onClick={[Function]}
             >
               Add review
             </a>
@@ -647,56 +606,10 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Авиатор
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/3"
               onClick={[Function]}
             >
               Большой куш
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Война миров
             </a>
           </h3>
         </article>

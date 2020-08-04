@@ -31,11 +31,23 @@ exports[`Render SignIn Email No Valid 1`] = `
         </span>
       </a>
     </div>
+    
     <h1
       className="page-title user-page__title"
     >
-      Sign in
+      Sign In
     </h1>
+    <div
+      className="user-block"
+    >
+      <a
+        className="user-block__link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Sign in
+      </a>
+    </div>
   </header>
   <div
     className="sign-in user-page__content"
@@ -171,11 +183,23 @@ exports[`Render SignIn Start 1`] = `
         </span>
       </a>
     </div>
+    
     <h1
       className="page-title user-page__title"
     >
-      Sign in
+      Sign In
     </h1>
+    <div
+      className="user-block"
+    >
+      <a
+        className="user-block__link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Sign in
+      </a>
+    </div>
   </header>
   <div
     className="sign-in user-page__content"
@@ -305,11 +329,23 @@ exports[`Render SignIn incorrect data 1`] = `
         </span>
       </a>
     </div>
+    
     <h1
       className="page-title user-page__title"
     >
-      Sign in
+      Sign In
     </h1>
+    <div
+      className="user-block"
+    >
+      <a
+        className="user-block__link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Sign in
+      </a>
+    </div>
   </header>
   <div
     className="sign-in user-page__content"

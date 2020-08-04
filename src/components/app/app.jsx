@@ -76,11 +76,10 @@ class App extends PureComponent {
             onSubmitReview={props.history.goBack}
           /></RedirectToAuth>;
         }}/>
+        <Route exact path="/mylist" render={(props) => <RedirectToAuth><MyList onFilmClick={(id) => props.history.push(`/films/${id}`)}/></RedirectToAuth>} />
         <Route exact path="/login" render={() => {
           return isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />;
-        }}>
-        </Route>
-        <Route exact path="/mylist" render={(props) => <MyList onFilmClick={(id) => props.history.push(`/films/${id}`)}/>} />
+        }} />
       </Switch>
     </BrowserRouter>;
   }

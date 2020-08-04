@@ -45,6 +45,7 @@ it(`Test change text`, () => {
         src={src}
         id={id}
         isDisableSubmit={false}
+        onSubmitReview={() => {}}
         onChangeText={handleChangeText}
         isDisableForm={false}/>
     </StaticRouter>

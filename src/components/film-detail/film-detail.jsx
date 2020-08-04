@@ -145,12 +145,6 @@ FilmDetail.propTypes = {
     runtime: PropTypes.number.isRequired,
     video: PropTypes.string.isRequired
   })),
-  likeFilms: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    video: PropTypes.string.isRequired
-  })),
   authorizationStatus: PropTypes.string.isRequired,
   onFilmClick: PropTypes.func.isRequired,
   onChangeFavorite: PropTypes.func.isRequired

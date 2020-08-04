@@ -8,8 +8,6 @@ import {Redirect} from "react-router-dom";
 const RedirectToAuth = (props) => {
   const {authorizationStatus, children} = props;
 
-  console.log(children);
-
   if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
     return <Redirect to="/login" />;
   }
@@ -18,7 +16,8 @@ const RedirectToAuth = (props) => {
 };
 
 RedirectToAuth.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired
 };
 
 const mapStateToProps = (state) => ({
