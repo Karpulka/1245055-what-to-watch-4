@@ -25,6 +25,7 @@ const store = createStore(
 store.dispatch(UserOperation.checkAuth());
 store.dispatch(DataOperation.loadPromoFilm());
 store.dispatch(DataOperation.loadFilms());
+store.dispatch(DataOperation.getFavoriteFilms());
 
 const AppComponent = withActiveItem(App);
 

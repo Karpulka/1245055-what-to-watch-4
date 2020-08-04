@@ -16,6 +16,7 @@ import MyList from "../mylist/mylist.jsx";
 import {Operation} from "../../reducer/data/data";
 import withReview from "../../hocs/with-review/with-review";
 import Review from "../review/review.jsx";
+import RedirectToAuth from "../redirect-to-auth/redirect-to-auth.jsx";
 
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
 const AddReviewComponent = withReview(Review);
@@ -49,6 +50,7 @@ class App extends PureComponent {
           return <FilmDetail
             film={film}
             onFilmClick={(id) => props.history.push(`/films/${id}`)}
+            onChangeFavorite={handleChangeFavorite}
           />;
         }}/>
         <Route exact path="/films/:id/player" render={(props) => {
@@ -66,19 +68,19 @@ class App extends PureComponent {
         <Route exact path="/films/:id/review" render={(props) => {
           const film = this._getFilmByID(parseInt(props.match.params.id, 10));
           const {id, background, title, src} = film;
-          return <AddReviewComponent
+          return <RedirectToAuth><AddReviewComponent
             id={id}
             background={background}
             src={src}
             title={title}
             onSubmitReview={props.history.goBack}
-          />;
+          /></RedirectToAuth>;
         }}/>
         <Route exact path="/login" render={() => {
           return isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />;
         }}>
         </Route>
-        <Route exact path="/mylist" component={MyList} />
+        <Route exact path="/mylist" render={(props) => <MyList onFilmClick={(id) => props.history.push(`/films/${id}`)}/>} />
       </Switch>
     </BrowserRouter>;
   }

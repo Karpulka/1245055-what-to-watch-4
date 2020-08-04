@@ -17,7 +17,7 @@ const LIKE_FILMS_COUNT = 4;
 
 class FilmDetail extends PureComponent {
   render() {
-    const {film, allFilms, authorizationStatus, onFilmClick} = this.props;
+    const {film, allFilms, authorizationStatus, onFilmClick, onChangeFavorite} = this.props;
     const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, isFavorite} = film;
     const likeFilms = this._getLikeFilms(allFilms, genre, id);
     const overview = {rating, voiceCount, description, director, actorList};
@@ -51,7 +51,11 @@ class FilmDetail extends PureComponent {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button className="btn btn--list movie-card__button" type="button" onClick={(evt) => {
+                  evt.preventDefault();
+                  const status = isFavorite ? 0 : 1;
+                  onChangeFavorite(id, status);
+                }}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     {isFavorite ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
                   </svg>
@@ -148,7 +152,8 @@ FilmDetail.propTypes = {
     video: PropTypes.string.isRequired
   })),
   authorizationStatus: PropTypes.string.isRequired,
-  onFilmClick: PropTypes.func.isRequired
+  onFilmClick: PropTypes.func.isRequired,
+  onChangeFavorite: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
