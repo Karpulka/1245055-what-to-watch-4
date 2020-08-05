@@ -1,22 +1,22 @@
 import * as React from "react";
-import Main from "../main/main.js";
-import * as PropTypes from "prop-types";
-import FilmDetail from "../film-detail/film-detail.js";
+import Main from "../main/main";
+import FilmDetail from "../film-detail/film-detail";
 import {Route, Switch, Redirect, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
-import FullVideoPlayer from "../full-video-player/full-video-player.js";
+import FullVideoPlayer from "../full-video-player/full-video-player";
 import {getFilms} from "../../reducer/film/selectors";
 import {getAllFilms, getPromoFilm} from "../../reducer/data/selectors";
 import {getGenre} from "../../reducer/film/selectors";
-import SignIn from "../sign-in/sign-in.js";
+import SignIn from "../sign-in/sign-in";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import MyList from "../mylist/mylist.js";
+import MyList from "../mylist/mylist";
 import {Operation} from "../../reducer/data/data";
 import withReview from "../../hocs/with-review/with-review";
-import Review from "../review/review.js";
-import RedirectToAuth from "../redirect-to-auth/redirect-to-auth.js";
+import Review from "../review/review";
+import RedirectToAuth from "../redirect-to-auth/redirect-to-auth";
+import {Film} from "../../types";
 
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
 const AddReviewComponent = withReview(Review);
@@ -27,7 +27,20 @@ const PageType = {
   MOVIE: `MOVIE`
 };
 
-class App extends React.PureComponent {
+interface Props {
+  films: Array<Film>,
+  runtime: number,
+  video: string,
+  allFilms: Array<Film>,
+  promoFilm: Film,
+  onItemClick: () => void,
+  handleChangeFavorite: () => void,
+  activeItem: Array<Film>,
+  genre: string,
+  isAuth: string
+}
+
+class App extends React.PureComponent<Props, {}> {
   constructor(props) {
     super(props);
 
@@ -105,73 +118,6 @@ class App extends React.PureComponent {
     return allFilms[index];
   }
 }
-
-App.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
-  })),
-  allFilms: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
-  })),
-  promoFilm: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    src: PropTypes.string,
-    background: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.number,
-    description: PropTypes.string,
-    rating: PropTypes.number,
-    voiceCount: PropTypes.number,
-    director: PropTypes.string,
-    actorList: PropTypes.arrayOf(PropTypes.string),
-    runtime: PropTypes.number,
-    video: PropTypes.string
-  }),
-  onItemClick: PropTypes.func.isRequired,
-  handleChangeFavorite: PropTypes.func.isRequired,
-  activeItem: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
-  }),
-  genre: PropTypes.string.isRequired,
-  isAuth: PropTypes.string.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   genre: getGenre(state),

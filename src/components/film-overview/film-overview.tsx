@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
+import {Overview} from "../../types";
 
 const RatingDescription = [
   {
@@ -32,7 +32,11 @@ const getRatingDescription = (rating) => {
   return RatingDescription.find((item) => rating >= item.min && (!item.max || rating < item.max)).title;
 };
 
-const FilmOverview = (props) => {
+interface Props {
+  overview: Overview
+}
+
+const FilmOverview: React.FunctionComponent<Props> = (props: Props) => {
   const {rating, voiceCount, description, director, actorList} = props.overview;
   const roundRating = Math.floor(rating * 10) / 10;
   const actors = actorList.join(`, `);
@@ -52,16 +56,6 @@ const FilmOverview = (props) => {
       {actorList ? <p className="movie-card__starring"><strong>Starring: {actors} and other</strong></p> : ``}
     </div>
   </React.Fragment>;
-};
-
-FilmOverview.propTypes = {
-  overview: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired
 };
 
 export default FilmOverview;

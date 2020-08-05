@@ -1,10 +1,15 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import * as PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer/film/film";
 import {getGenre} from "../../reducer/film/selectors";
 import {getFilters} from "../../reducer/data/selectors";
 import {Link} from "react-router-dom";
+
+interface Props {
+  filters: Array<string>,
+  genre: string,
+  handleGenreChange: () => void
+}
 
 const Filter = (props) => {
   const {filters, genre, handleGenreChange} = props;
@@ -20,12 +25,6 @@ const Filter = (props) => {
       </li>;
     })}
   </ul>;
-};
-
-Filter.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
-  genre: PropTypes.string.isRequired,
-  handleGenreChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -1,10 +1,18 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
-import VideoPlayer from "../video-player/video-palyer.js";
+import VideoPlayer from "../video-player/video-palyer";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import {Link} from "react-router-dom";
+import {Film} from "../../types";
 
-const Film = (props) => {
+interface Props {
+  film: Film,
+  onFilmHover: (film: Film) => void,
+  onFilmBlur: () => void,
+  onFilmClick: (id: number) => void,
+  isStartPlaying?: boolean
+}
+
+const Film: React.FunctionComponent<Props> = (props: Props) => {
   const {film, onFilmHover, isStartPlaying, onFilmBlur, onFilmClick} = props;
   const {id, title, video, preview} = film;
   const VideoPlayerComponent = withVideoPlayer(VideoPlayer);
@@ -17,19 +25,6 @@ const Film = (props) => {
       <Link to={`/films/${id}`} className="small-movie-card__link">{title}</Link>
     </h3>
   </article>;
-};
-
-Film.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    video: PropTypes.string.isRequired
-  }).isRequired,
-  onFilmHover: PropTypes.func.isRequired,
-  onFilmBlur: PropTypes.func.isRequired,
-  onFilmClick: PropTypes.func.isRequired,
-  isStartPlaying: PropTypes.bool
 };
 
 export default Film;

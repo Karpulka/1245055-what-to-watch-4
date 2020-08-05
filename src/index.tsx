@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from "./components/app/app.js";
+import App from "./components/app/app";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider} from "react-redux";
 import reducer from "./reducer/reducer";
@@ -9,6 +9,7 @@ import {ActionCreator, AuthorizationStatus, Operation as UserOperation} from "./
 import withActiveItem from "./hocs/with-active-item/with-active-item";
 import thunk from "redux-thunk";
 import {createApi} from "./api";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const api = createApi(() => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -16,9 +17,8 @@ const api = createApi(() => {
 
 const store = createStore(
     reducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
     )
 );
 

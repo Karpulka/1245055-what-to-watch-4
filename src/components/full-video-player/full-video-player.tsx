@@ -1,8 +1,19 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {formatTimeLeft} from "../../utils";
+import {ReactNode} from "react";
 
-const FullVideoPlayer = (props) => {
+interface Props {
+  children: React.ReactElement<any>,
+  onPlayButtonClick: () => void,
+  isPlaying: boolean,
+  title: string,
+  timeLeft: number,
+  progressBar: number,
+  onFullScreenButtonClick: () => void,
+  onExitButtonClick: () => void
+}
+
+const FullVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
   const {children, onPlayButtonClick, isPlaying, title, timeLeft, progressBar, onFullScreenButtonClick, onExitButtonClick} = props;
   return <div className="player">
     {React.cloneElement(children, {className: `player__video`})}
@@ -36,17 +47,6 @@ const FullVideoPlayer = (props) => {
       </div>
     </div>
   </div>;
-};
-
-FullVideoPlayer.propTypes = {
-  children: PropTypes.element.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  timeLeft: PropTypes.number.isRequired,
-  progressBar: PropTypes.number.isRequired,
-  onFullScreenButtonClick: PropTypes.func.isRequired,
-  onExitButtonClick: PropTypes.func.isRequired
 };
 
 export default FullVideoPlayer;

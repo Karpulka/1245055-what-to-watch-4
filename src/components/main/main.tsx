@@ -1,15 +1,22 @@
 import * as React from "react";
 import FilmsList from "../films-list/films-list";
-import * as PropTypes from "prop-types";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import Filter from "../filter/filter";
-import ShowMore from "../show-more/show-more.js";
+import ShowMore from "../show-more/show-more";
 import Footer from "../footer/footer";
 import {PageType} from "../app/app";
 import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {Link} from "react-router-dom";
+import {Film} from "../../types";
 
-const Main = (props) => {
+interface Props {
+  promoFilm: Film,
+  films: Array<Film>,
+  onFilmClick: (callback: () => void) => void,
+  onChangeFavorite: (id: number, status: number) => void
+}
+
+const Main: React.FunctionComponent<Props> = (props: Props) => {
   const {promoFilm, films, onFilmClick, onChangeFavorite} = props;
   const {background, title, src, genre, year, isFavorite, id} = promoFilm;
   const FilmsListComponent = withFilmsList(FilmsList);
@@ -78,32 +85,6 @@ const Main = (props) => {
 
 Main.defaultProps = {
   films: []
-};
-
-Main.propTypes = {
-  promoFilm: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired,
-    fullVideo: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired
-  }),
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired
-  })),
-  onFilmClick: PropTypes.func.isRequired,
-  onChangeFavorite: PropTypes.func.isRequired
 };
 
 export default Main;

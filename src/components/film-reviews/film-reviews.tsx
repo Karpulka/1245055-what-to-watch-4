@@ -1,11 +1,17 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
-import ReviewItem from "../review-item/review-item.js";
+import ReviewItem from "../review-item/review-item";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/data/data";
 import {getComments} from "../../reducer/data/selectors";
+import {Review} from "../../types";
 
-class FilmReviews extends React.PureComponent {
+interface Props {
+  filmID: number,
+  comments: Array<Review>,
+  setComments: () => void
+}
+
+class FilmReviews extends React.PureComponent<Props, {}> {
   constructor(props) {
     super(props);
 
@@ -32,18 +38,6 @@ class FilmReviews extends React.PureComponent {
     return null;
   }
 }
-
-FilmReviews.propTypes = {
-  filmID: PropTypes.number.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  })),
-  setComments: PropTypes.func.isRequired
-};
 
 const mapStateToProps = (state) => ({
   comments: getComments(state)

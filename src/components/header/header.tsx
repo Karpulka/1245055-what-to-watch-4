@@ -1,12 +1,20 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
-const Header = (props) => {
+interface Props {
+  auth: string,
+  isBreadcrumbs: boolean,
+  isUserBlock: boolean,
+  pageTitle?: string,
+  breadcrumbTitle?: string,
+  filmID?: number
+}
+
+const Header: React.FunctionComponent<Props> = (props: Props) => {
   const {auth, isBreadcrumbs, pageTitle, isUserBlock, filmID, breadcrumbTitle} = props;
 
   return <React.Fragment>
@@ -26,15 +34,6 @@ Header.defaultProps = {
   isBreadcrumbs: false,
   isUserBlock: true,
   pageTitle: ``
-};
-
-Header.propTypes = {
-  auth: PropTypes.string.isRequired,
-  isBreadcrumbs: PropTypes.bool,
-  isUserBlock: PropTypes.bool,
-  pageTitle: PropTypes.string,
-  breadcrumbTitle: PropTypes.string,
-  filmID: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({

@@ -21,7 +21,7 @@ const MockComponent = (props) => {
 
 MockComponent.propTypes = {
   children: PropTypes.element.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired
+  onPlayButtonClick: () => void
 };
 
 const MockComponentWrapped = withVideoPlayer(MockComponent);

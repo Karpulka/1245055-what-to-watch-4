@@ -1,10 +1,23 @@
 import * as React from "react";
+import {Subtract} from "utility-types";
 
 const MIN_TEXT_LENGTH = 50;
 const MAX_TEXT_LENGTH = 400;
 
+interface State {
+  isDisableSubmit: boolean
+}
+
+interface InjectingProps {
+  isDisableSubmit: boolean,
+  onChangeText: () => void
+}
+
 const withReview = (Component) => {
-  class WithReview extends React.PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithReview extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 
@@ -32,8 +45,6 @@ const withReview = (Component) => {
       }
     }
   }
-
-  WithReview.propTypes = {};
 
   return WithReview;
 };

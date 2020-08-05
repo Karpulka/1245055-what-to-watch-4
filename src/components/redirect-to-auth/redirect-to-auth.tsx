@@ -1,11 +1,15 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
-import * as PropTypes from "prop-types";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Redirect} from "react-router-dom";
 
-const RedirectToAuth = (props) => {
+interface Props {
+  authorizationStatus: string,
+  children: React.ReactElement
+}
+
+const RedirectToAuth: React.FunctionComponent<Props> = (props: Props) => {
   const {authorizationStatus, children} = props;
 
   if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
@@ -13,11 +17,6 @@ const RedirectToAuth = (props) => {
   }
 
   return <React.Fragment>{children}</React.Fragment>;
-};
-
-RedirectToAuth.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired
 };
 
 const mapStateToProps = (state) => ({

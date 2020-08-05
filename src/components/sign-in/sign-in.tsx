@@ -1,18 +1,26 @@
-import * as React, {PureComponent, createRef} from "react";
+import * as React from "react";
 import Footer from "../footer/footer";
 import {PageType} from "../app/app";
 import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {Operation} from "../../reducer/user/user";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getErrorMessage, getIsEmailValid} from "../../reducer/user/selectors";
 
-class SignIn extends React.PureComponent {
+interface Props {
+  login: (parameter: {login: string, password: string}) => void,
+  errorMessage: string,
+  isEmailValid: boolean
+}
+
+class SignIn extends React.PureComponent<Props, {}> {
+  private emailRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
 
-    this.emailRef = createRef();
-    this.passwordRef = createRef();
+    this.emailRef = React.createRef();
+    this.passwordRef = React.createRef();
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
@@ -61,12 +69,6 @@ class SignIn extends React.PureComponent {
     });
   }
 }
-
-SignIn.propTypes = {
-  login: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-  isEmailValid: PropTypes.bool.isRequired
-};
 
 const mapStateToProps = (state) => ({
   errorMessage: getErrorMessage(state),

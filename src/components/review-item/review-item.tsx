@@ -1,8 +1,16 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {prepareReviewDate} from "../../utils";
 
-const ReviewItem = (props) => {
+interface Props {
+  review: {
+    user: string,
+    rating: number,
+    comment: string,
+    date: string
+  }
+}
+
+const ReviewItem: React.FunctionComponent<Props> = (props: Props) => {
   const {user, rating, comment, date} = props.review;
 
   return <div className="review">
@@ -17,15 +25,6 @@ const ReviewItem = (props) => {
 
     <div className="review__rating">{rating}</div>
   </div>;
-};
-
-ReviewItem.propTypes = {
-  review: PropTypes.shape({
-    user: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  }).isRequired
 };
 
 export default ReviewItem;

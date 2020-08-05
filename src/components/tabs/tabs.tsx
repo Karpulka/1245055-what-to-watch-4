@@ -1,7 +1,7 @@
 import * as React from "react";
-import TabsInner from "../tabs-inner/tabs-inner.js";
-import * as PropTypes from "prop-types";
+import TabsInner from "../tabs-inner/tabs-inner";
 import TabVariants from "../tab-variants/tab-variants";
+import {Details, Overview, Tab} from "../../types";
 
 export const TabVariantValues = {
   OVERVIEW: `Overview`,
@@ -9,7 +9,15 @@ export const TabVariantValues = {
   REVIEWS: `Reviews`
 };
 
-const Tabs = (props) => {
+interface Props {
+  overview: Overview,
+  details: Details,
+  onItemClick: () => void,
+  activeItem: Tab,
+  filmID: number
+}
+
+const Tabs: React.FunctionComponent<Props> = (props: Props) => {
   const {overview, details, filmID, activeItem, onItemClick} = props;
 
   const tabVariants = [
@@ -40,29 +48,6 @@ const Tabs = (props) => {
     </nav>
     <TabsInner tabValue={activeItem || tabVariants[0]}/>
   </React.Fragment>;
-};
-
-Tabs.propTypes = {
-  overview: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired,
-  details: PropTypes.shape({
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired
-  }).isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.shape(), PropTypes.number])
-  }),
-  filmID: PropTypes.number.isRequired
 };
 
 export default Tabs;

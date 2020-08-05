@@ -1,8 +1,14 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {Tab} from "../../types";
 
-const TabVariants = (props) => {
+interface Props {
+  active: string,
+  onTabClick: (tabTitle: Tab) => void,
+  tab: Tab
+}
+
+const TabVariants: React.FunctionComponent<Props> = (props: Props) => {
   const {active, onTabClick, tab} = props;
   const {title} = tab;
   let itemClassName = `movie-nav__item`;
@@ -16,15 +22,6 @@ const TabVariants = (props) => {
       onTabClick(tab);
     }}>{title}</Link>
   </li>;
-};
-
-TabVariants.propTypes = {
-  active: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired,
-  tab: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.shape(), PropTypes.number])
-  }).isRequired
 };
 
 export default TabVariants;

@@ -1,6 +1,5 @@
-import * as React, {PureComponent, createRef} from "react";
+import * as React from "react";
 import {PageType} from "../app/app";
-import * as PropTypes from "prop-types";
 import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {getErrorText, getIsDisableComentForm} from "../../reducer/data/selectors";
 import {Operation} from "../../reducer/data/data";
@@ -14,12 +13,31 @@ const ratings = [
   `Rating 5`,
 ];
 
-class Review extends React.PureComponent {
+interface Props {
+  title: string,
+  background: string,
+  src: string,
+  id: number,
+  isDisableSubmit: boolean,
+  handleSubmitComment: (id: number, data: {
+    rating: number,
+    comment: string
+  }, callback: () => void) => void,
+  onChangeText: (text: string) => void,
+  onSubmitReview: () => void,
+  isDisableForm: boolean,
+  errorText?: string
+}
+
+class Review extends React.PureComponent<Props, {}> {
+  private _rating: number;
+  private _textRef: React.RefObject<HTMLTextAreaElement>
+
   constructor(props) {
     super(props);
 
     this._rating = 1;
-    this._textRef = createRef();
+    this._textRef = React.createRef();
 
     this._handlePostButtonclick = this._handlePostButtonclick.bind(this);
     this._handleChangeRating = this._handleChangeRating.bind(this);
@@ -91,19 +109,6 @@ class Review extends React.PureComponent {
     this._rating = evt.currentTarget.value;
   }
 }
-
-Review.propTypes = {
-  title: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  isDisableSubmit: PropTypes.bool.isRequired,
-  handleSubmitComment: PropTypes.func.isRequired,
-  onChangeText: PropTypes.func.isRequired,
-  onSubmitReview: PropTypes.func.isRequired,
-  isDisableForm: PropTypes.bool.isRequired,
-  errorText: PropTypes.string
-};
 
 const mapStateToProps = (state) => ({
   isDisableForm: getIsDisableComentForm(state),

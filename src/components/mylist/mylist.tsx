@@ -4,9 +4,14 @@ import {PageType} from "../app/app";
 import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {connect} from "react-redux";
 import {getFavoriteFilms} from "../../reducer/data/selectors";
-import * as PropTypes from "prop-types";
 import FilmsList from "../films-list/films-list";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
+import {Film} from "../../types";
+
+interface Props {
+  films: Array<Film>,
+  onFilmClick: () => void
+}
 
 const FilmsListComponent = withFilmsList(FilmsList);
 
@@ -24,16 +29,6 @@ const MyList = (props) => {
 
     <Footer />
   </div>;
-};
-
-MyList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    video: PropTypes.string.isRequired
-  })),
-  onFilmClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

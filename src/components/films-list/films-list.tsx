@@ -1,10 +1,19 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import Film from "../film/film";
 import {connect} from "react-redux";
 import {getShowingFilms} from "../../reducer/film/selectors";
+import {Film as FilmType} from "../../types";
 
-const FilmsList = (props) => {
+interface Props {
+  films: Array<FilmType>,
+  onFilmClick: () => void,
+  onFilmHover: () => void,
+  onFilmBlur: () => void,
+  activeFilmID?: number,
+  showingFilms: number,
+}
+
+const FilmsList: React.FunctionComponent<Props> = (props: Props) => {
   const {films, onFilmClick, onFilmHover, onFilmBlur, activeFilmID, showingFilms} = props;
 
   return <div className="catalog__movies-list">
@@ -17,20 +26,6 @@ const FilmsList = (props) => {
       isStartPlaying={activeFilmID === film.id}
     />)}
   </div>;
-};
-
-FilmsList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    video: PropTypes.string.isRequired
-  })),
-  onFilmClick: PropTypes.func.isRequired,
-  onFilmHover: PropTypes.func.isRequired,
-  onFilmBlur: PropTypes.func.isRequired,
-  activeFilmID: PropTypes.number,
-  showingFilms: PropTypes.number.isRequired,
 };
 
 const mapPropsToState = (state) => ({

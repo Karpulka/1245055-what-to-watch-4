@@ -1,7 +1,23 @@
 import * as React from "react";
+import {Subtract} from "utility-types";
+
+interface State {
+  activeFilmID: number
+}
+
+interface InjectingProps {
+  onFilmHover: () => void,
+  onFilmBlur: () => void,
+  activeFilmID: number
+}
 
 const withFilmsList = (Component) => {
-  class WithFilmsList extends React.PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithFilmsList extends React.PureComponent<T, State> {
+    private _timeoutID: NodeJS.Timer;
+
     constructor(props) {
       super(props);
 
@@ -40,8 +56,6 @@ const withFilmsList = (Component) => {
       this.setState({activeFilmID: null});
     }
   }
-
-  WithFilmsList.propTypes = {};
 
   return WithFilmsList;
 };

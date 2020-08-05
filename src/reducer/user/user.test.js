@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType, AuthorizationStatus} from "./user.js";
+import {reducer, ActionCreator, ActionType, AuthorizationStatus} from "./user";
 
 const errorText = `Message 1`;
 const otherErrorText = `Message 2`;

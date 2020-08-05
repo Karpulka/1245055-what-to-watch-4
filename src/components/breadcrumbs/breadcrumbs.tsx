@@ -1,8 +1,12 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-const Breadcrumbs = (props) => {
+interface Props {
+  id: number,
+  title: string
+}
+
+const Breadcrumbs: React.FunctionComponent<Props> = (props: Props) => {
   const {id, title} = props;
 
   return <nav className="breadcrumbs">
@@ -15,11 +19,6 @@ const Breadcrumbs = (props) => {
       </li>
     </ul>
   </nav>;
-};
-
-Breadcrumbs.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired
 };
 
 export default Breadcrumbs;

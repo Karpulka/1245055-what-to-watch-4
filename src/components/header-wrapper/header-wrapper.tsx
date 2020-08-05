@@ -1,10 +1,19 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import Header from "../header/header";
 import {PageType} from "../app/app";
 import {Link} from "react-router-dom";
 
-const HeaderWrapper = (props) => {
+interface Props {
+  pageType: string,
+  isBreadcrumbs?: boolean,
+  id?: number,
+  filmID?: number,
+  pageTitle?: string,
+  breadcrumbTitle?: string,
+  isUserBlock?: boolean
+}
+
+const HeaderWrapper: React.FunctionComponent<Props> = (props: Props) => {
   const {pageType} = props;
 
   return <header className={`page-header ${pageType === PageType.AUTH ? `user-page__head` : `movie-card__head`}`}>
@@ -20,12 +29,9 @@ const HeaderWrapper = (props) => {
   </header>;
 };
 
-HeaderWrapper.propTypes = {
-  pageType: PropTypes.string.isRequired,
-  isBreadcrumbs: PropTypes.bool,
-  id: PropTypes.number,
-  pageTitle: PropTypes.string,
-  breadcrumbTitle: PropTypes.string
-};
+HeaderWrapper.defaultProps = {
+  isUserBlock: true,
+  isBreadcrumbs: false
+}
 
 export default HeaderWrapper;

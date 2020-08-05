@@ -29,9 +29,9 @@ const MockComponent = (props) => {
 
 MockComponent.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired
+    id: number
   })).isRequired,
-  onItemClick: PropTypes.func.isRequired
+  onItemClick: () => void
 };
 
 it(`Test item click and set activeItem`, () => {

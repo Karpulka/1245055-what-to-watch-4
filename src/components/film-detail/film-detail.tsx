@@ -1,21 +1,29 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
-import Tabs from "../tabs/tabs.js";
-import FilmsList from "../films-list/films-list.js";
+import Tabs from "../tabs/tabs";
+import FilmsList from "../films-list/films-list";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import Footer from "../footer/footer.js";
+import Footer from "../footer/footer";
 import {PageType} from "../app/app";
-import HeaderWrapper from "../header-wrapper/header-wrapper.js";
+import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAllFilms} from "../../reducer/data/selectors";
 import {Link} from "react-router-dom";
+import {Film} from "../../types";
 
 const LIKE_FILMS_COUNT = 4;
 
-class FilmDetail extends React.PureComponent {
+interface Props {
+  film: Film,
+  allFilms: Array<Film>,
+  authorizationStatus: string,
+  onFilmClick: () => void,
+  onChangeFavorite: (id: number, status: number) => void
+}
+
+class FilmDetail extends React.PureComponent<Props, {}> {
   render() {
     const {film, allFilms, authorizationStatus, onFilmClick, onChangeFavorite} = this.props;
     const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, isFavorite} = film;
@@ -112,43 +120,6 @@ class FilmDetail extends React.PureComponent {
     return sortedFilms.slice(0, LIKE_FILMS_COUNT);
   }
 }
-
-FilmDetail.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired
-  }),
-  allFilms: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    voiceCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actorList: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runtime: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired
-  })),
-  authorizationStatus: PropTypes.string.isRequired,
-  onFilmClick: PropTypes.func.isRequired,
-  onChangeFavorite: PropTypes.func.isRequired
-};
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),

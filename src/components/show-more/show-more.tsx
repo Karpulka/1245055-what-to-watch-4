@@ -1,10 +1,15 @@
 import * as React from "react";
 import {ActionCreator} from "../../reducer/film/film";
 import {connect} from "react-redux";
-import * as PropTypes from "prop-types";
 import {getFilms, getShowingFilms} from "../../reducer/film/selectors";
 
-const ShowMore = (props) => {
+interface Props {
+  showingFilms: number,
+  filmsLength: number,
+  handleShowMoreClick: () => void
+}
+
+const ShowMore: React.FunctionComponent<Props> = (props: Props) => {
   const {showingFilms, filmsLength, handleShowMoreClick} = props;
 
   if (showingFilms < filmsLength) {
@@ -14,12 +19,6 @@ const ShowMore = (props) => {
   }
 
   return null;
-};
-
-ShowMore.propTypes = {
-  showingFilms: PropTypes.number.isRequired,
-  filmsLength: PropTypes.number.isRequired,
-  handleShowMoreClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

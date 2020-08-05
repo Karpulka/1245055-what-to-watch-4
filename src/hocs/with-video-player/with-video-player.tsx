@@ -1,10 +1,46 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
+import {Subtract} from "utility-types";
 
 const SECONDS_IN_MINUTE = 60;
 
+interface Props {
+  src: string,
+  poster: string,
+  isMuted?: boolean,
+  isStartPlaying: boolean,
+  runtime?: number,
+  wasHover?: boolean
+}
+
+interface State {
+  progress: number,
+  progressBar: number,
+  isLoading: boolean,
+  isPlaying: boolean,
+  timeLeft: number
+}
+
+interface InjectingProps {
+  onPlayButtonClick: () => void,
+  isPlaying: boolean,
+  timeLeft: number,
+  progressBar: number,
+  onFullScreenButtonClick: () => void
+}
+
 const withVideoPlayer = (Component) => {
-  class WithVideoPlayer extends React.PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithVideoPlayer extends React.PureComponent<Props & T, State> {
+    static defaultProps = {
+      isMuted: false
+    };
+
+    public videoRef: React.RefObject<any>;
+
+    private _fullTime: number;
+
     constructor(props) {
       super(props);
 
@@ -106,19 +142,6 @@ const withVideoPlayer = (Component) => {
       rfs.call(video);
     }
   }
-
-  WithVideoPlayer.defaultProps = {
-    isMuted: false
-  };
-
-  WithVideoPlayer.propTypes = {
-    src: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    isMuted: PropTypes.bool,
-    isStartPlaying: PropTypes.bool.isRequired,
-    runtime: PropTypes.number,
-    wasHover: PropTypes.bool
-  };
 
   return WithVideoPlayer;
 };
