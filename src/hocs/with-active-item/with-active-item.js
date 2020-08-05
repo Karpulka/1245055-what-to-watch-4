@@ -17,9 +17,7 @@ const withActiveItem = (Component) => {
       return <Component
         {...this.props}
         onItemClick={this.handleItemClick}
-        activeItem={activeItem}
-        onPlayButtonClick={this.handlePlayClick}
-        onExitButtonClick={this.handleExitClick}>
+        activeItem={activeItem}>
       </Component>;
     }
 

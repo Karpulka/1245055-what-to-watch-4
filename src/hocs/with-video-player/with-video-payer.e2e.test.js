@@ -12,17 +12,23 @@ const src = `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_
 const poster = `/poster.jpg`;
 
 const MockComponent = (props) => {
-  return <div>{props.children}</div>;
+  const {onPlayButtonClick, children} = props;
+  return <div>
+    <button onClick={onPlayButtonClick} />
+    {children}
+  </div>;
 };
 
 MockComponent.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired
 };
 
 const MockComponentWrapped = withVideoPlayer(MockComponent);
 
 it(`Test pause video`, () => {
   window.HTMLMediaElement.prototype.pause = () => {};
+
   const video = mount(
       <MockComponentWrapped
         src={src}
@@ -31,9 +37,37 @@ it(`Test pause video`, () => {
       />
   );
 
-  const videoInstance = video.instance();
-  expect(videoInstance.state.isPlaying).toBe(true);
+  const {videoRef} = video.instance();
+  jest.spyOn(videoRef.current, `pause`);
 
-  videoInstance.setState({isPlaying: false});
-  expect(videoInstance.state.isPlaying).toBe(false);
+  video.instance().componentDidMount();
+
+  expect(video.state().isPlaying).toEqual(true);
+  video.find(`button`).simulate(`click`);
+
+  expect(videoRef.current.pause).toHaveBeenCalledTimes(1);
+  expect(video.state().isPlaying).toEqual(false);
+});
+
+it(`Test play video`, () => {
+  window.HTMLMediaElement.prototype.play = () => {};
+
+  const video = mount(
+      <MockComponentWrapped
+        src={src}
+        poster={poster}
+        isStartPlaying={false}
+      />
+  );
+
+  const {videoRef} = video.instance();
+  jest.spyOn(videoRef.current, `play`);
+
+  video.instance().componentDidMount();
+
+  expect(video.state().isPlaying).toEqual(false);
+  video.find(`button`).simulate(`click`);
+
+  expect(videoRef.current.play).toHaveBeenCalledTimes(1);
+  expect(video.state().isPlaying).toEqual(true);
 });

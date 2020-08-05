@@ -8,7 +8,7 @@ const withVideoPlayer = (Component) => {
     constructor(props) {
       super(props);
 
-      this._ref = React.createRef();
+      this.videoRef = React.createRef();
 
       this.handlePlayButtonClick = this.handlePlayButtonClick.bind(this);
       this.handleFullScreenButtonClick = this.handleFullScreenButtonClick.bind(this);
@@ -25,7 +25,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidMount() {
-      const video = this._ref.current;
+      const video = this.videoRef.current;
       const {src, poster, isMuted} = this.props;
       video.src = src;
       video.poster = poster;
@@ -66,12 +66,12 @@ const withVideoPlayer = (Component) => {
         timeLeft={this.state.timeLeft}
         progressBar={this.state.progressBar}
         onFullScreenButtonClick={this.handleFullScreenButtonClick}>
-        <video ref={this._ref}/>
+        <video ref={this.videoRef}/>
       </Component>;
     }
 
     componentWillUnmount() {
-      const video = this._ref.current;
+      const video = this.videoRef.current;
 
       video.oncanplaythrough = null;
       video.onplay = null;
@@ -84,7 +84,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidUpdate() {
-      const video = this._ref.current;
+      const video = this.videoRef.current;
 
       if (this.state.isPlaying) {
         video.play();
@@ -101,7 +101,7 @@ const withVideoPlayer = (Component) => {
     }
 
     handleFullScreenButtonClick() {
-      const video = this._ref.current;
+      const video = this.videoRef.current;
       const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
       rfs.call(video);
     }
