@@ -378,7 +378,7 @@ describe(`Operation work correctly`, () => {
     const commentsSend = Operation.sendComment(1, {
       rating: 8,
       comment: `test`
-    });
+    }, () => {});
 
     apiMock
       .onPost(`/comments/1`)
@@ -421,7 +421,7 @@ describe(`Operation work correctly`, () => {
     }}), api)
       .then(() => {
         const newFilms = [].concat(films.slice(0, index), {}, films.slice(index + 1));
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
           payload: newFilms

@@ -13,6 +13,7 @@ exports[`Render SignIn Email No Valid 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -31,11 +32,13 @@ exports[`Render SignIn Email No Valid 1`] = `
         </span>
       </a>
     </div>
+    
     <h1
       className="page-title user-page__title"
     >
-      Sign in
+      Sign In
     </h1>
+    
   </header>
   <div
     className="sign-in user-page__content"
@@ -110,7 +113,8 @@ exports[`Render SignIn Email No Valid 1`] = `
     >
       <a
         className="logo__link logo__link--light"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -153,6 +157,7 @@ exports[`Render SignIn Start 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -171,11 +176,13 @@ exports[`Render SignIn Start 1`] = `
         </span>
       </a>
     </div>
+    
     <h1
       className="page-title user-page__title"
     >
-      Sign in
+      Sign In
     </h1>
+    
   </header>
   <div
     className="sign-in user-page__content"
@@ -244,7 +251,8 @@ exports[`Render SignIn Start 1`] = `
     >
       <a
         className="logo__link logo__link--light"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -287,6 +295,7 @@ exports[`Render SignIn incorrect data 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -305,11 +314,13 @@ exports[`Render SignIn incorrect data 1`] = `
         </span>
       </a>
     </div>
+    
     <h1
       className="page-title user-page__title"
     >
-      Sign in
+      Sign In
     </h1>
+    
   </header>
   <div
     className="sign-in user-page__content"
@@ -384,7 +395,8 @@ exports[`Render SignIn incorrect data 1`] = `
     >
       <a
         className="logo__link logo__link--light"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"

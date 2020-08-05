@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Film from "./film.jsx";
+import {StaticRouter} from "react-router-dom";
 
 const film = {
   id: 6,
@@ -24,13 +25,13 @@ const film = {
 
 it(`Render Film`, () => {
   const tree = renderer
-    .create(<Film
+    .create(<StaticRouter><Film
       film={film}
       onFilmClick={() => {}}
       onFilmHover={() => {}}
       onFilmBlur={() => {}}
       isStartPlaying={false}
-    />, {
+    /></StaticRouter>, {
       createNodeMock: () => {
         return {};
       }

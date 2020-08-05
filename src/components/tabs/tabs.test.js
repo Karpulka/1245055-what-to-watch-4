@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Tabs from "./tabs";
+import {StaticRouter} from "react-router-dom";
 
 const overview = {
   description: `This is Description. TCHK.`,
@@ -25,12 +26,13 @@ it(`Render Tabs`, () => {
   };
 
   const tree = renderer
-    .create(<Tabs
+    .create(<StaticRouter><Tabs
       overview={overview}
       details={details}
       filmID={0}
       activeItem={activeItem}
-      onItemClick={() => {}}/>)
+      onItemClick={() => {}}/>
+    </StaticRouter>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

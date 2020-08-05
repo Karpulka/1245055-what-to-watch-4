@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Redirect To Auth AUTH 1`] = `<div />`;
+
+exports[`Render Redirect To Auth NO_AUTH 1`] = `null`;

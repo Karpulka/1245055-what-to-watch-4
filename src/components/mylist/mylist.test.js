@@ -1,10 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FilmsList from "./films-list.jsx";
-import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {StaticRouter} from "react-router-dom";
+import {MyList} from "./mylist";
 
 const mockStore = configureStore([]);
 
@@ -65,23 +65,21 @@ const films = [
   }
 ];
 
-it(`Render FilmsList`, () => {
+it(`Render MyList Auth`, () => {
   const store = mockStore({
     [NameSpace.FILM]: {
-      showingFilms: 5
+      showingFilms: 9
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`
     }
   });
 
   const tree = renderer
     .create(<Provider store={store}>
       <StaticRouter>
-        <FilmsList
-          films={films}
-          onFilmClick={() => {}}
-          onFilmHover={() => {}}
-          onFilmBlur={() => {}}
-          activeFilmID={1}
-        /></StaticRouter>
+        <MyList onFilmClick={() => {}} films={films} />
+      </StaticRouter>
     </Provider>, {
       createNodeMock: () => {
         return {};

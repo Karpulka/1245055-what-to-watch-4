@@ -27,6 +27,7 @@ Array [
         <a
           className="logo__link"
           href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -46,6 +47,7 @@ Array [
         </a>
       </div>
       
+      
       <div
         className="user-block"
       >
@@ -59,7 +61,7 @@ Array [
             <img
               alt="User avatar"
               height="63"
-              src="img/avatar.jpg"
+              src="/img/avatar.jpg"
               width="63"
             />
           </a>
@@ -107,10 +109,10 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/films/1/player"
               onClick={[Function]}
-              type="button"
             >
               <svg
                 height="19"
@@ -124,7 +126,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               onClick={[Function]}
@@ -167,7 +169,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             All genres
@@ -178,7 +180,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Fantasy
@@ -189,7 +191,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Biography
@@ -200,7 +202,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Drama
@@ -226,7 +228,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/0"
               onClick={[Function]}
             >
               Фантастические твари и места их обитания
@@ -249,7 +251,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/1"
               onClick={[Function]}
             >
               Богемская рапсодия
@@ -272,7 +274,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/2"
               onClick={[Function]}
             >
               Авиатор
@@ -289,7 +291,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -347,6 +350,7 @@ Array [
         <a
           className="logo__link"
           href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -365,6 +369,7 @@ Array [
           </span>
         </a>
       </div>
+      
       
       <div
         className="user-block"
@@ -419,10 +424,10 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/films/1/player"
               onClick={[Function]}
-              type="button"
             >
               <svg
                 height="19"
@@ -436,7 +441,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               onClick={[Function]}
@@ -479,7 +484,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             All genres
@@ -490,7 +495,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Fantasy
@@ -501,7 +506,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Biography
@@ -512,7 +517,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             Drama
@@ -538,7 +543,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/0"
               onClick={[Function]}
             >
               Фантастические твари и места их обитания
@@ -561,7 +566,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/1"
               onClick={[Function]}
             >
               Богемская рапсодия
@@ -584,7 +589,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/2"
               onClick={[Function]}
             >
               Авиатор
@@ -601,7 +606,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

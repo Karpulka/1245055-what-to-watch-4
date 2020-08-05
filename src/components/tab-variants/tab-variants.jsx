@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const TabVariants = (props) => {
   const {active, onTabClick, tab} = props;
@@ -10,10 +11,10 @@ const TabVariants = (props) => {
   }
 
   return <li className={itemClassName}>
-    <a href="#" className="movie-nav__link" onClick={(evt) => {
+    <Link to="#" className="movie-nav__link" onClick={(evt) => {
       evt.preventDefault();
       onTabClick(tab);
-    }}>{title}</a>
+    }}>{title}</Link>
   </li>;
 };
 

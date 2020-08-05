@@ -81,12 +81,13 @@ const Operation = {
       });
   },
 
-  sendComment: (filmID, comment) => (dispatch, getState, api) => {
+  sendComment: (filmID, comment, callback) => (dispatch, getState, api) => {
     dispatch(ActionCreator.setDisableCommentForm(true));
     return api.post(`/comments/${filmID}`, comment)
       .then(() => {
         dispatch(ActionCreator.setErrorText(``));
         dispatch(ActionCreator.setDisableCommentForm(false));
+        callback();
       })
     .catch(() => {
       dispatch(ActionCreator.setErrorText(ERROR_TEXT));
@@ -106,6 +107,7 @@ const Operation = {
           const films = [].concat(allFilms.slice(0, index), film, allFilms.slice(index + 1));
 
           dispatch(ActionCreator.loadFilms(films));
+          dispatch(Operation.getFavoriteFilms());
           if (isPromoFilm) {
             dispatch(ActionCreator.loadPromoFilm(film));
           }
@@ -116,7 +118,8 @@ const Operation = {
   getFavoriteFilms: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)
       .then((response) => {
-        dispatch(ActionCreator.setFavoriteFilms(response.data));
+        const films = response.data && response.data.length > 0 ? response.data.map((film) => prepareFilmData(film)) : [];
+        dispatch(ActionCreator.setFavoriteFilms(films));
       });
   }
 };

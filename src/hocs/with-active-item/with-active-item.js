@@ -5,23 +5,19 @@ const withActiveItem = (Component) => {
     constructor(props) {
       super(props);
       this.state = {
-        activeItem: null,
-        isShowFilm: false
+        activeItem: null
       };
 
       this.handleItemClick = this.handleItemClick.bind(this);
-      this.handlePlayClick = this.handlePlayClick.bind(this);
-      this.handleExitClick = this.handleExitClick.bind(this);
     }
 
     render() {
-      const {activeItem, isShowFilm} = this.state;
+      const {activeItem} = this.state;
 
       return <Component
         {...this.props}
         onItemClick={this.handleItemClick}
         activeItem={activeItem}
-        isShowFilm={isShowFilm}
         onPlayButtonClick={this.handlePlayClick}
         onExitButtonClick={this.handleExitClick}>
       </Component>;
@@ -29,14 +25,6 @@ const withActiveItem = (Component) => {
 
     handleItemClick(film) {
       this.setState({activeItem: film});
-    }
-
-    handlePlayClick() {
-      this.setState({isShowFilm: true});
-    }
-
-    handleExitClick() {
-      this.setState({isShowFilm: false});
     }
   }
 

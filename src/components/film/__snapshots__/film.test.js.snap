@@ -17,7 +17,7 @@ exports[`Render Film 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/films/6"
       onClick={[Function]}
     >
       Остров проклятых

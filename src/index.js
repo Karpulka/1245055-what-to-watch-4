@@ -6,7 +6,7 @@ import {Provider} from "react-redux";
 import reducer from "./reducer/reducer";
 import {Operation as DataOperation} from "./reducer/data/data";
 import {ActionCreator, AuthorizationStatus, Operation as UserOperation} from "./reducer/user/user";
-import withActiveItem from "./hocs/with-app/with-app";
+import withActiveItem from "./hocs/with-active-item/with-active-item";
 import thunk from "redux-thunk";
 import {createApi} from "./api";
 
@@ -25,6 +25,7 @@ const store = createStore(
 store.dispatch(UserOperation.checkAuth());
 store.dispatch(DataOperation.loadPromoFilm());
 store.dispatch(DataOperation.loadFilms());
+store.dispatch(DataOperation.getFavoriteFilms());
 
 const AppComponent = withActiveItem(App);
 

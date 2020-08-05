@@ -6,17 +6,18 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {Redirect} from "react-router-dom";
 
 const RedirectToAuth = (props) => {
-  const {authorizationStatus} = props;
+  const {authorizationStatus, children} = props;
 
   if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
     return <Redirect to="/login" />;
   }
 
-  return ``;
+  return <React.Fragment>{children}</React.Fragment>;
 };
 
 RedirectToAuth.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired
 };
 
 const mapStateToProps = (state) => ({

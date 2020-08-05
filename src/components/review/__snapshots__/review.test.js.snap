@@ -29,6 +29,7 @@ exports[`Render Review Component is Auth 1`] = `
         <a
           className="logo__link"
           href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -58,9 +59,10 @@ exports[`Render Review Component is Auth 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="movie-page.html"
+              href="/films/2"
+              onClick={[Function]}
             >
-              The Grand Budapest Hotel
+              Test film
             </a>
           </li>
           <li
@@ -68,12 +70,15 @@ exports[`Render Review Component is Auth 1`] = `
           >
             <a
               className="breadcrumbs__link"
+              href="/"
+              onClick={[Function]}
             >
               Add review
             </a>
           </li>
         </ul>
       </nav>
+      
       <div
         className="user-block"
       >
@@ -87,7 +92,7 @@ exports[`Render Review Component is Auth 1`] = `
             <img
               alt="User avatar"
               height="63"
-              src="img/avatar.jpg"
+              src="/img/avatar.jpg"
               width="63"
             />
           </a>
@@ -257,6 +262,7 @@ exports[`Render Review Component is No Auth 1`] = `
         <a
           className="logo__link"
           href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -286,9 +292,10 @@ exports[`Render Review Component is No Auth 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="movie-page.html"
+              href="/films/2"
+              onClick={[Function]}
             >
-              The Grand Budapest Hotel
+              Test film
             </a>
           </li>
           <li
@@ -296,12 +303,15 @@ exports[`Render Review Component is No Auth 1`] = `
           >
             <a
               className="breadcrumbs__link"
+              href="/"
+              onClick={[Function]}
             >
               Add review
             </a>
           </li>
         </ul>
       </nav>
+      
       <div
         className="user-block"
       >

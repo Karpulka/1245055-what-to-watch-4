@@ -1,7 +1,8 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import TabVariants from "./tab-variants.jsx";
+import {StaticRouter} from "react-router-dom";
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -21,11 +22,13 @@ const tab = {
 it(`Click by tab`, () => {
   const handleTabClick = jest.fn();
 
-  const tabVariants = shallow(<TabVariants
-    tab={tab}
-    active={`Details`}
-    onTabClick={handleTabClick}
-  />);
+  const tabVariants = mount(<StaticRouter>
+    <TabVariants
+      tab={tab}
+      active={`Details`}
+      onTabClick={handleTabClick}
+    />
+  </StaticRouter>);
 
   const link = tabVariants.find(`a`);
   link.simulate(`click`, {preventDefault: () => {}});

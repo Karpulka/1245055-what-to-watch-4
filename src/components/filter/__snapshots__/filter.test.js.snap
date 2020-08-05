@@ -9,7 +9,7 @@ exports[`Render Filter 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      href="/"
       onClick={[Function]}
     >
       All genres
@@ -20,7 +20,7 @@ exports[`Render Filter 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      href="/"
       onClick={[Function]}
     >
       Drama
@@ -31,7 +31,7 @@ exports[`Render Filter 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      href="/"
       onClick={[Function]}
     >
       Comwdy

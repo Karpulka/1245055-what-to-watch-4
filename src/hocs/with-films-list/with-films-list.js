@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 
 const withFilmsList = (Component) => {
   class WithFilmsList extends PureComponent {
@@ -42,13 +41,7 @@ const withFilmsList = (Component) => {
     }
   }
 
-  WithFilmsList.propTypes = {
-    films: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired
-    })),
-    onFilmClick: PropTypes.func.isRequired
-  };
+  WithFilmsList.propTypes = {};
 
   return WithFilmsList;
 };

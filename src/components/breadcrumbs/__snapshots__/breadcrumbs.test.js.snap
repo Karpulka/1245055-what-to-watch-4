@@ -12,9 +12,10 @@ exports[`Render breadcrumbs 1`] = `
     >
       <a
         className="breadcrumbs__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
-        The Grand Budapest Hotel
+        Test title
       </a>
     </li>
     <li
@@ -22,6 +23,8 @@ exports[`Render breadcrumbs 1`] = `
     >
       <a
         className="breadcrumbs__link"
+        href="/"
+        onClick={[Function]}
       >
         Add review
       </a>

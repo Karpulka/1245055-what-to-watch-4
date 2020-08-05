@@ -9,6 +9,10 @@ export const getAllFilms = (state) => {
   return state[NAME_SPACE].allFilms;
 };
 
+export const getFavoriteFilms = (state) => {
+  return state[NAME_SPACE].favoriteFilms;
+};
+
 export const getPromoFilm = (state) => {
   return state[NAME_SPACE].promoFilm;
 };

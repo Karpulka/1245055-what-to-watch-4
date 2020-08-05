@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import TabVariants from "./tab-variants";
+import {StaticRouter} from "react-router-dom";
 
 const tab = {
   title: `Overview`,
@@ -15,8 +16,9 @@ const tab = {
 
 it(`Render TabVariants No Active Tab`, () => {
   const tree = renderer
-    .create(<TabVariants tab={tab} active={`Details`} onTabClick={() => {
-    }}/>)
+    .create(<StaticRouter>
+      <TabVariants tab={tab} active={`Details`} onTabClick={() => {}}/>
+    </StaticRouter>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -24,8 +26,9 @@ it(`Render TabVariants No Active Tab`, () => {
 
 it(`Render TabVariants Active Tab`, () => {
   const tree = renderer
-    .create(<TabVariants tab={tab} active={`Overview`} onTabClick={() => {
-    }}/>)
+    .create(<StaticRouter>
+      <TabVariants tab={tab} active={`Overview`} onTabClick={() => {}}/>
+    </StaticRouter>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

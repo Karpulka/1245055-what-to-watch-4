@@ -26,7 +26,7 @@ class Review extends PureComponent {
   }
 
   render() {
-    const {title, background, src, onChangeText, isDisableSubmit, isDisableForm, errorText} = this.props;
+    const {title, background, src, onChangeText, isDisableSubmit, isDisableForm, errorText, id} = this.props;
 
     return <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -36,7 +36,7 @@ class Review extends PureComponent {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <HeaderWrapper pageType={PageType.ADD_REVIEW} isBreadcrumbs={true}/>
+        <HeaderWrapper pageType={PageType.ADD_REVIEW} breadcrumbTitle={title} isBreadcrumbs={true} filmID={id}/>
 
         <div className="movie-card__poster movie-card__poster--small">
           <img src={src} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
@@ -79,12 +79,12 @@ class Review extends PureComponent {
 
   _handlePostButtonclick(evt) {
     evt.preventDefault();
-    const {handleSubmitComment, id} = this.props;
+    const {handleSubmitComment, id, onSubmitReview} = this.props;
 
     handleSubmitComment(id, {
       rating: this._rating,
       comment: this._textRef.current.value
-    });
+    }, onSubmitReview);
   }
 
   _handleChangeRating(evt) {
@@ -100,6 +100,7 @@ Review.propTypes = {
   isDisableSubmit: PropTypes.bool.isRequired,
   handleSubmitComment: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
+  onSubmitReview: PropTypes.func.isRequired,
   isDisableForm: PropTypes.bool.isRequired,
   errorText: PropTypes.string
 };
@@ -110,8 +111,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSubmitComment(filmID, comment) {
-    dispatch(Operation.sendComment(filmID, comment));
+  handleSubmitComment(filmID, comment, callback) {
+    dispatch(Operation.sendComment(filmID, comment, callback));
   }
 });
 

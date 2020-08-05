@@ -38,6 +38,7 @@ it(`Render Review Component is Auth`, () => {
           src={src}
           id={id}
           isDisableSubmit={true}
+          onSubmitReview={() => {}}
           onChangeText={() => {}}
           isDisableForm={false}/>
       </StaticRouter>
@@ -68,6 +69,7 @@ it(`Render Review Component is No Auth`, () => {
           id={film.id}
           isDisableSubmit={true}
           onChangeText={() => {}}
+          onSubmitReview={() => {}}
           isDisableForm={false}/>
       </StaticRouter>
     </Provider>)

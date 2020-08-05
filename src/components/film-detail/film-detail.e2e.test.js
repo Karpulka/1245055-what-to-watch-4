@@ -108,23 +108,31 @@ it(`Click Play button on Film Detail Page`, () => {
       films: likeFilms,
       activeItem
     },
+    [NameSpace.DATA]: {
+      allFilms: likeFilms
+    },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.AUTH
     }
   });
 
-  const handlePlayButtonClick = jest.fn();
+  const handleChangeFavorite = jest.fn();
+  const status = film.isFavorite ? 0 : 1;
+
   const filmDetail = mount(<Provider store={store}>
     <StaticRouter>
       <FilmDetail
         film={film}
         likeFilms={[film]}
         onFilmClick={() => {}}
-        onPlayButtonClick={handlePlayButtonClick}/>
+        onChangeFavorite={handleChangeFavorite}
+      />
     </StaticRouter>
   </Provider>);
 
-  const playButton = filmDetail.find(`.btn--play.movie-card__button`);
-  playButton.simulate(`click`);
-  expect(handlePlayButtonClick).toHaveBeenCalledTimes(1);
+  const button = filmDetail.find(`button.btn--list`);
+  button.simulate(`click`);
+  expect(handleChangeFavorite).toHaveBeenCalledTimes(1);
+  expect(handleChangeFavorite.mock.calls[0][0]).toBe(film.id);
+  expect(handleChangeFavorite.mock.calls[0][1]).toBe(status);
 });
