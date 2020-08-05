@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import renderer from "react-test-renderer";
-import FilmsList from "./films-list.jsx";
+import FilmsList from "./films-list";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space";

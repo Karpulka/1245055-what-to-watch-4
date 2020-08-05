@@ -1,7 +1,7 @@
-import React from "react";
-import TabsInner from "../tabs-inner/tabs-inner.jsx";
-import PropTypes from "prop-types";
-import TabVariants from "../tab-variants/tab-variants.jsx";
+import * as React from "react";
+import TabsInner from "../tabs-inner/tabs-inner.js";
+import * as PropTypes from "prop-types";
+import TabVariants from "../tab-variants/tab-variants";
 
 export const TabVariantValues = {
   OVERVIEW: `Overview`,

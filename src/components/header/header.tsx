@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Breadcrumbs from "../breadcrumbs/breadcrumbs.jsx";
+import Breadcrumbs from "../breadcrumbs/breadcrumbs";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";

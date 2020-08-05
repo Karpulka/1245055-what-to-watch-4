@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import FilmDetails from "../film-details/film-details.jsx";
-import FilmReviews from "../film-reviews/film-reviews.jsx";
-import FilmOverview from "../film-overview/film-overview.jsx";
-import {TabVariantValues} from "../tabs/tabs.jsx";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import FilmDetails from "../film-details/film-details";
+import FilmReviews from "../film-reviews/film-reviews";
+import FilmOverview from "../film-overview/film-overview";
+import {TabVariantValues} from "../tabs/tabs";
 
 const TabsInner = (props) => {
   const {tabValue: {title, value}} = props;

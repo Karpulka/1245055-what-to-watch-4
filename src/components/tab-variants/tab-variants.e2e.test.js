@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import TabVariants from "./tab-variants.jsx";
+import TabVariants from "./tab-variants";
 import {StaticRouter} from "react-router-dom";
 
 Enzyme.configure({

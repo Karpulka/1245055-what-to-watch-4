@@ -1,13 +1,13 @@
-import React, {PureComponent, createRef} from "react";
-import Footer from "../footer/footer.jsx";
-import {PageType} from "../app/app.jsx";
-import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import * as React, {PureComponent, createRef} from "react";
+import Footer from "../footer/footer";
+import {PageType} from "../app/app";
+import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {Operation} from "../../reducer/user/user";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getErrorMessage, getIsEmailValid} from "../../reducer/user/selectors";
 
-class SignIn extends PureComponent {
+class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
 

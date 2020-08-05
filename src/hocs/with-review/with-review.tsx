@@ -1,10 +1,10 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
 
 const MIN_TEXT_LENGTH = 50;
 const MAX_TEXT_LENGTH = 400;
 
 const withReview = (Component) => {
-  class WithReview extends PureComponent {
+  class WithReview extends React.PureComponent {
     constructor(props) {
       super(props);
 

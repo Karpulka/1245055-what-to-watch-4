@@ -1,10 +1,10 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 
 const SECONDS_IN_MINUTE = 60;
 
 const withVideoPlayer = (Component) => {
-  class WithVideoPlayer extends PureComponent {
+  class WithVideoPlayer extends React.PureComponent {
     constructor(props) {
       super(props);
 

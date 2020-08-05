@@ -1,12 +1,12 @@
-import React from "react";
-import FilmsList from "../films-list/films-list.jsx";
-import PropTypes from "prop-types";
+import * as React from "react";
+import FilmsList from "../films-list/films-list";
+import * as PropTypes from "prop-types";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
-import Filter from "../filter/filter.jsx";
-import ShowMore from "../show-more/show-more.jsx";
-import Footer from "../footer/footer.jsx";
-import {PageType} from "../app/app.jsx";
-import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import Filter from "../filter/filter";
+import ShowMore from "../show-more/show-more.js";
+import Footer from "../footer/footer";
+import {PageType} from "../app/app";
+import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {Link} from "react-router-dom";
 
 const Main = (props) => {

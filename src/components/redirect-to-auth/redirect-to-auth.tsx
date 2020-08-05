@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Redirect} from "react-router-dom";
 

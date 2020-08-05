@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import {ActionCreator} from "../../reducer/film/film";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import {getFilms, getShowingFilms} from "../../reducer/film/selectors";
 
 const ShowMore = (props) => {

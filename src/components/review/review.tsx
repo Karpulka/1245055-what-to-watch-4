@@ -1,7 +1,7 @@
-import React, {PureComponent, createRef} from "react";
-import {PageType} from "../app/app.jsx";
-import PropTypes from "prop-types";
-import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import * as React, {PureComponent, createRef} from "react";
+import {PageType} from "../app/app";
+import * as PropTypes from "prop-types";
+import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {getErrorText, getIsDisableComentForm} from "../../reducer/data/selectors";
 import {Operation} from "../../reducer/data/data";
 import {connect} from "react-redux";
@@ -14,7 +14,7 @@ const ratings = [
   `Rating 5`,
 ];
 
-class Review extends PureComponent {
+class Review extends React.PureComponent {
   constructor(props) {
     super(props);
 

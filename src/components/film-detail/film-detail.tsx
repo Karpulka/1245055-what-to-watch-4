@@ -1,12 +1,12 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import Tabs from "../tabs/tabs.jsx";
-import FilmsList from "../films-list/films-list.jsx";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import Tabs from "../tabs/tabs.js";
+import FilmsList from "../films-list/films-list.js";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import Footer from "../footer/footer.jsx";
-import {PageType} from "../app/app.jsx";
-import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import Footer from "../footer/footer.js";
+import {PageType} from "../app/app";
+import HeaderWrapper from "../header-wrapper/header-wrapper.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
@@ -15,7 +15,7 @@ import {Link} from "react-router-dom";
 
 const LIKE_FILMS_COUNT = 4;
 
-class FilmDetail extends PureComponent {
+class FilmDetail extends React.PureComponent {
   render() {
     const {film, allFilms, authorizationStatus, onFilmClick, onChangeFavorite} = this.props;
     const {id, title, src, background, genre, year, rating, voiceCount, description, director, actorList, runtime, isFavorite} = film;

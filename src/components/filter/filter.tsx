@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer/film/film";
 import {getGenre} from "../../reducer/film/selectors";
 import {getFilters} from "../../reducer/data/selectors";

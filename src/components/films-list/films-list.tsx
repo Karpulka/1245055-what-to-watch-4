@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Film from "../film/film.jsx";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import Film from "../film/film";
 import {connect} from "react-redux";
 import {getShowingFilms} from "../../reducer/film/selectors";
 

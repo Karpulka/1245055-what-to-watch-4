@@ -1,22 +1,22 @@
-import React, {PureComponent} from "react";
-import Main from "../main/main.jsx";
-import PropTypes from "prop-types";
-import FilmDetail from "../film-detail/film-detail.jsx";
+import * as React from "react";
+import Main from "../main/main.js";
+import * as PropTypes from "prop-types";
+import FilmDetail from "../film-detail/film-detail.js";
 import {Route, Switch, Redirect, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
-import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
+import FullVideoPlayer from "../full-video-player/full-video-player.js";
 import {getFilms} from "../../reducer/film/selectors";
 import {getAllFilms, getPromoFilm} from "../../reducer/data/selectors";
 import {getGenre} from "../../reducer/film/selectors";
-import SignIn from "../sign-in/sign-in.jsx";
+import SignIn from "../sign-in/sign-in.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import MyList from "../mylist/mylist.jsx";
+import MyList from "../mylist/mylist.js";
 import {Operation} from "../../reducer/data/data";
 import withReview from "../../hocs/with-review/with-review";
-import Review from "../review/review.jsx";
-import RedirectToAuth from "../redirect-to-auth/redirect-to-auth.jsx";
+import Review from "../review/review.js";
+import RedirectToAuth from "../redirect-to-auth/redirect-to-auth.js";
 
 const FullVideoPlayerComponent = withVideoPlayer(FullVideoPlayer);
 const AddReviewComponent = withReview(Review);
@@ -27,7 +27,7 @@ const PageType = {
   MOVIE: `MOVIE`
 };
 
-class App extends PureComponent {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
 

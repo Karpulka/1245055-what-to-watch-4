@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import renderer from "react-test-renderer";
-import Film from "./film.jsx";
+import Film from "./film";
 import {StaticRouter} from "react-router-dom";
 
 const film = {

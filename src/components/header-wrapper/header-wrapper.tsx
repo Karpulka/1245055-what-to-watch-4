@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Header from "../header/header.jsx";
-import {PageType} from "../app/app.jsx";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import Header from "../header/header";
+import {PageType} from "../app/app";
 import {Link} from "react-router-dom";
 
 const HeaderWrapper = (props) => {

@@ -1,11 +1,11 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import ReviewItem from "../review-item/review-item.jsx";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import ReviewItem from "../review-item/review-item.js";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/data/data";
 import {getComments} from "../../reducer/data/selectors";
 
-class FilmReviews extends PureComponent {
+class FilmReviews extends React.PureComponent {
   constructor(props) {
     super(props);
 

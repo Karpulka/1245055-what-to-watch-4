@@ -1,11 +1,11 @@
-import React from "react";
-import Footer from "../footer/footer.jsx";
-import {PageType} from "../app/app.jsx";
-import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import * as React from "react";
+import Footer from "../footer/footer";
+import {PageType} from "../app/app";
+import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {connect} from "react-redux";
 import {getFavoriteFilms} from "../../reducer/data/selectors";
-import PropTypes from "prop-types";
-import FilmsList from "../films-list/films-list.jsx";
+import * as PropTypes from "prop-types";
+import FilmsList from "../films-list/films-list";
 import withFilmsList from "../../hocs/with-films-list/with-films-list";
 
 const FilmsListComponent = withFilmsList(FilmsList);

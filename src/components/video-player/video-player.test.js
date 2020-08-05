@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import renderer from "react-test-renderer";
-import VideoPlayer from "./video-palyer.jsx";
+import VideoPlayer from "./video-palyer";
 
 it(`Render VideoPlayer`, () => {
   const tree = renderer
