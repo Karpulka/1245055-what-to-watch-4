@@ -1,5 +1,5 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
+import * as renderer from "react-test-renderer";
 import FilmsList from "./films-list";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";

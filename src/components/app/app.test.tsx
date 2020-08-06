@@ -1,13 +1,14 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
+import * as renderer from "react-test-renderer";
 import {App} from "./app";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {Film} from "../../types";
 
 const mockStore = configureStore([]);
 
-const promoFilm = {
+const promoFilm: Film = {
   id: 1,
   title: `Богемская рапсодия`,
   src: `/bohemian-rhapsody.jpg`,
@@ -27,7 +28,7 @@ const promoFilm = {
   runtime: 99
 };
 
-const films = [
+const films: Array<Film> = [
   {
     id: 0,
     title: `Фантастические твари и места их обитания`,
@@ -109,11 +110,7 @@ it(`Render App Is Auth`, () => {
         promoFilm={promoFilm}
         allFilms={films}
         films={films}
-        handleItemClick={() => {}}
         onItemClick={() => {}}
-        onExitButtonClick={() => {}}
-        isShowFilm={false}
-        onPlayButtonClick={() => {}}
         genre={`All films`}
         isAuth={`AUTH`}
         handleChangeFavorite={() => {}}
@@ -150,11 +147,7 @@ it(`Render App No Auth`, () => {
         promoFilm={promoFilm}
         allFilms={films}
         films={films}
-        handleItemClick={() => {}}
         onItemClick={() => {}}
-        onExitButtonClick={() => {}}
-        isShowFilm={false}
-        onPlayButtonClick={() => {}}
         genre={`All films`}
         isAuth={`NO_AUTH`}
         handleChangeFavorite={() => {}}

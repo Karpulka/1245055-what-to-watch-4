@@ -1,5 +1,5 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
+import * as renderer from "react-test-renderer";
 import {SignIn} from "./sign-in";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";

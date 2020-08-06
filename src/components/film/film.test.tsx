@@ -1,5 +1,5 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
+import * as renderer from "react-test-renderer";
 import Film from "./film";
 import {StaticRouter} from "react-router-dom";
 

@@ -29,13 +29,13 @@ const PageType = {
 
 interface Props {
   films: Array<Film>,
-  runtime: number,
-  video: string,
+  runtime?: number,
+  video?: string,
   allFilms: Array<Film>,
   promoFilm: Film,
   onItemClick: () => void,
   handleChangeFavorite: () => void,
-  activeItem: Array<Film>,
+  activeItem?: Array<Film>,
   genre: string,
   isAuth: string
 }
