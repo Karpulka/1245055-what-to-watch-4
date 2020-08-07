@@ -129,32 +129,30 @@ const withVideoPlayer = (Component) => {
         promise = video.play();
       }
 
-      if (!this.state.isPlaying
-        && this.state.isFullScreen
-        && promise && promise !== undefined) {
-        promise.then(() => {
-          video.pause();
-          if (this.props.wasHover) {
-            video.load();
-          }
-        }).catch(() => {
-          video.pause();
-        });
-      } else if (!this.state.isPlaying && !this.state.isFullScreen) {
+      if (!this.state.isPlaying && !this.state.isFullScreen) {
         video.pause();
         if (this.props.wasHover) {
           video.load();
         }
+      } else if (!this.state.isPlaying
+        && promise && promise !== undefined) {
+        promise.then(() => {
+          video.pause();
+        });
       }
     }
 
     handlePlayButtonClick() {
-      this.setState({isPlaying: !this.state.isPlaying});
+      this.setState({
+        isPlaying: !this.state.isPlaying,
+        isFullScreen: false
+      });
     }
 
     handleFullScreenButtonClick() {
       const video = this.videoRef.current;
       this.setState({
+        isPlaying: false,
         isFullScreen: true
       });
       video.requestFullscreen();
