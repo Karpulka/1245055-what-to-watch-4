@@ -1,7 +1,7 @@
 import * as React from "react";
 import Main from "../main/main";
 import FilmDetail from "../film-detail/film-detail";
-import {Route, Switch, BrowserRouter} from "react-router-dom";
+import {Route, Switch, BrowserRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import FullVideoPlayer from "../full-video-player/full-video-player";
@@ -71,7 +71,7 @@ class App extends React.PureComponent<Props, {}> {
               onChangeFavorite={handleChangeFavorite}
             />;
           }
-          return null;
+          return <Redirect to="/"/>;
         }}/>
         <Route exact path="/films/:id/player" render={(props) => {
           const film = this._getFilmByID(parseInt(props.match.params.id, 10));
@@ -86,7 +86,7 @@ class App extends React.PureComponent<Props, {}> {
               runtime={runtime}
             />;
           }
-          return null;
+          return <Redirect to="/"/>;
         }} />
         <Route exact path="/films/:id/review" render={(props) => {
           const film = this._getFilmByID(parseInt(props.match.params.id, 10));
@@ -100,7 +100,7 @@ class App extends React.PureComponent<Props, {}> {
               onSubmitReview={props.history.goBack}
             /></RedirectToAuth>;
           }
-          return null;
+          return <Redirect to="/"/>;
         }}/>
         <Route exact path="/mylist" render={(props) => <RedirectToAuth><MyList onFilmClick={(id) => props.history.push(`/films/${id}`)}/></RedirectToAuth>} />
         <Route exact path="/login" render={() => <SignIn />} />
