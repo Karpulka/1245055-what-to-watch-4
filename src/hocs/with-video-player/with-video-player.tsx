@@ -41,11 +41,13 @@ const withVideoPlayer = (Component) => {
     public videoRef: React.RefObject<HTMLVideoElement>;
 
     private _fullTime: number;
+    private _promise: Promise<any>;
 
     constructor(props) {
       super(props);
 
       this.videoRef = React.createRef();
+      this._promise = null;
 
       this.handlePlayButtonClick = this.handlePlayButtonClick.bind(this);
       this.handleFullScreenButtonClick = this.handleFullScreenButtonClick.bind(this);
@@ -124,9 +126,8 @@ const withVideoPlayer = (Component) => {
     componentDidUpdate() {
       const video = this.videoRef.current;
 
-      let promise = null;
       if (this.state.isPlaying) {
-        promise = video.play();
+        this._promise = video.play();
       }
 
       if (!this.state.isPlaying && !this.state.isFullScreen) {
@@ -135,8 +136,8 @@ const withVideoPlayer = (Component) => {
           video.load();
         }
       } else if (!this.state.isPlaying
-        && promise && promise !== undefined) {
-        promise.then(() => {
+        && this._promise && this._promise !== undefined) {
+        this._promise.then(() => {
           video.pause();
         });
       }
@@ -151,8 +152,8 @@ const withVideoPlayer = (Component) => {
 
     handleFullScreenButtonClick() {
       const video = this.videoRef.current;
+      this._promise = null;
       this.setState({
-        isPlaying: false,
         isFullScreen: true
       });
       video.requestFullscreen();
