@@ -1,16 +1,15 @@
 import * as React from "react";
 import {formatTimeLeft} from "../../utils";
-import {ReactNode} from "react";
 
 interface Props {
-  children: React.ReactElement<any>,
-  onPlayButtonClick: () => void,
-  isPlaying: boolean,
-  title: string,
-  timeLeft: number,
-  progressBar: number,
-  onFullScreenButtonClick: () => void,
-  onExitButtonClick: () => void
+  children: React.ReactElement;
+  onPlayButtonClick: () => void;
+  isPlaying: boolean;
+  title: string;
+  timeLeft: number;
+  progressBar: number;
+  onFullScreenButtonClick: () => void;
+  onExitButtonClick: () => void;
 }
 
 const FullVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {

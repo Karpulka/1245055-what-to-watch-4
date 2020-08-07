@@ -16,11 +16,11 @@ import {Film} from "../../types";
 const LIKE_FILMS_COUNT = 4;
 
 interface Props {
-  film: Film,
-  allFilms: Array<Film>,
-  authorizationStatus: string,
-  onFilmClick: () => void,
-  onChangeFavorite: (id: number, status: number) => void
+  film: Film;
+  allFilms: Array<Film>;
+  authorizationStatus: string;
+  onFilmClick: () => void;
+  onChangeFavorite: (id: number, status: number) => void;
 }
 
 class FilmDetail extends React.PureComponent<Props, {}> {

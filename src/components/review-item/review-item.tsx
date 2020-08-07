@@ -3,11 +3,11 @@ import {prepareReviewDate} from "../../utils";
 
 interface Props {
   review: {
-    user: string,
-    rating: number,
-    comment: string,
-    date: string
-  }
+    user: string;
+    rating: number;
+    comment: string;
+    date: string;
+  };
 }
 
 const ReviewItem: React.FunctionComponent<Props> = (props: Props) => {

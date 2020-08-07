@@ -1,8 +1,9 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import FilmOverview from "./film-overview";
+import {Overview} from "../../types";
 
-const overview = {
+const overview: Overview = {
   description: `This is Description. TCHK.`,
   rating: 8.5,
   voiceCount: 214,

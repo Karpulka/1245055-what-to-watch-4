@@ -1,7 +1,7 @@
 import * as React from "react";
-import {Overview} from "../../types";
+import {Overview, RatingDescriptionType} from "../../types";
 
-const RatingDescription = [
+const RatingDescription: Array<RatingDescriptionType> = [
   {
     min: 0,
     max: 3,

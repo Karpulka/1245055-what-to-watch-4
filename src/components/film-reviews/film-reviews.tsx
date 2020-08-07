@@ -6,9 +6,9 @@ import {getComments} from "../../reducer/data/selectors";
 import {Review} from "../../types";
 
 interface Props {
-  filmID: number,
-  comments: Array<Review>,
-  setComments: () => void
+  filmID: number;
+  comments: Array<Review>;
+  setComments: () => void;
 }
 
 class FilmReviews extends React.PureComponent<Props, {}> {

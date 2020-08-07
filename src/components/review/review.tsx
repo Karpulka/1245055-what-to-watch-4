@@ -14,19 +14,19 @@ const ratings = [
 ];
 
 interface Props {
-  title: string,
-  background: string,
-  src: string,
-  id: number,
-  isDisableSubmit: boolean,
+  title: string;
+  background: string;
+  src: string;
+  id: number;
+  isDisableSubmit: boolean;
   handleSubmitComment: (id: number, data: {
-    rating: number,
-    comment: string
-  }, callback: () => void) => void,
-  onChangeText: (text: string) => void,
-  onSubmitReview: () => void,
-  isDisableForm: boolean,
-  errorText?: string
+    rating: number;
+    comment: string;
+  }, callback: () => void) => void;
+  onChangeText: (text: string) => void;
+  onSubmitReview: () => void;
+  isDisableForm: boolean;
+  errorText?: string;
 }
 
 class Review extends React.PureComponent<Props, {}> {

@@ -4,13 +4,13 @@ import {PageType} from "../app/app";
 import {Link} from "react-router-dom";
 
 interface Props {
-  pageType: string,
-  isBreadcrumbs?: boolean,
-  id?: number,
-  filmID?: number,
-  pageTitle?: string,
-  breadcrumbTitle?: string,
-  isUserBlock?: boolean
+  pageType: string;
+  isBreadcrumbs?: boolean;
+  id?: number;
+  filmID?: number;
+  pageTitle?: string;
+  breadcrumbTitle?: string;
+  isUserBlock?: boolean;
 }
 
 const HeaderWrapper: React.FunctionComponent<Props> = (props: Props) => {
@@ -32,6 +32,6 @@ const HeaderWrapper: React.FunctionComponent<Props> = (props: Props) => {
 HeaderWrapper.defaultProps = {
   isUserBlock: true,
   isBreadcrumbs: false
-}
+};
 
 export default HeaderWrapper;

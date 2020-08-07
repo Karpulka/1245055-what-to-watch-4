@@ -3,9 +3,9 @@ import {Link} from "react-router-dom";
 import {Tab} from "../../types";
 
 interface Props {
-  active: string,
-  onTabClick: (tabTitle: Tab) => void,
-  tab: Tab
+  active: string;
+  onTabClick: (tabTitle: Tab) => void;
+  tab: Tab;
 }
 
 const TabVariants: React.FunctionComponent<Props> = (props: Props) => {

@@ -1,10 +1,11 @@
 import * as React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import {Filter} from "./filter";
 import {StaticRouter} from "react-router-dom";
+import {noop} from "../../utils";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
@@ -22,7 +23,7 @@ it(`Click by link`, () => {
   );
 
   const link = filterComponent.find(`.catalog__genres-link`).at(1);
-  link.simulate(`click`, {preventDefault() {}, currentTarget: {textContent: `Drama`}});
+  link.simulate(`click`, {preventDefault: noop, currentTarget: {textContent: `Drama`}});
 
   expect(handleGenreChange.mock.calls.length).toBe(1);
 });

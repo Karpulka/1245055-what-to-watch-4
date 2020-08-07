@@ -17,3 +17,5 @@ export const prepareReviewDate = (date) => {
 export const setNewObject = (a, b) => {
   return Object.assign({}, a, b);
 };
+
+export const noop = () => {};

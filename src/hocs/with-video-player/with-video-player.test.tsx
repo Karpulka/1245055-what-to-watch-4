@@ -1,14 +1,13 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import withVideoPlayer from "./with-video-player";
-import * as PropTypes from "prop-types";
 
-const MockComponent = (props) => {
+interface MockComponentType {
+  children: React.ReactNode;
+}
+
+const MockComponent = (props: MockComponentType) => {
   return <div>{props.children}</div>;
-};
-
-MockComponent.propTypes = {
-  children: PropTypes.element.isRequired
 };
 
 const src = `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`;

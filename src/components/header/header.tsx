@@ -6,12 +6,12 @@ import {Link} from "react-router-dom";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
 interface Props {
-  auth: string,
-  isBreadcrumbs: boolean,
-  isUserBlock: boolean,
-  pageTitle?: string,
-  breadcrumbTitle?: string,
-  filmID?: number
+  auth: string;
+  isBreadcrumbs: boolean;
+  isUserBlock: boolean;
+  pageTitle?: string;
+  breadcrumbTitle?: string;
+  filmID?: number;
 }
 
 const Header: React.FunctionComponent<Props> = (props: Props) => {

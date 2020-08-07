@@ -1,14 +1,22 @@
 import * as React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import withActiveItem from "./with-active-item";
-import * as PropTypes from "prop-types";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
-const mockFilms = [
+interface MockFilm {
+  id: number;
+}
+
+interface MockComponentTypes {
+  films: Array<MockFilm>;
+  onItemClick: (film: MockFilm) => void;
+}
+
+const mockFilms: Array<MockFilm> = [
   {
     id: 3
   },
@@ -20,18 +28,11 @@ const mockFilms = [
   }
 ];
 
-const MockComponent = (props) => {
+const MockComponent = (props: MockComponentTypes) => {
   const {films, onItemClick} = props;
   return <div>
     {films.map((film) => <button onClick={() => onItemClick(film)} key={film.id} />)}
   </div>;
-};
-
-MockComponent.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: number
-  })).isRequired,
-  onItemClick: () => void
 };
 
 it(`Test item click and set activeItem`, () => {

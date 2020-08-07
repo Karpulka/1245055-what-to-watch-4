@@ -10,11 +10,11 @@ export const TabVariantValues = {
 };
 
 interface Props {
-  overview: Overview,
-  details: Details,
-  onItemClick: () => void,
-  activeItem: Tab,
-  filmID: number
+  overview: Overview;
+  details: Details;
+  onItemClick: () => void;
+  activeItem: Tab;
+  filmID: number;
 }
 
 const Tabs: React.FunctionComponent<Props> = (props: Props) => {

@@ -6,7 +6,7 @@ import {TabVariantValues} from "../tabs/tabs";
 import {Tab} from "../../types";
 
 interface Props {
-  tabValue: Tab
+  tabValue: Tab;
 }
 
 const TabsInner = (props) => {

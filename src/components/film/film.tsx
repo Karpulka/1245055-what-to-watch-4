@@ -2,14 +2,14 @@ import * as React from "react";
 import VideoPlayer from "../video-player/video-palyer";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import {Link} from "react-router-dom";
-import {Film} from "../../types";
+import {Film as FilmType} from "../../types";
 
 interface Props {
-  film: Film,
-  onFilmHover: (film: Film) => void,
-  onFilmBlur: () => void,
-  onFilmClick: (id: number) => void,
-  isStartPlaying?: boolean
+  film: FilmType;
+  onFilmHover: (film: FilmType) => void;
+  onFilmBlur: () => void;
+  onFilmClick: (id: number) => void;
+  isStartPlaying?: boolean;
 }
 
 const Film: React.FunctionComponent<Props> = (props: Props) => {

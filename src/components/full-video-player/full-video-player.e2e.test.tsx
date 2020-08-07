@@ -1,9 +1,10 @@
 import * as React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import FullVideoPlayer from "./full-video-player";
+import {noop} from "../../utils";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
@@ -18,8 +19,8 @@ describe(`Test FullVideoPlayer Funcs`, () => {
           title={`Test`}
           timeLeft={0}
           progressBar={0}
-          onFullScreenButtonClick={() => {}}
-          onExitButtonClick={() => {}}>
+          onFullScreenButtonClick={noop}
+          onExitButtonClick={noop}>
           <video />
         </FullVideoPlayer>
     );
@@ -34,13 +35,13 @@ describe(`Test FullVideoPlayer Funcs`, () => {
 
     const fullVideoPlayer = shallow(
         <FullVideoPlayer
-          onPlayButtonClick={() => {}}
+          onPlayButtonClick={noop}
           isPlaying={true}
           title={`Test`}
           timeLeft={0}
           progressBar={0}
           onFullScreenButtonClick={handleFullScreenButtonClick}
-          onExitButtonClick={() => {}}>
+          onExitButtonClick={noop}>
           <video />
         </FullVideoPlayer>
     );
@@ -55,12 +56,12 @@ describe(`Test FullVideoPlayer Funcs`, () => {
 
     const fullVideoPlayer = shallow(
         <FullVideoPlayer
-          onPlayButtonClick={() => {}}
+          onPlayButtonClick={noop}
           isPlaying={true}
           title={`Test`}
           timeLeft={0}
           progressBar={0}
-          onFullScreenButtonClick={() => {}}
+          onFullScreenButtonClick={noop}
           onExitButtonClick={handleExitButtonClick}>
           <video />
         </FullVideoPlayer>

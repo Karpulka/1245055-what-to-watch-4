@@ -3,12 +3,12 @@ import {Film} from "../../types";
 import {Subtract} from "utility-types";
 
 interface State {
-  activeItem: Film
+  activeItem: Film;
 }
 
 interface InjectingPtops {
-  onItemClick: () => void,
-  activeItem: Film
+  onItemClick: () => void;
+  activeItem: Film;
 }
 
 const withActiveItem = (Component) => {

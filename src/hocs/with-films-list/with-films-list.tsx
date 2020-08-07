@@ -2,13 +2,13 @@ import * as React from "react";
 import {Subtract} from "utility-types";
 
 interface State {
-  activeFilmID: number
+  activeFilmID: number;
 }
 
 interface InjectingProps {
-  onFilmHover: () => void,
-  onFilmBlur: () => void,
-  activeFilmID: number
+  onFilmHover: () => void;
+  onFilmBlur: () => void;
+  activeFilmID: number;
 }
 
 const withFilmsList = (Component) => {

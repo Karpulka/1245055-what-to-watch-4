@@ -2,8 +2,10 @@ import * as React from "react";
 import * as renderer from "react-test-renderer";
 import Tabs from "./tabs";
 import {StaticRouter} from "react-router-dom";
+import {Overview, Details, ActiveItem} from "../../types";
+import {noop} from "../../utils";
 
-const overview = {
+const overview: Overview = {
   description: `This is Description. TCHK.`,
   rating: 8.5,
   voiceCount: 214,
@@ -11,7 +13,7 @@ const overview = {
   actorList: [`Actor`, `Actor`, `Actor`]
 };
 
-const details = {
+const details: Details = {
   genre: `Drama`,
   year: 2012,
   director: `He's Director`,
@@ -20,7 +22,7 @@ const details = {
 };
 
 it(`Render Tabs`, () => {
-  const activeItem = {
+  const activeItem: ActiveItem = {
     title: `Overview`,
     value: overview
   };
@@ -31,7 +33,7 @@ it(`Render Tabs`, () => {
       details={details}
       filmID={0}
       activeItem={activeItem}
-      onItemClick={() => {}}/>
+      onItemClick={noop}/>
     </StaticRouter>)
     .toJSON();
 

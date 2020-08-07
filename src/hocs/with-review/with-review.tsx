@@ -5,12 +5,12 @@ const MIN_TEXT_LENGTH = 50;
 const MAX_TEXT_LENGTH = 400;
 
 interface State {
-  isDisableSubmit: boolean
+  isDisableSubmit: boolean;
 }
 
 interface InjectingProps {
-  isDisableSubmit: boolean,
-  onChangeText: () => void
+  isDisableSubmit: boolean;
+  onChangeText: () => void;
 }
 
 const withReview = (Component) => {

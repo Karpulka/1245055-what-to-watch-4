@@ -2,8 +2,8 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 
 interface Props {
-  id: number,
-  title: string
+  id: number;
+  title: string;
 }
 
 const Breadcrumbs: React.FunctionComponent<Props> = (props: Props) => {

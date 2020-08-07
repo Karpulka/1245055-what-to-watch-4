@@ -4,12 +4,16 @@ import {PageType} from "../app/app";
 import HeaderWrapper from "../header-wrapper/header-wrapper";
 import {Operation} from "../../reducer/user/user";
 import {connect} from "react-redux";
-import {getErrorMessage, getIsEmailValid} from "../../reducer/user/selectors";
+import {getErrorMessage, getIsEmailValid, getAuthorizationStatus, getIsEndLoadData} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {Redirect} from "react-router-dom";
 
 interface Props {
-  login: (parameter: {login: string, password: string}) => void,
-  errorMessage: string,
-  isEmailValid: boolean
+  login: (parameter: {login: string; password: string}) => void;
+  errorMessage?: string;
+  isEmailValid: boolean;
+  authorizationStatus: string;
+  isEndLoadData: boolean;
 }
 
 class SignIn extends React.PureComponent<Props, {}> {
@@ -26,7 +30,16 @@ class SignIn extends React.PureComponent<Props, {}> {
   }
 
   render() {
-    const {errorMessage, isEmailValid} = this.props;
+    const {errorMessage, isEmailValid, authorizationStatus, isEndLoadData} = this.props;
+
+    if (!isEndLoadData) {
+      return null;
+    }
+
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      return <Redirect to="/" />;
+    }
+
     const emailClassName = `sign-in__field${!isEmailValid ? ` sign-in__field--error` : ``}`;
 
     return <div className="user-page">
@@ -72,7 +85,9 @@ class SignIn extends React.PureComponent<Props, {}> {
 
 const mapStateToProps = (state) => ({
   errorMessage: getErrorMessage(state),
-  isEmailValid: getIsEmailValid(state)
+  isEmailValid: getIsEmailValid(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  isEndLoadData: getIsEndLoadData(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

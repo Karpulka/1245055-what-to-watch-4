@@ -1,14 +1,16 @@
 import * as React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import TabVariants from "./tab-variants";
 import {StaticRouter} from "react-router-dom";
+import {Tab} from "../../types";
+import {noop} from "../../utils";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
-const tab = {
+const tab: Tab = {
   title: `Overview`,
   value: {
     description: `This is Description. TCHK.`,
@@ -31,7 +33,7 @@ it(`Click by tab`, () => {
   </StaticRouter>);
 
   const link = tabVariants.find(`a`);
-  link.simulate(`click`, {preventDefault: () => {}});
+  link.simulate(`click`, {preventDefault: noop});
 
   expect(handleTabClick.mock.calls.length).toBe(1);
 });

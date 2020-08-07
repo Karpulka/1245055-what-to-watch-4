@@ -3,7 +3,7 @@ import {prepareFilmDuration} from "../../utils";
 import {Details} from "../../types";
 
 interface Props {
-  details: Details
+  details: Details;
 }
 
 const FilmDetails: React.FunctionComponent<Props> = (props: Props) => {

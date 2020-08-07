@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {Film} from "../../types";
+import {noop} from "../../utils";
 
 const mockStore = configureStore([]);
 
@@ -110,10 +111,10 @@ it(`Render App Is Auth`, () => {
         promoFilm={promoFilm}
         allFilms={films}
         films={films}
-        onItemClick={() => {}}
+        onItemClick={noop}
         genre={`All films`}
         isAuth={`AUTH`}
-        handleChangeFavorite={() => {}}
+        handleChangeFavorite={noop}
       />
     </Provider>, {
       createNodeMock: () => {
@@ -147,10 +148,10 @@ it(`Render App No Auth`, () => {
         promoFilm={promoFilm}
         allFilms={films}
         films={films}
-        onItemClick={() => {}}
+        onItemClick={noop}
         genre={`All films`}
         isAuth={`NO_AUTH`}
-        handleChangeFavorite={() => {}}
+        handleChangeFavorite={noop}
       />
     </Provider>, {
       createNodeMock: () => {

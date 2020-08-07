@@ -1,8 +1,10 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import ReviewItem from "./review-item";
+import {Review} from "../../types";
 
-const review = {
+const review: Review = {
+  id: 1,
   user: `Kate Muir`,
   rating: 7.1,
   comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,

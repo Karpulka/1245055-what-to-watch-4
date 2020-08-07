@@ -6,12 +6,12 @@ import {getFilters} from "../../reducer/data/selectors";
 import {Link} from "react-router-dom";
 
 interface Props {
-  filters: Array<string>,
-  genre: string,
-  handleGenreChange: () => void
+  filters: Array<string>;
+  genre: string;
+  handleGenreChange: (text: string) => void;
 }
 
-const Filter = (props) => {
+const Filter: React.FunctionComponent<Props> = (props: Props) => {
   const {filters, genre, handleGenreChange} = props;
 
   return <ul className="catalog__genres-list">

@@ -5,14 +5,17 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {StaticRouter} from "react-router-dom";
+import {Film} from "../../types";
+import {noop} from "../../utils";
 
 const mockStore = configureStore([]);
 
-const promoFilm = {
+const promoFilm: Film = {
   id: 5,
   title: `Revenant`,
   src: `/revenant.jpg`,
   background: `/revenant.jpg`,
+  preview: `/revenant.jpg`,
   genre: `Action, Adventure`,
   year: 2015,
   video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -27,12 +30,13 @@ const promoFilm = {
   runtime: 145
 };
 
-const films = [
+const films: Array<Film> = [
   {
     id: 3,
     title: `Большой куш`,
     src: `/snatch.jpg`,
     background: `/snatch.jpg`,
+    preview: `/snatch.jpg`,
     genre: `Comedy, Crime`,
     year: 2000,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -51,6 +55,7 @@ const films = [
     title: `Война миров`,
     src: `/war-of-the-worlds.jpg`,
     background: `/war-of-the-worlds.jpg`,
+    preview: `/war-of-the-worlds.jpg`,
     genre: `Adventure, War Drama`,
     year: 2005,
     fullVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -69,6 +74,7 @@ const films = [
     title: `Revenant`,
     src: `/revenant.jpg`,
     background: `/revenant.jpg`,
+    preview: `/revenant.jpg`,
     genre: `Action, Adventure`,
     year: 2015,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -89,8 +95,7 @@ it(`Render Main Is Auth`, () => {
     [NameSpace.FILM]: {
       filters: [`All genres`, `Drama`],
       genre: `All genres`,
-      showingFilms: 5,
-      films
+      showingFilms: 5
     },
     [NameSpace.DATA]: {
       allFilms: films
@@ -105,12 +110,16 @@ it(`Render Main Is Auth`, () => {
       <StaticRouter>
         <Main
           promoFilm={promoFilm}
-          onFilmClick={() => {}}
-          onPlayButtonClick={() => {}}
-          onChangeFavorite={() => {}}
+          onFilmClick={noop}
+          films={films}
+          onChangeFavorite={noop}
         />
       </StaticRouter>
-    </Provider>)
+    </Provider>, {
+      createNodeMock: () => {
+        return {};
+      }
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -121,8 +130,7 @@ it(`Render Main No Auth`, () => {
     [NameSpace.FILM]: {
       filters: [`All genres`, `Drama`],
       genre: `All genres`,
-      showingFilms: 5,
-      films
+      showingFilms: 5
     },
     [NameSpace.DATA]: {
       allFilms: films
@@ -137,12 +145,16 @@ it(`Render Main No Auth`, () => {
       <StaticRouter>
         <Main
           promoFilm={promoFilm}
-          onFilmClick={() => {}}
-          onPlayButtonClick={() => {}}
-          onChangeFavorite={() => {}}
+          onFilmClick={noop}
+          films={films}
+          onChangeFavorite={noop}
         />
       </StaticRouter>
-    </Provider>)
+    </Provider>, {
+      createNodeMock: () => {
+        return {};
+      }
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

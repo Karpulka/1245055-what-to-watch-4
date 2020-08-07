@@ -10,7 +10,6 @@ import {getAllFilms, getPromoFilm} from "../../reducer/data/selectors";
 import {getGenre} from "../../reducer/film/selectors";
 import SignIn from "../sign-in/sign-in";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
-import {AuthorizationStatus} from "../../reducer/user/user";
 import MyList from "../mylist/mylist";
 import {Operation} from "../../reducer/data/data";
 import withReview from "../../hocs/with-review/with-review";
@@ -28,16 +27,16 @@ const PageType = {
 };
 
 interface Props {
-  films: Array<Film>,
-  runtime?: number,
-  video?: string,
-  allFilms: Array<Film>,
-  promoFilm: Film,
-  onItemClick: () => void,
-  handleChangeFavorite: () => void,
-  activeItem?: Array<Film>,
-  genre: string,
-  isAuth: string
+  films: Array<Film>;
+  runtime?: number;
+  video?: string;
+  allFilms: Array<Film>;
+  promoFilm: Film;
+  onItemClick: () => void;
+  handleChangeFavorite: () => void;
+  activeItem?: Array<Film>;
+  genre: string;
+  isAuth: string;
 }
 
 class App extends React.PureComponent<Props, {}> {
@@ -104,9 +103,7 @@ class App extends React.PureComponent<Props, {}> {
           return null;
         }}/>
         <Route exact path="/mylist" render={(props) => <RedirectToAuth><MyList onFilmClick={(id) => props.history.push(`/films/${id}`)}/></RedirectToAuth>} />
-        <Route exact path="/login" render={() => {
-          return isAuth === AuthorizationStatus.NO_AUTH ? <SignIn /> : <Redirect to="/" />;
-        }} />
+        <Route exact path="/login" render={() => <SignIn />} />
       </Switch>
     </BrowserRouter>;
   }

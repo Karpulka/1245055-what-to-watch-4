@@ -9,13 +9,13 @@ import withFilmsList from "../../hocs/with-films-list/with-films-list";
 import {Film} from "../../types";
 
 interface Props {
-  films: Array<Film>,
-  onFilmClick: () => void
+  films: Array<Film>;
+  onFilmClick: () => void;
 }
 
 const FilmsListComponent = withFilmsList(FilmsList);
 
-const MyList = (props) => {
+const MyList: React.FunctionComponent<Props> = (props: Props) => {
   const {films, onFilmClick} = props;
 
   return <div className="user-page">

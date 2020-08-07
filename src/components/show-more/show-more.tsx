@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {getFilms, getShowingFilms} from "../../reducer/film/selectors";
 
 interface Props {
-  showingFilms: number,
-  filmsLength: number,
-  handleShowMoreClick: () => void
+  showingFilms: number;
+  filmsLength: number;
+  handleShowMoreClick: () => void;
 }
 
 const ShowMore: React.FunctionComponent<Props> = (props: Props) => {

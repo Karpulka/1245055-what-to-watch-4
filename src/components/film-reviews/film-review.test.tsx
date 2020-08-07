@@ -1,13 +1,10 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import {FilmReviews} from "./film-reviews";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space";
+import {Review} from "../../types";
+import {noop} from "../../utils";
 
-const mockStore = configureStore([]);
-
-const comments = [
+const comments: Array<Review> = [
   {
     id: 0,
     user: `Kate Muir`,
@@ -31,15 +28,11 @@ const comments = [
   }
 ];
 
-it(`Render FilmReviews`, () => {
-  const store = mockStore({
-    [NameSpace.DATA]: {
-      comments
-    }
-  });
+const filmId = 1;
 
+it(`Render FilmReviews`, () => {
   const tree = renderer
-    .create(<Provider store={store}><FilmReviews filmID={1} setComments={() => {}}/></Provider>)
+    .create(<FilmReviews filmID={filmId} comments={comments} setComments={noop}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

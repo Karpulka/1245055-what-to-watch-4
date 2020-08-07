@@ -5,8 +5,8 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {Redirect} from "react-router-dom";
 
 interface Props {
-  authorizationStatus: string,
-  children: React.ReactElement
+  authorizationStatus: string;
+  children: React.ReactElement;
 }
 
 const RedirectToAuth: React.FunctionComponent<Props> = (props: Props) => {

@@ -10,10 +10,10 @@ import {Link} from "react-router-dom";
 import {Film} from "../../types";
 
 interface Props {
-  promoFilm: Film,
-  films: Array<Film>,
-  onFilmClick: (callback: () => void) => void,
-  onChangeFavorite: (id: number, status: number) => void
+  promoFilm: Film;
+  films: Array<Film>;
+  onFilmClick: (callback: () => void) => void;
+  onChangeFavorite: (id: number, status: number) => void;
 }
 
 const Main: React.FunctionComponent<Props> = (props: Props) => {

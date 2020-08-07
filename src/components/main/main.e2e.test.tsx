@@ -1,23 +1,26 @@
 import * as React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {StaticRouter} from "react-router-dom";
+import {Film} from "../../types";
+import {noop} from "../../utils";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
 const mockStore = configureStore([]);
 
-const promoFilm = {
+const promoFilm: Film = {
   id: 5,
   title: `Revenant`,
   src: `/revenant.jpg`,
   background: `/revenant.jpg`,
+  preview: `/revenant.jpg`,
   genre: `Action, Adventure`,
   year: 2015,
   video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -32,11 +35,12 @@ const promoFilm = {
   runtime: 145
 };
 
-const films = [
+const films: Array<Film> = [
   {
     id: 3,
     title: `Большой куш`,
     src: `/snatch.jpg`,
+    preview: `/snatch.jpg`,
     background: `/snatch.jpg`,
     genre: `Comedy, Crime`,
     year: 2000,
@@ -56,6 +60,7 @@ const films = [
     title: `Война миров`,
     src: `/war-of-the-worlds.jpg`,
     background: `/war-of-the-worlds.jpg`,
+    preview: `/war-of-the-worlds.jpg`,
     genre: `Adventure, War Drama`,
     year: 2005,
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -74,6 +79,7 @@ const films = [
     title: `Revenant`,
     src: `/revenant.jpg`,
     background: `/revenant.jpg`,
+    preview: `/revenant.jpg`,
     genre: `Action, Adventure`,
     year: 2015,
     video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -96,8 +102,7 @@ it(`Test click by Add favorite button`, () => {
     [NameSpace.FILM]: {
       filters: [`All genres`, `Drama`],
       genre: `All genres`,
-      showingFilms: 5,
-      films
+      showingFilms: 5
     },
     [NameSpace.DATA]: {
       allFilms: films
@@ -110,15 +115,15 @@ it(`Test click by Add favorite button`, () => {
   const main = mount(<Provider store={store}>
     <StaticRouter>
       <Main
+        films={films}
         promoFilm={promoFilm}
-        onPlayButtonClick={() => {}}
-        onFilmClick={() => {}}
+        onFilmClick={noop}
         onChangeFavorite={handleClickAddToFavorite} />
     </StaticRouter>
   </Provider>);
 
   const button = main.find(`button.btn--list`);
-  button.simulate(`click`, {preventDefault: () => {}});
+  button.simulate(`click`, {preventDefault: noop});
 
   expect(handleClickAddToFavorite.mock.calls.length).toBe(1);
   expect(handleClickAddToFavorite.mock.calls[0][0]).toBe(5);

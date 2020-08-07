@@ -5,12 +5,12 @@ import {getShowingFilms} from "../../reducer/film/selectors";
 import {Film as FilmType} from "../../types";
 
 interface Props {
-  films: Array<FilmType>,
-  onFilmClick: () => void,
-  onFilmHover: () => void,
-  onFilmBlur: () => void,
-  activeFilmID?: number,
-  showingFilms: number,
+  films: Array<FilmType>;
+  onFilmClick: () => void;
+  onFilmHover: () => void;
+  onFilmBlur: () => void;
+  activeFilmID?: number;
+  showingFilms: number;
 }
 
 const FilmsList: React.FunctionComponent<Props> = (props: Props) => {

@@ -4,8 +4,9 @@ import TabsInner from "./tabs-inner";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {Tab, Review} from "../../types";
 
-const overview = {
+const overview: Tab = {
   title: `Overview`,
   value: {
     description: `This is Description. TCHK.`,
@@ -16,7 +17,7 @@ const overview = {
   }
 };
 
-const details = {
+const details: Tab = {
   title: `Details`,
   value: {
     genre: `Drama`,
@@ -27,12 +28,12 @@ const details = {
   }
 };
 
-const reviews = {
+const reviews: Tab = {
   title: `Reviews`,
   value: 1
 };
 
-const comments = [
+const comments: Array<Review> = [
   {
     id: 0,
     user: `Kate Muir`,

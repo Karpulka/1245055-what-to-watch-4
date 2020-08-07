@@ -8,13 +8,15 @@ const AuthorizationStatus = {
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   errorMessage: ``,
-  isEmailValid: true
+  isEmailValid: true,
+  isEndLoadData: false
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_ERROR_TEXT: `SET_ERROR_TEXT`,
-  SET_EMAIL_VALID: `SET_EMAIL_VALID`
+  SET_EMAIL_VALID: `SET_EMAIL_VALID`,
+  SET_LOAD_DATA_FLAG: `SET_LOAD_DATA_FLAG`
 };
 
 const ErrorText = {
@@ -36,6 +38,11 @@ const ActionCreator = {
   setEmailValidation: (message) => ({
     type: ActionType.SET_EMAIL_VALID,
     payload: message
+  }),
+
+  setLoadDataFlag: (isLoadData) => ({
+    type: ActionType.SET_LOAD_DATA_FLAG,
+    payload: isLoadData
   })
 };
 
@@ -44,8 +51,10 @@ const Operation = {
     return api.get(`/login`)
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setLoadDataFlag(true));
       })
       .catch((err) => {
+        dispatch(ActionCreator.setLoadDataFlag(true));
         throw err;
       });
   },
@@ -95,6 +104,11 @@ const reducer = (state = initialState, action) => {
       return setNewObject(state, {
         errorMessage: action.payload,
         isEmailValid: false
+      });
+
+    case ActionType.SET_LOAD_DATA_FLAG:
+      return setNewObject(state, {
+        isEndLoadData: action.payload
       });
   }
 

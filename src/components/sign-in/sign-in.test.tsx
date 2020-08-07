@@ -5,20 +5,22 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space";
 import {StaticRouter} from "react-router-dom";
+import {noop} from "../../utils";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const mockStore = configureStore([]);
 
 it(`Render SignIn Start`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
-      authorizationStatus: `NO_AUTH`
+      authorizationStatus: AuthorizationStatus.NO_AUTH
     }
   });
 
   const tree = renderer
     .create(<Provider store={store}>
       <StaticRouter>
-        <SignIn errorMessage={``} isEmailValid={true} login={() => {}} />
+        <SignIn errorMessage={``} isEndLoadData={true} authorizationStatus={AuthorizationStatus.NO_AUTH} isEmailValid={true} login={noop} />
       </StaticRouter>
     </Provider>)
     .toJSON();
@@ -29,14 +31,14 @@ it(`Render SignIn Start`, () => {
 it(`Render SignIn Email No Valid`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
-      authorizationStatus: `NO_AUTH`
+      authorizationStatus: AuthorizationStatus.NO_AUTH
     }
   });
 
   const tree = renderer
     .create(<Provider store={store}>
       <StaticRouter>
-        <SignIn errorMessage={`Error`} isEmailValid={false} login={() => {}} />
+        <SignIn errorMessage={`Error`} authorizationStatus={AuthorizationStatus.NO_AUTH} isEndLoadData={true} isEmailValid={false} login={noop} />
       </StaticRouter>
     </Provider>)
     .toJSON();
@@ -47,14 +49,14 @@ it(`Render SignIn Email No Valid`, () => {
 it(`Render SignIn incorrect data`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
-      authorizationStatus: `NO_AUTH`
+      authorizationStatus: AuthorizationStatus.NO_AUTH
     }
   });
 
   const tree = renderer
     .create(<Provider store={store}>
       <StaticRouter>
-        <SignIn errorMessage={`Error`} isEmailValid={true} login={() => {}} />
+        <SignIn errorMessage={`Error`} isEndLoadData={true} authorizationStatus={AuthorizationStatus.NO_AUTH} isEmailValid={true} login={noop} />
       </StaticRouter>
     </Provider>)
     .toJSON();

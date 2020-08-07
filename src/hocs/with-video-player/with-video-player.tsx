@@ -4,28 +4,28 @@ import {Subtract} from "utility-types";
 const SECONDS_IN_MINUTE = 60;
 
 interface Props {
-  src: string,
-  poster: string,
-  isMuted?: boolean,
-  isStartPlaying: boolean,
-  runtime?: number,
-  wasHover?: boolean
+  src: string;
+  poster: string;
+  isMuted?: boolean;
+  isStartPlaying: boolean;
+  runtime?: number;
+  wasHover?: boolean;
 }
 
 interface State {
-  progress: number,
-  progressBar: number,
-  isLoading: boolean,
-  isPlaying: boolean,
-  timeLeft: number
+  progress: number;
+  progressBar: number;
+  isLoading: boolean;
+  isPlaying: boolean;
+  timeLeft: number;
 }
 
 interface InjectingProps {
-  onPlayButtonClick: () => void,
-  isPlaying: boolean,
-  timeLeft: number,
-  progressBar: number,
-  onFullScreenButtonClick: () => void
+  onPlayButtonClick: () => void;
+  isPlaying: boolean;
+  timeLeft: number;
+  progressBar: number;
+  onFullScreenButtonClick: () => void;
 }
 
 const withVideoPlayer = (Component) => {

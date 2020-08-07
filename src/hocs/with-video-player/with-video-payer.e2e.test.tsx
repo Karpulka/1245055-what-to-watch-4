@@ -1,17 +1,22 @@
 import * as React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import withVideoPlayer from "./with-video-player";
-import * as PropTypes from "prop-types";
+import {noop} from "../../utils";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
 const src = `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`;
 const poster = `/poster.jpg`;
 
-const MockComponent = (props) => {
+interface MockComponentTypes {
+  children: React.ReactNode;
+  onPlayButtonClick: () => void;
+}
+
+const MockComponent = (props: MockComponentTypes) => {
   const {onPlayButtonClick, children} = props;
   return <div>
     <button onClick={onPlayButtonClick} />
@@ -19,15 +24,10 @@ const MockComponent = (props) => {
   </div>;
 };
 
-MockComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  onPlayButtonClick: () => void
-};
-
 const MockComponentWrapped = withVideoPlayer(MockComponent);
 
 it(`Test pause video`, () => {
-  window.HTMLMediaElement.prototype.pause = () => {};
+  window.HTMLMediaElement.prototype.pause = noop;
 
   const video = mount(
       <MockComponentWrapped
@@ -50,7 +50,7 @@ it(`Test pause video`, () => {
 });
 
 it(`Test play video`, () => {
-  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
 
   const video = mount(
       <MockComponentWrapped

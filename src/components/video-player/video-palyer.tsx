@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  children: React.ReactElement
+  children: React.ReactElement;
 }
 
 const VideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
