@@ -16,7 +16,7 @@ const withFilmsList = (Component) => {
   type T = Subtract<P, InjectingProps>;
 
   class WithFilmsList extends React.PureComponent<T, State> {
-    private _timeoutID: NodeJS.Timer;
+    private _timeoutID: number;
 
     constructor(props) {
       super(props);
@@ -48,7 +48,7 @@ const withFilmsList = (Component) => {
     }
 
     handleFilmHover(film) {
-      this._timeoutID = setTimeout(() => this.setState({activeFilmID: film.id}), 1000);
+      this._timeoutID = window.setTimeout(() => this.setState({activeFilmID: film.id}), 1000);
     }
 
     handleFilmBlur() {

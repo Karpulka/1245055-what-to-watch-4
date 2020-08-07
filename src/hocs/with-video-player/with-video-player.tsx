@@ -18,6 +18,7 @@ interface State {
   isLoading: boolean;
   isPlaying: boolean;
   timeLeft: number;
+  isFullScreen: boolean;
 }
 
 interface InjectingProps {
@@ -56,7 +57,8 @@ const withVideoPlayer = (Component) => {
         progressBar: 0,
         isLoading: true,
         isPlaying: props.isStartPlaying,
-        timeLeft: this._fullTime || 0
+        timeLeft: this._fullTime || 0,
+        isFullScreen: false
       };
     }
 
@@ -122,9 +124,23 @@ const withVideoPlayer = (Component) => {
     componentDidUpdate() {
       const video = this.videoRef.current;
 
+      let promise = null;
       if (this.state.isPlaying) {
-        video.play();
-      } else {
+        promise = video.play();
+      }
+
+      if (!this.state.isPlaying
+        && this.state.isFullScreen
+        && promise && promise !== undefined) {
+        promise.then(() => {
+          video.pause();
+          if (this.props.wasHover) {
+            video.load();
+          }
+        }).catch(() => {
+          video.pause();
+        });
+      } else if (!this.state.isPlaying && !this.state.isFullScreen) {
         video.pause();
         if (this.props.wasHover) {
           video.load();
@@ -138,8 +154,10 @@ const withVideoPlayer = (Component) => {
 
     handleFullScreenButtonClick() {
       const video = this.videoRef.current;
-      const rfs = video.requestFullscreen;
-      rfs.call(video);
+      this.setState({
+        isFullScreen: true
+      });
+      video.requestFullscreen();
     }
   }
 
