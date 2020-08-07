@@ -33,7 +33,7 @@ const getRatingDescription = (rating) => {
 };
 
 interface Props {
-  overview: Overview
+  overview: Overview;
 }
 
 const FilmOverview: React.FunctionComponent<Props> = (props: Props) => {

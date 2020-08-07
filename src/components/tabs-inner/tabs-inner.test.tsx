@@ -8,7 +8,7 @@ import {Tab, Review} from "../../types";
 
 const overview: Tab = {
   title: `Overview`,
-  value: {
+  overview: {
     description: `This is Description. TCHK.`,
     rating: 8.5,
     voiceCount: 214,
@@ -19,7 +19,7 @@ const overview: Tab = {
 
 const details: Tab = {
   title: `Details`,
-  value: {
+  details: {
     genre: `Drama`,
     year: 2012,
     director: `He's Director`,
@@ -30,7 +30,7 @@ const details: Tab = {
 
 const reviews: Tab = {
   title: `Reviews`,
-  value: 1
+  id: 1
 };
 
 const comments: Array<Review> = [

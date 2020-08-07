@@ -18,19 +18,19 @@ export interface Film {
 }
 
 export interface Details {
-  genre?: string;
-  year?: number;
-  director?: string;
-  actorList?: Array<string>;
-  runtime?: number;
+  genre: string;
+  year: number;
+  director: string;
+  actorList: Array<string>;
+  runtime: number;
 }
 
 export interface Overview {
-  description?: string;
-  rating?: number;
-  voiceCount?: number;
-  director?: string;
-  actorList?: Array<string>;
+  description: string;
+  rating: number;
+  voiceCount: number;
+  director: string;
+  actorList: Array<string>;
 }
 
 export interface Review {
@@ -43,7 +43,10 @@ export interface Review {
 
 export interface Tab {
   title: string;
-  value: Details | Overview | Review | number;
+  details?: Details;
+  overview?: Overview;
+  review?: Review;
+  id?: number;
 }
 
 export interface ActiveItem {

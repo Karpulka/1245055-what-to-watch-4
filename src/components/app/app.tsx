@@ -1,7 +1,7 @@
 import * as React from "react";
 import Main from "../main/main";
 import FilmDetail from "../film-detail/film-detail";
-import {Route, Switch, Redirect, BrowserRouter} from "react-router-dom";
+import {Route, Switch, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import FullVideoPlayer from "../full-video-player/full-video-player";
@@ -46,7 +46,7 @@ class App extends React.PureComponent<Props, {}> {
     this._getFilmByID = this._getFilmByID.bind(this);
   }
   render() {
-    const {isAuth, promoFilm, films, handleChangeFavorite} = this.props;
+    const {promoFilm, films, handleChangeFavorite} = this.props;
 
     return <BrowserRouter>
       <Switch>

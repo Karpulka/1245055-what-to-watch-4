@@ -23,15 +23,15 @@ const Tabs: React.FunctionComponent<Props> = (props: Props) => {
   const tabVariants = [
     {
       title: `Overview`,
-      value: overview
+      overview
     },
     {
       title: `Details`,
-      value: details
+      details
     },
     {
       title: `Reviews`,
-      value: filmID
+      id: filmID
     },
   ];
 

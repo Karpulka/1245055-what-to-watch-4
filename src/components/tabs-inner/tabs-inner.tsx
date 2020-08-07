@@ -9,18 +9,18 @@ interface Props {
   tabValue: Tab;
 }
 
-const TabsInner = (props) => {
-  const {tabValue: {title, value}} = props;
+const TabsInner: React.FunctionComponent<Props> = (props: Props) => {
+  const {tabValue: {title, details, id, overview}} = props;
 
   if (title === TabVariantValues.DETAILS) {
-    return <FilmDetails details={value}/>;
+    return <FilmDetails details={details}/>;
   }
 
   if (title === TabVariantValues.REVIEWS) {
-    return <FilmReviews filmID={value}/>;
+    return <FilmReviews filmID={id}/>;
   }
 
-  return <FilmOverview overview={value}/>;
+  return <FilmOverview overview={overview}/>;
 };
 
 export default TabsInner;

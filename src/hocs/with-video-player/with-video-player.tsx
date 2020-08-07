@@ -37,7 +37,7 @@ const withVideoPlayer = (Component) => {
       isMuted: false
     };
 
-    public videoRef: React.RefObject<any>;
+    public videoRef: React.RefObject<HTMLVideoElement>;
 
     private _fullTime: number;
 
@@ -138,7 +138,7 @@ const withVideoPlayer = (Component) => {
 
     handleFullScreenButtonClick() {
       const video = this.videoRef.current;
-      const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+      const rfs = video.requestFullscreen;
       rfs.call(video);
     }
   }

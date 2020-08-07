@@ -7,7 +7,7 @@ import {noop} from "../../utils";
 
 const tab: Tab = {
   title: `Overview`,
-  value: {
+  overview: {
     description: `This is Description. TCHK.`,
     rating: 8.5,
     voiceCount: 214,

@@ -2,7 +2,7 @@ import * as React from "react";
 import * as renderer from "react-test-renderer";
 import Tabs from "./tabs";
 import {StaticRouter} from "react-router-dom";
-import {Overview, Details, ActiveItem} from "../../types";
+import {Overview, Details, Tab} from "../../types";
 import {noop} from "../../utils";
 
 const overview: Overview = {
@@ -22,9 +22,9 @@ const details: Details = {
 };
 
 it(`Render Tabs`, () => {
-  const activeItem: ActiveItem = {
+  const activeItem: Tab = {
     title: `Overview`,
-    value: overview
+    overview
   };
 
   const tree = renderer
