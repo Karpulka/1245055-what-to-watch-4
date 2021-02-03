@@ -13,3 +13,7 @@ export const getErrorMessage = (state) => {
 export const getIsEmailValid = (state) => {
   return state[NAME_SPACE].isEmailValid;
 };
+
+export const getIsEndLoadData = (state) => {
+  return state[NAME_SPACE].isEndLoadData;
+};
